@@ -4,19 +4,19 @@
 
 ---
 
-| No. | Questions                                                                                                                                      |
-|----|------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | [what is java](#what-is-java)                                                                                                                  |
-| 2  | [what is JVM](#what-is-JVM)                                                                                                                    |
-| 3  | [what is JRE](#what-is-JRE)                                                                                                                    | 
-| 4  | [How many types of memory areas are allocated by JVM?](#How-many-types-of-memory-areas-are-allocated-by-JVM)                                   |
-| 5  | [What is JIT compiler?](#What-is-JIT-compiler)                                                                                                 |
-| 6  | [What is classloader?](#What-is-classloader)                                                                                                   |
-| 7  | [What is the purpose of static methods and variables?](#What-is-the-purpose-of-static-methods-and-variables)                                   |
-| 8  | [What are the advantages of Packages in Java?](#What-are-the-advantages-of-Packages-in-Java)                                                   | 
-| 9  | [What is this keyword in java?](#What-is-this-keyword-in-java)                                                                                 |
-| 10 | [Can we declare the static variables and methods in an abstract class?](#Can-we-declare-the-static-variables-and-methods-in-an-abstract-class) |
-| 11 | [Can this keyword be used to refer static members?](#Can-this-keyword-be-used-to-refer-static-members)                                         |                                            
+| No. | Questions                                                                                                                              |
+|----|----------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | [what is java](#what-is-java)                                                                                                          |
+| 2  | [what is JVM](#what-is-JVM)                                                                                                            |
+| 3  | [what is JRE](#what-is-JRE)                                                                                                            | 
+| 4  | [How many types of memory areas are allocated by JVM?](#How-many-types-of-memory-areas-are-allocated-by-JVM)                           |
+| 5  | [What is JIT compiler?](#What-is-JIT-compiler)                                                                                         |
+| 6  | [What is classloader?](#What-is-classloader)                                                                                           |
+| 7  | [What is the purpose of static methods and variables?](#What-is-the-purpose-of-static-methods-and-variables)                           |
+| 8  | [What are the advantages of Packages in Java?](#What-are-the-advantages-of-Packages-in-Java)                                           | 
+| 9  | [What is this keyword in java?](#What-is-this-keyword-in-java)                                                                         |
+| 10 | [Can we declare static variables and methods in an abstract class?](#Can-we-declare-static-variables-and-methods-in-an-abstract-class) |
+| 11 | [Can this keyword be used to refer to static members?](#Can-this-keyword-be-used-to-refer-to-static-members)                           |                                            
 
 
 
@@ -421,7 +421,7 @@ public class Main {
 
 <hr style="border:1px solid orange">
 
-### What is the `this` keyword in Java?
+### What is this keyword in java?
 
 In Java, the **`this`** keyword refers to the **current instance** of the class. It is used within an instance method or constructor to refer to the **current object** that is being manipulated or created. The `this` keyword helps to distinguish between instance variables and method parameters that have the same name.
 
@@ -615,7 +615,7 @@ Here’s how:
 
 <hr style="border:1px solid orange">
 
-### Can the `this` keyword be used to refer to static members?
+### Can this keyword be used to refer to static members?
 
 No, the `this` keyword cannot be used to refer to **static members** (static variables or static methods) in Java.
 
@@ -651,6 +651,8 @@ public class Main {
 - **`this` keyword** can only be used to refer to **instance members** (instance variables or instance methods).
 - **Static members** should be accessed using the **class name**, not the `this` keyword.
 - Using `this` for static members would result in a **compilation error** because `this` refers to the current object, and static members are class-level members that do not require an object.
+
+
 
 
 
