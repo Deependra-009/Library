@@ -30,6 +30,28 @@
 | 22 | [Differences Between String and StringBuffer in Java](#Differences-Between-String-and-StringBuffer-in-Java)                                                     |
 | 23 | [What is Garbage Collection in Java?](#What-is-Garbage-Collection-in-Java)                                                                                      |
 | 24 | [Differences Between final, finally, and finalize in Java](#Differences-Between-final-finally-and-finalize-in-Java)                                             |
+| 25 | [What is Serialization in Java?](#What-is-Serialization-in-Java) |
+| 26 | [What is the transient Keyword in Java?](#What-is-the-transient-Keyword-in-Java) |
+| 27 | [ConcurrentHashMap Class in Java](#ConcurrentHashMap-Class-in-Java) |
+| 28 | [Difference Between HashSet and TreeSet in Java](#Difference-Between-HashSet-and-TreeSet-in-Java) |
+| 29 | [System.out.println() in Java](#System-out-println-in-Java) |
+| 30 | [What is a Memory Leak?](#What-is-a-Memory-Leak) |
+| 31 | [What is Object Cloning in Java?](#What-is-Object-Cloning-in-Java) |
+| 32 | [Wrapper Classes in Java](#Wrapper-Classes-in-Java) |
+| 33 | [Creation of a String using new() vs. a String Literal](#Creation-of-a-String-using-new()-vs-a-String-Literal) |
+| 34 | [Java String Pool](#Java-String-Pool) |
+| 35 | [Daemon Thread in Java](#Daemon-Thread-in-Java) |
+| 36 | [The finalize() Method in Java](#The-finalize()-Method-in-Java) |
+| 37 | [What is Multithreading?](#What-is-Multithreading) |
+| 38 | [Difference Between Process and Thread](#Difference-Between-Process-and-Thread) |
+| 39 | [Inter-Thread Communication in Java](#Inter-Thread-Communication-in-Java) |
+| 40 | [Purpose of the wait() Method in Java](#Purpose-of-the-wait()-Method-in-Java) |
+| 41 | [Context Switching in Java (and Operating Systems)](#Context-Switching-in-Java-(and-Operating-Systems)) |
+| 42 | [Difference Between notify() and notifyAll() in Java](#Difference-Between-notify()-and-notifyAll()-in-Java) |
+| 43 | [Difference Between Comparable and Comparator in Java](#Difference-Between-Comparable-and-Comparator-in-Java) |
+| 44 | [Java 8 Features](#Java-8-Features) |
+| 45 | [Java 9 Features](#Java-9-Features) |
+| 46 | [Java 11 Features](#Java-11-Features) |
 
 
 ### what is java
