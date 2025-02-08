@@ -4,54 +4,54 @@
 
 ---
 
-| No. | Questions                                                                                                                                                       |
-|----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | [what is java](#what-is-java)                                                                                                                                   |
-| 2  | [what is JVM](#what-is-JVM)                                                                                                                                     |
-| 3  | [what is JRE](#what-is-JRE)                                                                                                                                     | 
-| 4  | [How many types of memory areas are allocated by JVM?](#How-many-types-of-memory-areas-are-allocated-by-JVM)                                                    |
-| 5  | [What is JIT compiler?](#What-is-JIT-compiler)                                                                                                                  |
-| 6  | [What is classloader?](#What-is-classloader)                                                                                                                    |
-| 7  | [What is the purpose of static methods and variables?](#What-is-the-purpose-of-static-methods-and-variables)                                                    |
-| 8  | [What are the advantages of Packages in Java?](#What-are-the-advantages-of-Packages-in-Java)                                                                    | 
-| 9  | [What is this keyword in java?](#What-is-this-keyword-in-java)                                                                                                  |
-| 10 | [Can we declare static variables and methods in an abstract class?](#Can-we-declare-static-variables-and-methods-in-an-abstract-class)                          |
-| 11 | [Can this keyword be used to refer to static members?](#Can-this-keyword-be-used-to-refer-to-static-members)                                                    |                                            
-| 12 | [Why does Java not support pointers?](#Why-does-Java-not-support-pointers)                                                                                      |
-| 13 | [What is super in Java?](#What-is-super-in-Java)                                                                                                                |
-| 14 | [What is Method Overloading and Method Overriding in Java?](#What-is-Method-Overloading-and-Method-Overriding-in-Java)                                          |
-| 15 | [What is the final Variable in Java?](#What-is-the-final-Variable-in-Java)                                                                                      
+| No. | Questions                                                                                                                                               |
+|----|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | [what is java](#what-is-java)                                                                                                                           |
+| 2  | [what is JVM](#what-is-JVM)                                                                                                                             |
+| 3  | [what is JRE](#what-is-JRE)                                                                                                                             | 
+| 4  | [How many types of memory areas are allocated by JVM?](#How-many-types-of-memory-areas-are-allocated-by-JVM)                                            |
+| 5  | [What is JIT compiler?](#What-is-JIT-compiler)                                                                                                          |
+| 6  | [What is classloader?](#What-is-classloader)                                                                                                            |
+| 7  | [What is the purpose of static methods and variables?](#What-is-the-purpose-of-static-methods-and-variables)                                            |
+| 8  | [What are the advantages of Packages in Java?](#What-are-the-advantages-of-Packages-in-Java)                                                            | 
+| 9  | [What is this keyword in java?](#What-is-this-keyword-in-java)                                                                                          |
+| 10 | [Can we declare static variables and methods in an abstract class?](#Can-we-declare-static-variables-and-methods-in-an-abstract-class)                  |
+| 11 | [Can this keyword be used to refer to static members?](#Can-this-keyword-be-used-to-refer-to-static-members)                                            |                                            
+| 12 | [Why does Java not support pointers?](#Why-does-Java-not-support-pointers)                                                                              |
+| 13 | [What is super in Java?](#What-is-super-in-Java)                                                                                                        |
+| 14 | [What is Method Overloading and Method Overriding in Java?](#What-is-Method-Overloading-and-Method-Overriding-in-Java)                                  |
+| 15 | [What is the final Variable in Java?](#What-is-the-final-Variable-in-Java)                                                                              
 | 16 | [Difference Between Compile-Time Polymorphism and Runtime Polymorphism in Java](#Difference-Between-Compile-Time-Polymorphism-and-Runtime-Polymorphism-in-Java) 
-| 17 | [What is the instanceof Operator in Java?](#What-is-the-instanceof-Operator-in-Java)                                                                            |
-| 18 | [Differences Between Abstract Class and Interface in Java](#Differences-Between-Abstract-Class-and-Interface-in-Java)                                           |
-| 19 | [Types of Exceptions in Java](#Types-of-Exceptions-in-Java)                                                                                                     |
-| 20 | [Difference Between throw and throws in Java](#Difference-Between-throw-and-throws-in-Java)                                                                     |
-| 21 | [Why Are Objects Immutable in Java?](#Why-Are-Objects-Immutable-in-Java)                                                                                        |
-| 22 | [Differences Between String and StringBuffer in Java](#Differences-Between-String-and-StringBuffer-in-Java)                                                     |
-| 23 | [What is Garbage Collection in Java?](#What-is-Garbage-Collection-in-Java)                                                                                      |
-| 24 | [Differences Between final, finally, and finalize in Java](#Differences-Between-final-finally-and-finalize-in-Java)                                             |
-| 25 | [What is Serialization in Java?](#What-is-Serialization-in-Java) |
-| 26 | [What is the transient Keyword in Java?](#What-is-the-transient-Keyword-in-Java) |
-| 27 | [ConcurrentHashMap Class in Java](#ConcurrentHashMap-Class-in-Java) |
-| 28 | [Difference Between HashSet and TreeSet in Java](#Difference-Between-HashSet-and-TreeSet-in-Java) |
-| 29 | [System.out.println() in Java](#System-out-println-in-Java) |
-| 30 | [What is a Memory Leak?](#What-is-a-Memory-Leak) |
-| 31 | [What is Object Cloning in Java?](#What-is-Object-Cloning-in-Java) |
-| 32 | [Wrapper Classes in Java](#Wrapper-Classes-in-Java) |
-| 33 | [Creation of a String using new() vs. a String Literal](#Creation-of-a-String-using-new()-vs-a-String-Literal) |
-| 34 | [Java String Pool](#Java-String-Pool) |
-| 35 | [Daemon Thread in Java](#Daemon-Thread-in-Java) |
-| 36 | [The finalize() Method in Java](#The-finalize()-Method-in-Java) |
-| 37 | [What is Multithreading?](#What-is-Multithreading) |
-| 38 | [Difference Between Process and Thread](#Difference-Between-Process-and-Thread) |
-| 39 | [Inter-Thread Communication in Java](#Inter-Thread-Communication-in-Java) |
-| 40 | [Purpose of the wait() Method in Java](#Purpose-of-the-wait()-Method-in-Java) |
-| 41 | [Context Switching in Java (and Operating Systems)](#Context-Switching-in-Java-(and-Operating-Systems)) |
-| 42 | [Difference Between notify() and notifyAll() in Java](#Difference-Between-notify()-and-notifyAll()-in-Java) |
-| 43 | [Difference Between Comparable and Comparator in Java](#Difference-Between-Comparable-and-Comparator-in-Java) |
-| 44 | [Java 8 Features](#Java-8-Features) |
-| 45 | [Java 9 Features](#Java-9-Features) |
-| 46 | [Java 11 Features](#Java-11-Features) |
+| 17 | [What is the instanceof Operator in Java?](#What-is-the-instanceof-Operator-in-Java)                                                                    |
+| 18 | [Differences Between Abstract Class and Interface in Java](#Differences-Between-Abstract-Class-and-Interface-in-Java)                                   |
+| 19 | [Types of Exceptions in Java](#Types-of-Exceptions-in-Java)                                                                                             |
+| 20 | [Difference Between throw and throws in Java](#Difference-Between-throw-and-throws-in-Java)                                                             |
+| 21 | [Why Are Objects Immutable in Java?](#Why-Are-Objects-Immutable-in-Java)                                                                                |
+| 22 | [Differences Between String and StringBuffer in Java](#Differences-Between-String-and-StringBuffer-in-Java)                                             |
+| 23 | [What is Garbage Collection in Java?](#What-is-Garbage-Collection-in-Java)                                                                              |
+| 24 | [Differences Between final, finally, and finalize in Java](#Differences-Between-final-finally-and-finalize-in-Java)                                     |
+| 25 | [What is Serialization in Java?](#What-is-Serialization-in-Java)                                                                                        |
+| 26 | [What is the transient Keyword in Java?](#What-is-the-transient-Keyword-in-Java)                                                                        |
+| 27 | [ConcurrentHashMap Class in Java](#ConcurrentHashMap-Class-in-Java)                                                                                     |
+| 28 | [Difference Between HashSet and TreeSet in Java](#Difference-Between-HashSet-and-TreeSet-in-Java)                                                       |
+| 29 | [Systemoutprintln in Java](#Systemoutprintln-in-Java)                                                                                                   |
+| 30 | [What is a Memory Leak?](#What-is-a-Memory-Leak)                                                                                                        |
+| 31 | [What is Object Cloning in Java?](#What-is-Object-Cloning-in-Java)                                                                                      |
+| 32 | [Wrapper Classes in Java](#Wrapper-Classes-in-Java)                                                                                                     |
+| 33 | [Creation of a String using new vs String Literal](#Creation-of-a-String-using-new-vs-String-Literal)                                                   |
+| 34 | [Java String Pool](#Java-String-Pool)                                                                                                                   |
+| 35 | [Daemon Thread in Java](#Daemon-Thread-in-Java)                                                                                                         |
+| 36 | [The finalize() Method in Java](#The-finalize-Method-in-Java)                                                                                           |
+| 37 | [What is Multithreading?](#What-is-Multithreading)                                                                                                      |
+| 38 | [Difference Between Process and Thread](#Difference-Between-Process-and-Thread)                                                                         |
+| 39 | [Inter-Thread Communication in Java](#Inter-Thread-Communication-in-Java)                                                                               |
+| 40 | [Purpose of the wait() Method in Java](#Purpose-of-the-wait-Method-in-Java)                                                                             |
+| 41 | [Context Switching in Java (and Operating Systems)](#Context-Switching-in-Java-and-Operating-Systems)                                                   |
+| 42 | [Difference Between notify() and notifyAll() in Java](#Difference-Between-notify-and-notifyAll-in-Java)                                                 |
+| 43 | [Difference Between Comparable and Comparator in Java](#Difference-Between-Comparable-and-Comparator-in-Java)                                           |
+| 44 | [Java 8 Features](#Java-8-Features)                                                                                                                     |
+| 45 | [Java 9 Features](#Java-9-Features)                                                                                                                     |
+| 46 | [Java 11 Features](#Java-11-Features)                                                                                                                   |
 
 
 ### what is java
@@ -3231,7 +3231,7 @@ TreeSet: [Apple, Banana, Cherry]  // Sorted
 
 <hr style="border:1px solid orange">
 
-### System.out.println() in Java
+### Systemoutprintln in Java
 
 `System.out.println()` is one of the most commonly used methods in Java for printing output to the console.
 
@@ -3795,7 +3795,7 @@ Wrapper classes in Java allow primitive data types to be used as objects, provid
 <hr style="border:1px solid orange">
 
 
-### **Creation of a String using new() vs. a String Literal**
+### **Creation of a String using new vs String Literal**
 
 In Java, Strings can be created in two main ways:
 1. **Using a String literal** (e.g., `"Hello"`)
