@@ -8,20 +8,20 @@
 |----|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1  | [what is java](#what-is-java)                                                                                                                           |
 | 2  | [what is JVM](#what-is-JVM)                                                                                                                             |
-| 3  | [what is JRE](#what-is-JRE)                                                                                                                             | 
+| 3  | [what is JRE](#what-is-JRE)                                                                                                                             |
 | 4  | [How many types of memory areas are allocated by JVM?](#How-many-types-of-memory-areas-are-allocated-by-JVM)                                            |
 | 5  | [What is JIT compiler?](#What-is-JIT-compiler)                                                                                                          |
 | 6  | [What is classloader?](#What-is-classloader)                                                                                                            |
 | 7  | [What is the purpose of static methods and variables?](#What-is-the-purpose-of-static-methods-and-variables)                                            |
-| 8  | [What are the advantages of Packages in Java?](#What-are-the-advantages-of-Packages-in-Java)                                                            | 
+| 8  | [What are the advantages of Packages in Java?](#What-are-the-advantages-of-Packages-in-Java)                                                            |
 | 9  | [What is this keyword in java?](#What-is-this-keyword-in-java)                                                                                          |
 | 10 | [Can we declare static variables and methods in an abstract class?](#Can-we-declare-static-variables-and-methods-in-an-abstract-class)                  |
-| 11 | [Can this keyword be used to refer to static members?](#Can-this-keyword-be-used-to-refer-to-static-members)                                            |                                            
+| 11 | [Can this keyword be used to refer to static members?](#Can-this-keyword-be-used-to-refer-to-static-members)                                            |
 | 12 | [Why does Java not support pointers?](#Why-does-Java-not-support-pointers)                                                                              |
 | 13 | [What is super in Java?](#What-is-super-in-Java)                                                                                                        |
 | 14 | [What is Method Overloading and Method Overriding in Java?](#What-is-Method-Overloading-and-Method-Overriding-in-Java)                                  |
-| 15 | [What is the final Variable in Java?](#What-is-the-final-Variable-in-Java)                                                                              
-| 16 | [Difference Between Compile-Time Polymorphism and Runtime Polymorphism in Java](#Difference-Between-Compile-Time-Polymorphism-and-Runtime-Polymorphism-in-Java) 
+| 15 | [What is the final Variable in Java?](#What-is-the-final-Variable-in-Java)
+| 16 | [Difference Between Compile-Time Polymorphism and Runtime Polymorphism in Java](#Difference-Between-Compile-Time-Polymorphism-and-Runtime-Polymorphism-in-Java)
 | 17 | [What is the instanceof Operator in Java?](#What-is-the-instanceof-Operator-in-Java)                                                                    |
 | 18 | [Differences Between Abstract Class and Interface in Java](#Differences-Between-Abstract-Class-and-Interface-in-Java)                                   |
 | 19 | [Types of Exceptions in Java](#Types-of-Exceptions-in-Java)                                                                                             |
@@ -52,7 +52,7 @@
 | 44 | [Java 8 Features](#Java-8-Features)                                                                                                                     |
 | 45 | [Java 9 Features](#Java-9-Features)                                                                                                                     |
 | 46 | [Java 11 Features](#Java-11-Features)                                                                                                                   |
-
+---
 
 ### what is java
 
@@ -60,25 +60,25 @@ Java is a **high-level, object-oriented programming language** widely used for d
 
 ### Key Features of Java:
 
-1. **Platform Independence**:  
+1. **Platform Independence**:
    Java's "Write Once, Run Anywhere" (WORA) capability allows Java programs to run on any device with a Java Virtual Machine (JVM). This is achieved through bytecode, an intermediate representation of Java code.
 
-2. **Object-Oriented**:  
+2. **Object-Oriented**:
    Java supports key object-oriented programming concepts like inheritance, encapsulation, polymorphism, and abstraction.
 
-3. **Robust and Secure**:  
+3. **Robust and Secure**:
    Java includes features like automatic memory management (garbage collection), exception handling, and type checking to create robust and secure applications.
 
-4. **Multithreading**:  
+4. **Multithreading**:
    Java provides built-in support for multithreaded programming, enabling developers to create applications that can perform multiple tasks simultaneously.
 
-5. **Rich API**:  
+5. **Rich API**:
    Java offers an extensive set of libraries for various tasks such as data structures, networking, database connectivity, and GUI development.
 
-6. **Distributed Computing**:  
+6. **Distributed Computing**:
    Java's support for distributed systems (e.g., using RMI and EJB) makes it suitable for building enterprise-grade applications.
 
-7. **High Performance**:  
+7. **High Performance**:
    Although not as fast as native languages like C++, Java's performance has significantly improved with Just-In-Time (JIT) compilers and other optimizations.
 
 ### Common Applications of Java:
@@ -110,19 +110,19 @@ The **Java Virtual Machine (JVM)** is the runtime environment in the Java ecosys
 
 ### Key Components of the JVM:
 
-1. **Class Loader**:  
+1. **Class Loader**:
    Loads Java class files (bytecode) into the JVM and ensures the required classes are available. It handles tasks like linking and initialization of classes.
 
-2. **Bytecode Verifier**:  
+2. **Bytecode Verifier**:
    Verifies the correctness and safety of the bytecode to ensure it adheres to the Java specification. This prevents malicious code from being executed.
 
-3. **Interpreter**:  
+3. **Interpreter**:
    Interprets bytecode and translates it into machine instructions at runtime. This ensures portability across different platforms.
 
-4. **Just-In-Time (JIT) Compiler**:  
+4. **Just-In-Time (JIT) Compiler**:
    Enhances performance by converting frequently executed bytecode into native machine code, which speeds up execution.
 
-5. **Garbage Collector (GC)**:  
+5. **Garbage Collector (GC)**:
    Automatically manages memory by reclaiming unused objects, reducing the risk of memory leaks.
 
 6. **Runtime Data Areas**:
@@ -134,16 +134,16 @@ The **Java Virtual Machine (JVM)** is the runtime environment in the Java ecosys
 
 ### How JVM Works:
 
-1. **Compilation**:  
+1. **Compilation**:
    Java source code (`.java` files) is compiled by the Java Compiler (`javac`) into bytecode (`.class` files).
 
-2. **Class Loading**:  
+2. **Class Loading**:
    The JVM loads the compiled `.class` files into memory through the Class Loader.
 
-3. **Bytecode Execution**:  
+3. **Bytecode Execution**:
    The JVM executes the bytecode. The Interpreter interprets it line-by-line, while the JIT Compiler optimizes performance by converting frequently executed code into native instructions.
 
-4. **Memory Management**:  
+4. **Memory Management**:
    The Garbage Collector manages memory by automatically deallocating unused objects.
 
 ### Diagram of the Java Execution Process:
@@ -458,7 +458,7 @@ In Java, the **`this`** keyword refers to the **current instance** of the class.
       ```java
       class Person {
           String name;
-          
+
           // Constructor
           public Person(String name) {
               this.name = name;  // 'this.name' refers to the instance variable, 'name' refers to the parameter
@@ -472,12 +472,12 @@ In Java, the **`this`** keyword refers to the **current instance** of the class.
       ```java
       class Car {
           int speed;
- 
+
           // Method to set speed
           public void setSpeed(int speed) {
               this.speed = speed;  // 'this' is optional here but explicitly used for clarity
           }
- 
+
           // Method to display speed
           public void displaySpeed() {
               System.out.println("Speed: " + this.speed);  // 'this' refers to the current instance variable
@@ -492,12 +492,12 @@ In Java, the **`this`** keyword refers to the **current instance** of the class.
       class Car {
           String model;
           int year;
- 
+
           // Constructor 1
           public Car(String model) {
               this(model, 2022);  // Calling another constructor
           }
- 
+
           // Constructor 2
           public Car(String model, int year) {
               this.model = model;
@@ -514,7 +514,7 @@ In Java, the **`this`** keyword refers to the **current instance** of the class.
           public void printMessage(String message) {
               System.out.println(message);
           }
-          
+
           public void printObjectDetails() {
               printMessage(this.toString());  // Passing the current object to another method
           }
@@ -1130,7 +1130,7 @@ Polymorphism in Java refers to the ability of an object to take many forms. It i
 ---
 
 ### **1. Compile-Time Polymorphism**
-**Definition**:  
+**Definition**:
 Compile-time polymorphism, also known as **static binding** or **early binding**, occurs when the method to be called is resolved at **compile time**.
 
 **Achieved Through**:
@@ -1173,7 +1173,7 @@ public class Main {
 ---
 
 ### **2. Runtime Polymorphism**
-**Definition**:  
+**Definition**:
 Runtime polymorphism, also known as **dynamic binding** or **late binding**, occurs when the method to be called is resolved at **runtime**.
 
 **Achieved Through**:
@@ -1775,7 +1775,7 @@ In Java, **immutable objects** are objects whose state cannot be changed once th
    - Immutable objects are inherently thread-safe because their state cannot be modified after creation.
    - Multiple threads can access the same immutable object simultaneously without synchronization, reducing complexity in multi-threaded environments.
 
-   **Example**:  
+   **Example**:
    Strings in Java are immutable, so they are safe to use across multiple threads without the need for explicit locking.
 
    ```java
@@ -1914,7 +1914,7 @@ By following immutability principles, you can create reliable and maintainable J
 
 ### **1. Mutability**
 
-- **`String`**: Immutable  
+- **`String`**: Immutable
   Once a `String` object is created, its value cannot be changed. Any modification (e.g., concatenation) results in the creation of a new `String` object.
 
   **Example**:
@@ -1928,7 +1928,7 @@ By following immutability principles, you can create reliable and maintainable J
   }
   ```
 
-- **`StringBuffer`**: Mutable  
+- **`StringBuffer`**: Mutable
   The value of a `StringBuffer` object can be modified without creating a new object, making it more efficient for string manipulation.
 
   **Example**:
@@ -1973,12 +1973,12 @@ By following immutability principles, you can create reliable and maintainable J
 
 ### **5. Use Cases**
 
-- **`String`**:  
+- **`String`**:
   Use `String` when:
    - The value does not change frequently.
    - Immutability is required (e.g., when working with string literals or as keys in a `HashMap`).
 
-- **`StringBuffer`**:  
+- **`StringBuffer`**:
   Use `StringBuffer` when:
    - You need to modify the string frequently.
    - Thread safety is required in a multi-threaded environment.
@@ -2044,7 +2044,7 @@ public class Main {
 ### **Conclusion**
 
 - Use **`String`** for immutable and constant string values.
-- Use **`StringBuffer`** when you need mutable strings and thread safety in multi-threaded environments.  
+- Use **`StringBuffer`** when you need mutable strings and thread safety in multi-threaded environments.
   For single-threaded environments, you may consider using **`StringBuilder`**, which is similar to `StringBuffer` but faster because it is not synchronized.
 
 **[⬆ Back to Top](#table-of-contents)**
@@ -2176,10 +2176,10 @@ public class Main {
 
 ### **How Garbage Collection Works in Java**
 
-- **Automatic Memory Management**:  
+- **Automatic Memory Management**:
   Java automatically manages memory using the **Heap**, which is where all objects are stored. When objects are no longer reachable (i.e., no live thread or reference is holding a reference to them), they become eligible for garbage collection.
 
-- **GC Algorithm**:  
+- **GC Algorithm**:
   Java uses **different garbage collection algorithms** to clean up the heap. The JVM decides when and how to perform garbage collection.
 
 ---
@@ -2235,26 +2235,26 @@ public class Main {
 
 ### **Benefits of Garbage Collection**
 
-1. **Automatic Memory Management**:  
+1. **Automatic Memory Management**:
    Developers don't need to manually deallocate memory, which reduces errors related to memory leaks or forgetting to release memory.
 
-2. **Efficient Resource Management**:  
+2. **Efficient Resource Management**:
    Garbage collection helps manage memory more efficiently, improving performance in long-running applications.
 
-3. **Prevention of Memory Leaks**:  
+3. **Prevention of Memory Leaks**:
    Objects that are no longer referenced are automatically removed from memory, reducing the chances of memory leaks (although programmers should still avoid creating unnecessary references).
 
 ---
 
 ### **Limitations of Garbage Collection**
 
-1. **Unpredictable Timing**:  
+1. **Unpredictable Timing**:
    The exact timing of garbage collection is not predictable, and it may introduce **pause times** during execution, which may affect performance, especially in real-time applications.
 
-2. **Performance Overhead**:  
+2. **Performance Overhead**:
    While GC helps in memory management, it also introduces overhead due to the need to track and clean up unused objects.
 
-3. **Cannot Remove All Objects**:  
+3. **Cannot Remove All Objects**:
    Garbage collection only handles unreachable objects. It does not handle objects that are still referenced, even if they are no longer used.
 
 ---
@@ -2320,12 +2320,12 @@ These three terms in Java — **`final`**, **`finally`**, and **`finalize`** —
 
 ### **1. `final`**
 
-**Usage**:  
+**Usage**:
 The `final` keyword is used to define constants, prevent method overriding, and prevent inheritance.
 
 #### **Different Uses of `final`:**
 
-- **Final Variable**:  
+- **Final Variable**:
   A `final` variable cannot be reassigned once it has been initialized. It is often used to declare constants.
 
   **Example**:
@@ -2334,7 +2334,7 @@ The `final` keyword is used to define constants, prevent method overriding, and 
   // MAX_VALUE = 200; // Error: cannot assign a value to final variable
   ```
 
-- **Final Method**:  
+- **Final Method**:
   A `final` method cannot be overridden by subclasses.
 
   **Example**:
@@ -2350,7 +2350,7 @@ The `final` keyword is used to define constants, prevent method overriding, and 
   }
   ```
 
-- **Final Class**:  
+- **Final Class**:
   A `final` class cannot be subclassed. This is useful for creating immutable classes.
 
   **Example**:
@@ -2366,7 +2366,7 @@ The `final` keyword is used to define constants, prevent method overriding, and 
 
 ### **2. `finally`**
 
-**Usage**:  
+**Usage**:
 The `finally` block is used in exception handling. It is always executed after the try-catch blocks, regardless of whether an exception was thrown or not. It is typically used to release resources like closing files or database connections.
 
 #### **Behavior of `finally`:**
@@ -2398,7 +2398,7 @@ This block is always executed.
 
 ### **3. `finalize`**
 
-**Usage**:  
+**Usage**:
 The `finalize()` method is used for cleanup activities before an object is garbage collected. It is a method of the `Object` class, and it is called by the Garbage Collector before an object is removed from memory. This method can be overridden to release resources or perform actions before the object is garbage collected.
 
 #### **Key Points about `finalize`:**
@@ -2464,10 +2464,10 @@ When an object is serialized, its fields, including its values, are written into
 
 ### **How Does Serialization Work?**
 
-1. **Serialization**:  
+1. **Serialization**:
    When an object is serialized, the Java Virtual Machine (JVM) writes the object's state (its fields and their values) to a stream (like a file or a network).
 
-2. **Deserialization**:  
+2. **Deserialization**:
    Deserialization is the process of reading the byte stream and converting it back into the original object.
 
 To make an object serializable in Java, the class must implement the `Serializable` interface, which is a marker interface (it doesn't contain any methods, but it signals to the JVM that the class can be serialized).
@@ -2476,7 +2476,7 @@ To make an object serializable in Java, the class must implement the `Serializab
 
 ### **Steps to Serialize an Object in Java**
 
-1. **Implement `Serializable` Interface**:  
+1. **Implement `Serializable` Interface**:
    To mark a class as serializable, it must implement the `Serializable` interface.
 
    ```java
@@ -2502,7 +2502,7 @@ To make an object serializable in Java, the class must implement the `Serializab
    public class Main {
        public static void main(String[] args) {
            Student student = new Student("John", 20);
-           
+
            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("student.ser"))) {
                oos.writeObject(student); // Serializing the student object
                System.out.println("Object serialized successfully.");
@@ -2566,13 +2566,13 @@ To make an object serializable in Java, the class must implement the `Serializab
 
 ### **When to Use Serialization**
 
-1. **Persistence**:  
+1. **Persistence**:
    Serialization is often used to save the state of an object to a file (for example, saving user data between sessions).
 
-2. **Networking**:  
+2. **Networking**:
    When sending objects over a network, serialization is used to convert the object into a byte stream, which can be transmitted and then deserialized at the other end.
 
-3. **Caching**:  
+3. **Caching**:
    In distributed systems, objects are serialized to be cached and shared between different services or servers.
 
 ---
@@ -2739,7 +2739,7 @@ import java.io.IOException;
 public class SerializeExample {
     public static void main(String[] args) {
         Student student = new Student("Alice", 22);
-        
+
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("student.dat"))) {
             out.writeObject(student);  // Serializing the student object
             System.out.println("Student object serialized!");
@@ -2795,13 +2795,13 @@ When a field is marked as `transient`, it is **excluded** from the serialization
 
 ### **Why Use `transient`?**
 
-1. **Avoid Serializing Sensitive Data**:  
+1. **Avoid Serializing Sensitive Data**:
    Some fields may contain sensitive information (like passwords, tokens, etc.) that you do not want to serialize because they may pose a security risk.
 
-2. **Avoid Storing Unnecessary Data**:  
+2. **Avoid Storing Unnecessary Data**:
    Some fields, such as references to open file handles or database connections, might not make sense to serialize because their state can't be restored upon deserialization.
 
-3. **Save Memory**:  
+3. **Save Memory**:
    By marking fields as `transient`, you can avoid serializing large or temporary data that is not needed after the object is deserialized.
 
 ---
@@ -2817,7 +2817,7 @@ import java.io.Serializable;
 
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     private String name;
     private int age;
     private transient String password;  // This field will not be serialized
@@ -2899,16 +2899,16 @@ Deserialized Student: Student{name='Alice', age=22, password='null'}
 
 ### **Key Points About `transient`**
 
-1. **Exclusion from Serialization**:  
+1. **Exclusion from Serialization**:
    The primary purpose of `transient` is to exclude fields from being serialized when an object is serialized.
 
-2. **Default Value After Deserialization**:  
+2. **Default Value After Deserialization**:
    After deserialization, the `transient` fields are initialized to their default values (e.g., `null` for objects, `0` for numbers, `false` for booleans).
 
-3. **Only for Instance Variables**:  
+3. **Only for Instance Variables**:
    The `transient` keyword can only be applied to instance variables, not to methods or classes.
 
-4. **Works Only with Serialization**:  
+4. **Works Only with Serialization**:
    The `transient` keyword has an effect only when an object is serialized using `ObjectOutputStream` and deserialized using `ObjectInputStream`. It does not affect the fields in regular object instantiation.
 
 ---
@@ -3003,54 +3003,54 @@ public class ConcurrentHashMapExample {
 
 ### **Key Methods of `ConcurrentHashMap`:**
 
-1. **`putIfAbsent(K key, V value)`**  
+1. **`putIfAbsent(K key, V value)`**
    Inserts the specified key-value pair only if the key is not already associated with a value.
 
-2. **`replace(K key, V oldValue, V newValue)`**  
+2. **`replace(K key, V oldValue, V newValue)`**
    Replaces the entry for a key only if the current value is equal to the specified old value.
 
-3. **`replace(K key, V value)`**  
+3. **`replace(K key, V value)`**
    Replaces the entry for the specified key with the given value.
 
-4. **`computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)`**  
+4. **`computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)`**
    Computes the value for the key if it's not already present in the map, and inserts it atomically.
 
-5. **`remove(Object key, Object value)`**  
+5. **`remove(Object key, Object value)`**
    Removes the entry for the key only if it is currently mapped to the specified value.
 
-6. **`clear()`**  
+6. **`clear()`**
    Removes all mappings from the map.
 
-7. **`keySet()` / `values()` / `entrySet()`**  
+7. **`keySet()` / `values()` / `entrySet()`**
    Returns views of the keys, values, or entries, respectively, in the map.
 
 ---
 
 ### **Advantages of `ConcurrentHashMap`:**
 
-1. **Thread-Safety:**  
+1. **Thread-Safety:**
    It is highly efficient and thread-safe for concurrent operations, and you do not need to manage synchronization explicitly.
 
-2. **Improved Performance:**  
+2. **Improved Performance:**
    It allows multiple threads to perform concurrent reads and writes, improving performance in multithreaded applications.
 
-3. **Scalable:**  
+3. **Scalable:**
    With its segment-based locking, `ConcurrentHashMap` can scale efficiently as the number of threads increases.
 
-4. **Atomic Operations:**  
+4. **Atomic Operations:**
    Provides atomic operations for common tasks such as adding, replacing, and removing key-value pairs.
 
 ---
 
 ### **Use Cases:**
 
-- **Caching:**  
+- **Caching:**
   `ConcurrentHashMap` is often used in cache implementations, where it’s crucial to allow multiple threads to concurrently access and modify the cache.
 
-- **Counters/Accumulators:**  
+- **Counters/Accumulators:**
   It can be used for maintaining thread-safe counters or accumulators in multi-threaded environments.
 
-- **Shared Data Structures in Multi-threaded Applications:**  
+- **Shared Data Structures in Multi-threaded Applications:**
   Any application where multiple threads need to access and modify a shared map structure concurrently can benefit from `ConcurrentHashMap`.
 
 ---
@@ -3594,7 +3594,7 @@ class Person implements Cloneable {
 
         // Perform deep copy for the address object
         clonedPerson.address = new Address(this.address.city, this.address.state);
-        
+
         return clonedPerson;
     }
 }
@@ -3641,11 +3641,11 @@ If a class does not implement `Cloneable` and its `clone()` method is called, it
 ```java
 class MyClass implements Cloneable {
     int x;
-    
+
     public MyClass(int x) {
         this.x = x;
     }
-    
+
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -3753,11 +3753,11 @@ public class WrapperExample {
         // Autoboxing: converting primitive to object
         Integer intObj = 100;
         Double doubleObj = 10.5;
-        
+
         // Unboxing: converting object to primitive
         int primitiveInt = intObj;
         double primitiveDouble = doubleObj;
-        
+
         System.out.println("Autoboxed Integer: " + intObj);      // Output: 100
         System.out.println("Autoboxed Double: " + doubleObj);    // Output: 10.5
         System.out.println("Unboxed int: " + primitiveInt);      // Output: 100
@@ -3766,10 +3766,10 @@ public class WrapperExample {
         // Using wrapper class methods
         int parsedInt = Integer.parseInt("123");
         String str = Integer.toString(456);
-        
+
         System.out.println("Parsed integer: " + parsedInt);      // Output: 123
         System.out.println("Converted string: " + str);          // Output: "456"
-        
+
         // Checking constants in wrapper classes
         System.out.println("Maximum Integer value: " + Integer.MAX_VALUE); // Output: 2147483647
         System.out.println("Minimum Integer value: " + Integer.MIN_VALUE); // Output: -2147483648
@@ -3894,7 +3894,7 @@ public class StringPoolExample {
     public static void main(String[] args) {
         String str1 = "Hello";
         String str2 = "Hello";
-        
+
         // Both str1 and str2 refer to the same object in the string pool.
         System.out.println(str1 == str2); // Output: true
     }
@@ -4017,14 +4017,14 @@ public class DaemonThreadExample {
         // Start the threads
         userThread.start();
         daemonThread.start();
-        
+
         try {
             // Let the user thread run for a while
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         // After the main thread finishes, the daemon thread will be terminated automatically.
         System.out.println("Main thread is finished");
     }
@@ -4973,7 +4973,7 @@ Both interfaces are essential tools for sorting objects in Java, and the choice 
 Java 8 introduced several new features that significantly improved the language. Here are the key features:
 
 #### **1. Lambda Expressions**
-Lambda expressions allow you to write concise and functional code by simplifying anonymous inner classes.  
+Lambda expressions allow you to write concise and functional code by simplifying anonymous inner classes.
 **Example:**
 ```java
 // Traditional approach
@@ -4990,7 +4990,7 @@ public class LambdaExample {
 ```
 
 #### **2. Functional Interfaces**
-Java 8 introduced functional interfaces with the `@FunctionalInterface` annotation. Some built-in functional interfaces include `Predicate`, `Consumer`, and `Supplier`.  
+Java 8 introduced functional interfaces with the `@FunctionalInterface` annotation. Some built-in functional interfaces include `Predicate`, `Consumer`, and `Supplier`.
 **Example:**
 ```java
 @FunctionalInterface
@@ -5007,14 +5007,14 @@ public class FunctionalInterfaceExample {
 ```
 
 #### **3. Default and Static Methods in Interfaces**
-Interfaces can now have default and static methods.  
+Interfaces can now have default and static methods.
 **Example:**
 ```java
 interface MyInterface {
     default void show() {
         System.out.println("Default Method in Interface");
     }
-    
+
     static void staticMethod() {
         System.out.println("Static Method in Interface");
     }
@@ -5032,7 +5032,7 @@ public class DefaultMethodExample {
 ```
 
 #### **4. Stream API**
-Streams provide a powerful way to process collections with functional-style operations.  
+Streams provide a powerful way to process collections with functional-style operations.
 **Example:**
 ```java
 import java.util.Arrays;
@@ -5049,7 +5049,7 @@ public class StreamExample {
 ```
 
 #### **5. Optional Class**
-Used to handle `null` values safely and avoid `NullPointerException`.  
+Used to handle `null` values safely and avoid `NullPointerException`.
 **Example:**
 ```java
 import java.util.Optional;
@@ -5063,7 +5063,7 @@ public class OptionalExample {
 ```
 
 #### **6. New Date and Time API**
-Java 8 introduced a new `java.time` package to replace the old `Date` and `Calendar` APIs.  
+Java 8 introduced a new `java.time` package to replace the old `Date` and `Calendar` APIs.
 **Example:**
 ```java
 import java.time.LocalDate;
@@ -5075,7 +5075,7 @@ public class DateTimeExample {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
         LocalDateTime dateTime = LocalDateTime.now();
-        
+
         System.out.println(date);
         System.out.println(time);
         System.out.println(dateTime);
@@ -5084,7 +5084,7 @@ public class DateTimeExample {
 ```
 
 #### **7. Collectors Class (Part of Stream API)**
-The `Collectors` utility class helps perform reduction operations such as grouping, partitioning, and collecting elements.  
+The `Collectors` utility class helps perform reduction operations such as grouping, partitioning, and collecting elements.
 **Example:**
 ```java
 import java.util.Arrays;
@@ -5106,7 +5106,7 @@ public class CollectorsExample {
 Java 8 introduced the Nashorn JavaScript engine for running JavaScript code within Java applications.
 
 #### **9. Base64 Encoding and Decoding**
-Java 8 provides built-in Base64 encoding and decoding utilities.  
+Java 8 provides built-in Base64 encoding and decoding utilities.
 **Example:**
 ```java
 import java.util.Base64;
@@ -5116,7 +5116,7 @@ public class Base64Example {
         String original = "Java8Features";
         String encoded = Base64.getEncoder().encodeToString(original.getBytes());
         String decoded = new String(Base64.getDecoder().decode(encoded));
-        
+
         System.out.println("Encoded: " + encoded);
         System.out.println("Decoded: " + decoded);
     }
@@ -5154,7 +5154,7 @@ module mymodule {
 ---
 
 ### **2. JShell (REPL - Read-Eval-Print Loop)**
-Java 9 introduced **JShell**, an interactive tool that allows testing Java code without creating a full program.  
+Java 9 introduced **JShell**, an interactive tool that allows testing Java code without creating a full program.
 **Usage:**
 ```
 $ jshell
@@ -5165,7 +5165,7 @@ Hello, Java 9
 ---
 
 ### **3. Private Methods in Interfaces**
-Java 9 allows **private methods** inside interfaces to avoid code duplication in **default** and **static methods**.  
+Java 9 allows **private methods** inside interfaces to avoid code duplication in **default** and **static methods**.
 **Example:**
 ```java
 interface MyInterface {
@@ -5173,7 +5173,7 @@ interface MyInterface {
         commonMethod();
         System.out.println("Default Method");
     }
-    
+
     private void commonMethod() {
         System.out.println("Private Method in Interface");
     }
@@ -5183,7 +5183,7 @@ interface MyInterface {
 ---
 
 ### **4. Factory Methods for Collections**
-Java 9 introduced static factory methods (`List.of()`, `Set.of()`, `Map.of()`) to create **immutable collections** easily.  
+Java 9 introduced static factory methods (`List.of()`, `Set.of()`, `Map.of()`) to create **immutable collections** easily.
 **Example:**
 ```java
 import java.util.List;
@@ -5205,7 +5205,7 @@ public class CollectionExample {
 ---
 
 ### **5. Stream API Enhancements**
-Java 9 added new methods to the Stream API, such as `takeWhile()`, `dropWhile()`, and `iterate()`.  
+Java 9 added new methods to the Stream API, such as `takeWhile()`, `dropWhile()`, and `iterate()`.
 **Example:**
 ```java
 import java.util.List;
@@ -5226,7 +5226,7 @@ public class StreamExample {
 ---
 
 ### **6. Optional Enhancements**
-Java 9 added methods like `ifPresentOrElse()` and `or()` to the `Optional` class.  
+Java 9 added methods like `ifPresentOrElse()` and `or()` to the `Optional` class.
 **Example:**
 ```java
 import java.util.Optional;
@@ -5246,7 +5246,7 @@ public class OptionalExample {
 ---
 
 ### **7. HTTP/2 Client (New HttpClient API)**
-Java 9 introduced a new **HttpClient** API to replace the old `HttpURLConnection`.  
+Java 9 introduced a new **HttpClient** API to replace the old `HttpURLConnection`.
 **Example:**
 ```java
 import java.net.http.HttpClient;
@@ -5272,7 +5272,7 @@ public class HttpClientExample {
 ---
 
 ### **8. Process API Improvements**
-Java 9 introduced enhancements to the `Process` API to manage and monitor system processes more efficiently.  
+Java 9 introduced enhancements to the `Process` API to manage and monitor system processes more efficiently.
 **Example:**
 ```java
 import java.io.IOException;
@@ -5290,7 +5290,7 @@ public class ProcessExample {
 ---
 
 ### **9. Try-With-Resources Enhancement**
-Java 9 allows using **final or effectively final variables** inside try-with-resources.  
+Java 9 allows using **final or effectively final variables** inside try-with-resources.
 **Example:**
 ```java
 import java.io.BufferedReader;
@@ -5300,7 +5300,7 @@ import java.io.IOException;
 public class TryWithResourcesExample {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("test.txt"));
-        
+
         try (reader) { // No need to declare inside try()
             System.out.println(reader.readLine());
         }
@@ -5327,7 +5327,7 @@ public class StringMethodsExample {
     public static void main(String[] args) {
         // isBlank(): Returns true if the string is empty or contains only white spaces
         System.out.println("  ".isBlank());  // Output: true
-        
+
         // strip(): Removes leading and trailing spaces (better than trim())
         System.out.println("  Hello  ".strip());  // Output: "Hello"
 
@@ -5424,7 +5424,7 @@ import java.util.Optional;
 public class OptionalExample {
     public static void main(String[] args) {
         Optional<String> emptyOpt = Optional.empty();
-        
+
         System.out.println(emptyOpt.isEmpty()); // Output: true
     }
 }
@@ -5501,8 +5501,8 @@ Java 11 introduced several useful enhancements such as **new String methods, imp
 
 
 
-    
-    
+
+
 
 
 
