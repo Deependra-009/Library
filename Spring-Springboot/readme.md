@@ -36,6 +36,44 @@
 | 28 | [What is the Difference Between @RequestBody and @ResponseBody?](#What-is-the-Difference-Between-RequestBody-and-ResponseBody) |
 | 29 | [What is @PathVariable?](#What-is-PathVariable) |
 | 30 | [What are Spring MVC Validations?](#What-are-Spring-MVC-Validations) |
+| 31 | [What are HTTP Response Status Codes?](#What-are-HTTP-Response-Status-Codes) |
+| 32 | [What is Cross-Origin Resource Sharing (CORS)?](#What-is-Cross-Origin-Resource-Sharing-CORS) |
+| 33 | [What is View Resolver in Spring MVC?](#What-is-View-Resolver-in-Spring-MVC) |
+| 34 | [What is the Difference Between JPA and Hibernate?](#What-is-the-Difference-Between-JPA-and-Hibernate) |
+| 35 | [What are the Advantages of JPA?](#What-are-the-Advantages-of-JPA) |
+| 36 | [What is the Difference Between CrudRepository and JpaRepository?](#What-is-the-Difference-Between-CrudRepository-and-JpaRepository) |
+| 37 | [What is an Entity Class in Spring JPA?](#What-is-an-Entity-Class-in Spring-JPA) |
+| 38 | [What is PagingAndSortingRepository in Spring Data JPA?](#What-is-PagingAndSortingRepository-in-Spring-Data-JPA) |
+| 39 | [What is @Query Annotation in Spring Data JPA?](#What-is-Query-Annotation-in-Spring-Data-JPA) |
+| 40 | [What is Spring Security?](#What-is-Spring-Security) |
+| 41 | [What is Spring Security OAuth2?](#What-is-Spring-Security-OAuth2) |
+| 42 | [What is Hashing and Encryption?](#What-is-Hashing-and-Encryption) |
+| 43 | [What is Password Encoder?](#What-is-Password-Encoder) |
+| 44 | [What is Authentication & Authorization?](#What-is-Authentication-&-Authorization) |
+| 45 | [What is Security Context & SecurityContextHolder?](#What-is-Security-Context-&-SecurityContextHolder) |
+| 46 | [What is Security Annotation?](#What-is-Security-Annotation) |
+| 47 | [What is a Custom Filter in Spring Security?](#What-is-a-Custom-Filter-in-Spring-Security) |
+| 48 | [What is Spring Boot?](#What-is-Spring-Boot) |
+| 49 | [Why Should We Use Spring Boot Framework?](#Why-Should-We-Use-Spring-Boot-Framework) |
+| 50 | [Advantages of Spring Boot](#Advantages-of-Spring Boot) |
+| 51 | [Spring Boot Architecture](#Spring-Boot-Architecture) |
+| 52 | [Java Persistence Query Language (JPQL)](#Java-Persistence-Query-Language-JPQL) |
+| 53 | [Hibernate vs JPA](#Hibernate-vs-JPA) |
+| 54 | [Spring Boot Actuator](#Spring-Boot-Actuator) |
+| 55 | [Spring Boot AOP](#Spring-Boot-AOP) |
+| 56 | [Spring Boot JDBC](#Spring-Boot-JDBC) |
+| 57 | [Spring Boot JDBC vs Spring JDBC](#Spring-Boot-JDBC-vs-Spring-JDBC) |
+| 58 | [Spring Boot H2 Database](#Spring-Boot-H2-Database) |
+| 59 | [Spring Boot Thymeleaf](#Spring-Boot-Thymeleaf) |
+| 60 | [Spring Boot Caching](#Spring-Boot-Caching) |
+| 61 | [Spring Boot Cache Annotation](#Spring-Boot-Cache-Annotation) |
+| 62 | [RESTful Web Services](#RESTful-Web-Services) |
+| 63 | [SOAP vs REST](#SOAP-vs-REST) |
+| 64 | [What is DispatcherServlet in Spring?](#What-is-DispatcherServlet-in-Spring?) |
+
+
+
+---
 
 ### What is Spring Framework?
 
@@ -4912,7 +4950,7 @@ JPA provides a standard and convenient way to manage persistence in Java applica
 <hr style="border:1px solid orange">
 
 
-### What is the Difference Between `CrudRepository` and `JpaRepository`?
+### What is the Difference Between CrudRepository and JpaRepository?
 
 In Spring Data JPA, both `CrudRepository` and `JpaRepository` are interfaces that provide methods for CRUD (Create, Read, Update, Delete) operations. However, there are differences between them in terms of functionality and use cases.
 
@@ -5119,7 +5157,7 @@ An **Entity Class** in Spring JPA is a Java class that represents a table in a r
 <hr style="border:1px solid orange">
 
 
-### What is `PagingAndSortingRepository` in Spring Data JPA?
+### What is PagingAndSortingRepository in Spring Data JPA?
 
 `PagingAndSortingRepository` is an extension of the `CrudRepository` interface in Spring Data JPA that adds support for **pagination** and **sorting** of query results. It provides methods to easily retrieve data in a paginated form or apply sorting criteria to your query results. This is useful when dealing with large datasets and when you want to control how data is retrieved in chunks (pagination) or order it in a specific way (sorting).
 
@@ -5252,7 +5290,7 @@ public class UserController {
 <hr style="border:1px solid orange">
 
 
-### What is `@Query` Annotation in Spring Data JPA?
+### What is @Query Annotation in Spring Data JPA?
 
 The `@Query` annotation in Spring Data JPA is used to define custom queries directly on repository methods. It allows you to write JPQL (Java Persistence Query Language) or native SQL queries to fetch data from the database when the default query methods (like `findAll()`, `findById()`, etc.) provided by Spring Data are not sufficient or do not cover specific use cases.
 
