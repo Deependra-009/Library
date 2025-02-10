@@ -14,16 +14,16 @@
 | 6 | [Types of Dependency Injection](#Types-of-Dependency-Injection) |
 | 7 | [Constructor Injection vs Setter Injection](#Constructor-Injection-vs-Setter-Injection) |
 | 8 | [What is Autowiring in Spring?](#What-is-Autowiring-in-Spring) |
-| 9 | [Autowiring Modes in Spring][#Autowiring-Modes-in-Spring] |
+| 9 | [Autowiring Modes in Spring](#Autowiring-Modes-in-Spring) |
 | 10 | [What is Spring AOP?](#What-is-Spring-AOP) |
 | 11 | [What is a Spring Configuration File?](#What-is-a-Spring-Configuration-File) |
 | 12 | [What is a Spring Bean?](#What-is-a-Spring-Bean) |
 | 13 | [What is Bean Scope in Spring?](#What-is-Bean-Scope-in-Spring) |
-| 14 | [What is the Difference Between @Inject and @Autowired?](#What-is-the-Difference-Between-@Inject-and-@Autowired) |
+| 14 | [What is the Difference Between @Inject and @Autowired?](#What-is-the-Difference-Between-Inject-and-Autowired) |
 | 15 | [What Are the Types of IoC Containers in Spring?](#What-Are-the-Types-of-IoC-Containers-in-Spring) |
-| 16 | [What is the @Required Annotation in Spring?](#What-is-the-@Required-Annotation-in-Spring) |
-| 17 | [What is the @Qualifier Annotation in Spring?](#What-is-the-@Qualifier-Annotation-in-Spring) |
-| 18 | [What is the @Primary Annotation in Spring?](#What-is-the-@Primary-Annotation-in-Spring) |
+| 16 | [What is the @Required Annotation in Spring?](#What-is-the-Required-Annotation-in-Spring) |
+| 17 | [What is the @Qualifier Annotation in Spring?](#What-is-the-Qualifier-Annotation-in-Spring) |
+| 18 | [What is the @Primary Annotation in Spring?](#What-is-the-Primary-Annotation-in-Spring) |
 | 19 | [What is the Lifecycle in Spring?](#What-is-the-Lifecycle-in-Spring) |
 | 20 | [What Are the Different Ways of Writing the Lifecycle of a Spring Bean?](#What-Are-the-Different-Ways-of-Writing-the-Lifecycle-of-a-Spring-Bean) |
 | 21 | [What is the Stereotype Annotation in Spring?](#What-is-the-Stereotype-Annotation-in-Spring) |
@@ -32,10 +32,10 @@
 | 24 | [What is MVC Architecture?](#What-is-MVC-Architecture) |
 | 25 | [What are the Advantages of MVC?](#What-are-the-Advantages-of-MVC) |
 | 26 | [What is the Flow of Spring MVC?](#What-is-the-Flow-of-Spring-MVC) |
-| 27 | [What is the Difference Between @Controller and @RestController?](#What-is-the-Difference-Between-@Controller-and-@RestController) |
-| 28 | [What is the Difference Between @RequestBody and @ResponseBody?](#What-is-the-Difference-Between-@RequestBody-and-@ResponseBody) |
-| 29 | [What is @PathVariable?](#What-is-@PathVariable) |
-| 30 | [What are Spring MVC Validations?](#What-are-Spring-MVC-Validations?) |
+| 27 | [What is the Difference Between @Controller and @RestController?](#What-is-the-Difference-Between-Controller-and-RestController) |
+| 28 | [What is the Difference Between @RequestBody and @ResponseBody?](#What-is-the-Difference-Between-RequestBody-and-ResponseBody) |
+| 29 | [What is @PathVariable?](#What-is-PathVariable) |
+| 30 | [What are Spring MVC Validations?](#What-are-Spring-MVC-Validations) |
 
 ### What is Spring Framework?
 
