@@ -55,7 +55,7 @@
 | 47 | [What is a Custom Filter in Spring Security?](#What-is-a-Custom-Filter-in-Spring-Security) |
 | 48 | [What is Spring Boot?](#What-is-Spring-Boot) |
 | 49 | [Why Should We Use Spring Boot Framework?](#Why-Should-We-Use-Spring-Boot-Framework) |
-| 50 | [Advantages of Spring Boot](#Advantages-of-Spring Boot) |
+| 50 | [Advantages of Spring Boot](#Advantages-of-Spring-Boot) |
 | 51 | [Spring Boot Architecture](#Spring-Boot-Architecture) |
 | 52 | [Java Persistence Query Language (JPQL)](#Java-Persistence-Query-Language-JPQL) |
 | 53 | [Hibernate vs JPA](#Hibernate-vs-JPA) |
@@ -69,7 +69,7 @@
 | 61 | [Spring Boot Cache Annotation](#Spring-Boot-Cache-Annotation) |
 | 62 | [RESTful Web Services](#RESTful-Web-Services) |
 | 63 | [SOAP vs REST](#SOAP-vs-REST) |
-| 64 | [What is DispatcherServlet in Spring?](#What-is-DispatcherServlet-in-Spring?) |
+| 64 | [What is DispatcherServlet in Spring?](#What-is-DispatcherServlet-in-Spring) |
 
 
 
