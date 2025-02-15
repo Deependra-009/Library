@@ -42,7 +42,7 @@
 | 34 | [What is the Difference Between JPA and Hibernate?](#What-is-the-Difference-Between-JPA-and-Hibernate) |
 | 35 | [What are the Advantages of JPA?](#What-are-the-Advantages-of-JPA) |
 | 36 | [What is the Difference Between CrudRepository and JpaRepository?](#What-is-the-Difference-Between-CrudRepository-and-JpaRepository) |
-| 37 | [What is an Entity Class in Spring JPA?](#What-is-an-Entity-Class-in Spring-JPA) |
+| 37 | [What is an Entity Class in Spring JPA?](#What-is-an-Entity-Class-in-Spring-JPA) |
 | 38 | [What is PagingAndSortingRepository in Spring Data JPA?](#What-is-PagingAndSortingRepository-in-Spring-Data-JPA) |
 | 39 | [What is @Query Annotation in Spring Data JPA?](#What-is-Query-Annotation-in-Spring-Data-JPA) |
 | 40 | [What is Spring Security?](#What-is-Spring-Security) |
