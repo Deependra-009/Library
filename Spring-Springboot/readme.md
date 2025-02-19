@@ -70,7 +70,7 @@
 | 62 | [RESTful Web Services](#RESTful-Web-Services) |
 | 63 | [SOAP vs REST](#SOAP-vs-REST) |
 | 64 | [What is DispatcherServlet in Spring?](#What-is-DispatcherServlet-in-Spring) |
-| 65 | [What is the @SpringBootApplication Annotation?](#What-is-the-@SpringBootApplication-Annotation) |
+| 65 | [What is the @SpringBootApplication Annotation?](#What-is-the-SpringBootApplication-Annotation) |
 | 66 | [How to Retrieve Parameters in Spring Boot](#How-to-Retrieve-Parameters-in-Spring-Boot) |
 | 67 | [SOLID Principles in Java (With Examples)](#SOLID-Principles-in-Java-With-Examples) |
 | 68 | [Difference Between == and .equals() in Java](#Difference-Between-==-and-equals-in-Java) |
