@@ -74,6 +74,8 @@
 | 66 | [How to Retrieve Parameters in Spring Boot](#How-to-Retrieve-Parameters-in-Spring-Boot)                                                        |
 | 67 | [SOLID Principles in Java (With Examples)](#SOLID-Principles-in-Java-With-Examples)                                                            |
 | 68 | [Difference Between == and .equals() in Java](#Difference-Between--and-equals-in-Java)                                                         |
+| 69 | [What is a Design Pattern in Java?](#What-is-a-Design-Pattern-in-Java) |
+| 70 | [Creational Design Patterns in Java](#Creational-Design-Patterns-in-Java) |
 
 
 
@@ -10381,7 +10383,465 @@ The `.equals()` method is used to check for **content equality** (whether two ob
 
 <hr style="border:1px solid orange">
 
+### What is a Design Pattern in Java?
 
+A **design pattern** in Java is a **proven solution** to a **common software design problem**. These patterns provide best practices and reusable solutions, making the development process faster and more efficient.
+
+---
+
+## **Types of Design Patterns in Java**
+
+Java design patterns are categorized into **three main types**:
+
+1. **Creational Design Patterns** → Deals with object creation
+2. **Structural Design Patterns** → Deals with class and object composition
+3. **Behavioral Design Patterns** → Deals with communication between objects
+
+---
+
+## **1. Creational Design Patterns (Object Creation Patterns)**
+
+| Pattern Name | Description | Example |
+|-------------|-------------|---------|
+| **Singleton** | Ensures that only **one** instance of a class exists. | Database Connection Pool |
+| **Factory Method** | Creates objects without exposing the instantiation logic to the client. | `Calendar.getInstance()` |
+| **Abstract Factory** | Provides an interface for creating families of related objects. | GUI frameworks (e.g., Windows, Mac, Linux UI components) |
+| **Builder** | Constructs complex objects step by step. | `StringBuilder`, `Lombok @Builder` |
+| **Prototype** | Creates a new object by copying an existing object. | Cloning Objects (`clone()`) |
+
+### **Example: Singleton Pattern**
+```java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {} // Private constructor
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+```
+
+---
+
+## **2. Structural Design Patterns (Class/Object Composition Patterns)**
+
+| Pattern Name | Description | Example |
+|-------------|-------------|---------|
+| **Adapter** | Converts one interface into another interface the client expects. | `java.util.Arrays.asList()` |
+| **Bridge** | Decouples abstraction from implementation. | JDBC Driver |
+| **Composite** | Treats individual objects and compositions of objects uniformly. | UI components (buttons, panels) |
+| **Decorator** | Adds new functionality to an object dynamically. | `BufferedReader` |
+| **Facade** | Provides a simplified interface to a complex system. | `javax.faces.context.FacesContext` |
+| **Flyweight** | Shares common objects to reduce memory usage. | String Pool (`String.intern()`) |
+| **Proxy** | Controls access to an object. | `java.lang.reflect.Proxy` |
+
+### **Example: Adapter Pattern**
+```java
+// Target interface
+interface MediaPlayer {
+    void play(String audioType, String fileName);
+}
+
+// Adaptee class
+class AdvancedMediaPlayer {
+    void playMp3(String fileName) {
+        System.out.println("Playing MP3: " + fileName);
+    }
+}
+
+// Adapter class
+class MediaAdapter implements MediaPlayer {
+    private AdvancedMediaPlayer advancedMusicPlayer = new AdvancedMediaPlayer();
+
+    public void play(String audioType, String fileName) {
+        if ("mp3".equalsIgnoreCase(audioType)) {
+            advancedMusicPlayer.playMp3(fileName);
+        }
+    }
+}
+```
+
+---
+
+## **3. Behavioral Design Patterns (Communication Between Objects)**
+
+| Pattern Name | Description | Example |
+|-------------|-------------|---------|
+| **Chain of Responsibility** | Passes requests along a chain of handlers. | Servlet Filters |
+| **Command** | Encapsulates a request as an object. | `Runnable` interface |
+| **Interpreter** | Implements a specialized language interpreter. | Regular Expressions (`Pattern.compile()`) |
+| **Iterator** | Provides a way to access elements sequentially. | `Iterator` interface |
+| **Mediator** | Reduces direct dependencies between objects. | Chat Application (Centralized Message Broker) |
+| **Memento** | Saves and restores an object's state. | `Serializable` |
+| **Observer** | Defines a one-to-many dependency. | `java.util.Observer` |
+| **State** | Changes behavior based on object state. | Traffic Light System |
+| **Strategy** | Selects an algorithm at runtime. | Payment Processing System |
+| **Template Method** | Defines the structure of an algorithm. | `HttpServlet` |
+| **Visitor** | Adds operations to an object structure. | XML Processing |
+
+### **Example: Observer Pattern**
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+// Observer Interface
+interface Observer {
+    void update(String message);
+}
+
+// Subject (Publisher)
+class Subject {
+    private List<Observer> observers = new ArrayList<>();
+
+    void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    void notifyObservers(String message) {
+        for (Observer observer : observers) {
+            observer.update(message);
+        }
+    }
+}
+
+// Concrete Observer
+class Subscriber implements Observer {
+    private String name;
+
+    public Subscriber(String name) {
+        this.name = name;
+    }
+
+    public void update(String message) {
+        System.out.println(name + " received: " + message);
+    }
+}
+
+// Usage
+public class ObserverPatternExample {
+    public static void main(String[] args) {
+        Subject subject = new Subject();
+        Observer user1 = new Subscriber("Alice");
+        Observer user2 = new Subscriber("Bob");
+
+        subject.addObserver(user1);
+        subject.addObserver(user2);
+
+        subject.notifyObservers("New Video Uploaded!");
+    }
+}
+```
+
+---
+
+## **Why Use Design Patterns?**
+✅ Improves code **reusability**
+✅ Increases **maintainability**
+✅ Makes the system **scalable**
+✅ Enhances **code readability**
+✅ Reduces code **duplication**
+
+By using design patterns, you follow best practices and write **more structured, efficient, and reusable code**. 🚀
+
+
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+
+### Creational Design Patterns in Java
+
+Creational design patterns **handle object creation** mechanisms, making the system **more flexible and reusable**. Java provides five common creational design patterns:
+
+1. **Singleton**
+2. **Factory Method**
+3. **Abstract Factory**
+4. **Builder**
+5. **Prototype**
+
+---
+
+## **1. Singleton Pattern**
+Ensures that **only one instance** of a class exists throughout the application.
+
+### **Example: Singleton Pattern (Thread-Safe)**
+```java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {} // Private constructor prevents instantiation
+
+    public static synchronized Singleton getInstance() { // Thread-safe
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+```
+✅ **Use Case:** **Database connection pool, logging, configuration management**
+
+---
+
+## **2. Factory Method Pattern**
+The Factory Method Pattern provides an interface for creating objects but allows subclasses to decide which class to instantiate.
+
+### **Example: Factory Method Pattern**
+```java
+// Step 1: Define an interface
+interface Vehicle {
+    void drive();
+}
+
+// Step 2: Create concrete classes implementing the interface
+class Car implements Vehicle {
+    public void drive() {
+        System.out.println("Car is driving");
+    }
+}
+
+class Bike implements Vehicle {
+    public void drive() {
+        System.out.println("Bike is driving");
+    }
+}
+
+// Step 3: Create a Factory class
+class VehicleFactory {
+    public static Vehicle getVehicle(String type) {
+        if ("Car".equalsIgnoreCase(type)) {
+            return new Car();
+        } else if ("Bike".equalsIgnoreCase(type)) {
+            return new Bike();
+        }
+        return null;
+    }
+}
+
+// Step 4: Use the factory to get objects
+public class FactoryPatternExample {
+    public static void main(String[] args) {
+        Vehicle car = VehicleFactory.getVehicle("Car");
+        car.drive(); // Output: Car is driving
+
+        Vehicle bike = VehicleFactory.getVehicle("Bike");
+        bike.drive(); // Output: Bike is driving
+    }
+}
+```
+✅ **Use Case:** **Logging frameworks, connection factories, parsers**
+
+---
+
+## **3. Abstract Factory Pattern**
+Abstract Factory provides an **interface for creating families of related objects** without specifying their concrete classes.
+
+### **Example: Abstract Factory Pattern**
+```java
+// Step 1: Create an interface
+interface Car {
+    void drive();
+}
+
+// Step 2: Create concrete classes implementing the interface
+class ElectricCar implements Car {
+    public void drive() {
+        System.out.println("Driving an electric car.");
+    }
+}
+
+class PetrolCar implements Car {
+    public void drive() {
+        System.out.println("Driving a petrol car.");
+    }
+}
+
+// Step 3: Create abstract factory
+interface CarFactory {
+    Car createCar();
+}
+
+// Step 4: Implement factory classes
+class ElectricCarFactory implements CarFactory {
+    public Car createCar() {
+        return new ElectricCar();
+    }
+}
+
+class PetrolCarFactory implements CarFactory {
+    public Car createCar() {
+        return new PetrolCar();
+    }
+}
+
+// Step 5: Use the factories
+public class AbstractFactoryExample {
+    public static void main(String[] args) {
+        CarFactory factory1 = new ElectricCarFactory();
+        Car electricCar = factory1.createCar();
+        electricCar.drive(); // Output: Driving an electric car.
+
+        CarFactory factory2 = new PetrolCarFactory();
+        Car petrolCar = factory2.createCar();
+        petrolCar.drive(); // Output: Driving a petrol car.
+    }
+}
+```
+✅ **Use Case:** **UI frameworks, database drivers, shape factories**
+
+---
+
+## **4. Builder Pattern**
+Builder Pattern **constructs complex objects step by step** without directly using a constructor.
+
+### **Example: Builder Pattern**
+```java
+// Step 1: Create a Product class
+class House {
+    private String foundation;
+    private String structure;
+    private String roof;
+
+    public House(String foundation, String structure, String roof) {
+        this.foundation = foundation;
+        this.structure = structure;
+        this.roof = roof;
+    }
+
+    public void show() {
+        System.out.println("House with " + foundation + ", " + structure + ", and " + roof);
+    }
+}
+
+// Step 2: Create a Builder class
+class HouseBuilder {
+    private String foundation;
+    private String structure;
+    private String roof;
+
+    public HouseBuilder setFoundation(String foundation) {
+        this.foundation = foundation;
+        return this;
+    }
+
+    public HouseBuilder setStructure(String structure) {
+        this.structure = structure;
+        return this;
+    }
+
+    public HouseBuilder setRoof(String roof) {
+        this.roof = roof;
+        return this;
+    }
+
+    public House build() {
+        return new House(foundation, structure, roof);
+    }
+}
+
+// Step 3: Use the Builder to create objects
+public class BuilderPatternExample {
+    public static void main(String[] args) {
+        House house = new HouseBuilder()
+                .setFoundation("Concrete")
+                .setStructure("Brick Walls")
+                .setRoof("Metal Sheet")
+                .build();
+
+        house.show(); // Output: House with Concrete, Brick Walls, and Metal Sheet
+    }
+}
+```
+✅ **Use Case:** **Immutable objects (e.g., StringBuilder), complex object creation**
+
+---
+
+## **5. Prototype Pattern**
+Prototype Pattern allows us to **copy existing objects without creating new instances** from scratch.
+
+### **Example: Prototype Pattern**
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+// Step 1: Create an interface
+interface Animal extends Cloneable {
+    Animal clone();
+}
+
+// Step 2: Implement concrete classes
+class Dog implements Animal {
+    public Dog() {
+        System.out.println("Dog object created");
+    }
+
+    public Animal clone() {
+        return new Dog();
+    }
+}
+
+class Cat implements Animal {
+    public Cat() {
+        System.out.println("Cat object created");
+    }
+
+    public Animal clone() {
+        return new Cat();
+    }
+}
+
+// Step 3: Create a Prototype Registry
+class AnimalRegistry {
+    private static Map<String, Animal> animalMap = new HashMap<>();
+
+    static {
+        animalMap.put("Dog", new Dog());
+        animalMap.put("Cat", new Cat());
+    }
+
+    public static Animal getAnimal(String type) {
+        return (Animal) animalMap.get(type).clone();
+    }
+}
+
+// Step 4: Use the prototype pattern
+public class PrototypePatternExample {
+    public static void main(String[] args) {
+        Animal clonedDog = AnimalRegistry.getAnimal("Dog");
+        Animal clonedCat = AnimalRegistry.getAnimal("Cat");
+    }
+}
+```
+✅ **Use Case:** **Copying objects without reinitializing, game character cloning, document templates**
+
+---
+
+## **Summary Table**
+
+| Pattern | Description | Example Use Case |
+|---------|-------------|-----------------|
+| **Singleton** | Ensures only **one instance** exists | Database connection, logging |
+| **Factory Method** | Creates objects without exposing instantiation logic | Logger factory, GUI buttons |
+| **Abstract Factory** | Creates **families of related objects** | UI themes, database drivers |
+| **Builder** | Step-by-step creation of complex objects | Immutable objects (e.g., `StringBuilder`) |
+| **Prototype** | Clones existing objects without re-initializing | Game character cloning, document templates |
+
+---
+
+### **When to Use Which Pattern?**
+✅ **Use Singleton** → When only **one instance** is needed (e.g., logging, database connection).
+✅ **Use Factory Method** → When creating objects **without specifying their exact class**.
+✅ **Use Abstract Factory** → When dealing with **multiple object families** (e.g., UI themes).
+✅ **Use Builder** → When creating **complex objects step by step**.
+✅ **Use Prototype** → When copying **existing objects efficiently**.
+
+These patterns **improve code maintainability, reduce coupling, and enhance scalability**. 🚀
 
 
 
