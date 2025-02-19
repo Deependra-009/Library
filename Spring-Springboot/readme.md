@@ -42,7 +42,7 @@
 | 34 | [What is the Difference Between JPA and Hibernate?](#What-is-the-Difference-Between-JPA-and-Hibernate) |
 | 35 | [What are the Advantages of JPA?](#What-are-the-Advantages-of-JPA) |
 | 36 | [What is the Difference Between CrudRepository and JpaRepository?](#What-is-the-Difference-Between-CrudRepository-and-JpaRepository) |
-| 37 | [What is an Entity Class in Spring JPA?](#What-is-an-Entity-Class-in Spring-JPA) |
+| 37 | [What is an Entity Class in Spring JPA?](#What-is-an-Entity-Class-in-Spring-JPA) |
 | 38 | [What is PagingAndSortingRepository in Spring Data JPA?](#What-is-PagingAndSortingRepository-in-Spring-Data-JPA) |
 | 39 | [What is @Query Annotation in Spring Data JPA?](#What-is-Query-Annotation-in-Spring-Data-JPA) |
 | 40 | [What is Spring Security?](#What-is-Spring-Security) |
@@ -70,6 +70,10 @@
 | 62 | [RESTful Web Services](#RESTful-Web-Services) |
 | 63 | [SOAP vs REST](#SOAP-vs-REST) |
 | 64 | [What is DispatcherServlet in Spring?](#What-is-DispatcherServlet-in-Spring) |
+| 65 | [What is the @SpringBootApplication Annotation?](#What-is-the-@SpringBootApplication-Annotation) |
+| 66 | [How to Retrieve Parameters in Spring Boot](#How-to-Retrieve-Parameters-in-Spring-Boot) |
+| 67 | [SOLID Principles in Java (With Examples)](#SOLID-Principles-in-Java-With-Examples) |
+| 68 | [Difference Between == and .equals() in Java](#Difference-Between-==-and-equals-in-Java) |
 
 
 
@@ -9651,5 +9655,733 @@ The **DispatcherServlet** is essential for the functioning of a Spring MVC appli
 **[⬆ Back to Top](#table-of-contents)**
 
 <hr style="border:1px solid orange">
+
+
+### What is the @SpringBootApplication Annotation?
+
+The `@SpringBootApplication` annotation in Spring Boot is a **convenience annotation** that combines three key annotations:
+1. **`@Configuration`**
+2. **`@EnableAutoConfiguration`**
+3. **`@ComponentScan`**
+
+This makes it easier to configure and bootstrap a Spring Boot application with minimal effort. Here's a breakdown:
+
+---
+
+### **Annotations Combined in `@SpringBootApplication`**
+
+1. **`@Configuration`**:
+   - Marks the class as a source of Spring configuration.
+   - Allows defining Spring Beans using methods annotated with `@Bean`.
+
+   **Example:**
+   ```java
+   @Configuration
+   public class MyAppConfig {
+       @Bean
+       public MyService myService() {
+           return new MyService();
+       }
+   }
+   ```
+
+2. **`@EnableAutoConfiguration`**:
+   - Enables Spring Boot's auto-configuration mechanism.
+   - Automatically configures Spring components (like DataSource, RestController) based on the **classpath** dependencies.
+
+   **Example:**
+   - If `spring-boot-starter-web` is on the classpath, Spring Boot configures a web application (e.g., Tomcat server).
+
+3. **`@ComponentScan`**:
+   - Scans the package where the annotated class resides and its sub-packages for Spring components like **`@Component`, `@Service`, `@Repository`, and `@Controller`**.
+
+   **Example:**
+   ```java
+   @Component
+   public class MyComponent {
+       public void doWork() {
+           System.out.println("Doing work...");
+       }
+   }
+   ```
+
+---
+
+### **How to Use `@SpringBootApplication`**
+
+A typical Spring Boot application class looks like this:
+```java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MySpringBootApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MySpringBootApplication.class, args);
+    }
+}
+```
+
+- **`@SpringBootApplication`** tells Spring Boot to:
+  - Auto-configure the application.
+  - Scan for components in the package `com.example` and its sub-packages (assuming the application is in `com.example`).
+  - Use the configuration for beans and other settings.
+
+---
+
+### **Advantages of `@SpringBootApplication`**
+
+1. **Simplifies Configuration**:
+   - Combines commonly used annotations into one.
+   - Reduces boilerplate code.
+
+2. **Automatic Component Scanning**:
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+### How to Retrieve Parameters in Spring Boot
+
+In Spring Boot, there are different ways to retrieve parameters depending on the type of request and where the parameters are located (query parameters, path variables, request body, or headers). Below are the common methods with examples.
+
+---
+
+### 1. **Query Parameters**
+Query parameters are typically part of the URL after a `?`, such as `/api/users?name=John&age=30`.
+
+#### **Using `@RequestParam` Annotation**
+You can use `@RequestParam` to retrieve query parameters.
+
+#### **Example:**
+```java
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController {
+
+    @GetMapping("/api/users")
+    public String getUserByParams(@RequestParam String name, @RequestParam int age) {
+        return "Name: " + name + ", Age: " + age;
+    }
+}
+```
+
+- **Request:** `GET /api/users?name=John&age=30`
+- **Response:** `Name: John, Age: 30`
+
+#### Optional Query Parameters
+To make a query parameter optional, use `required = false` and provide a default value using `defaultValue`.
+
+```java
+@GetMapping("/api/users")
+public String getUser(@RequestParam(defaultValue = "Guest") String name,
+                      @RequestParam(defaultValue = "0") int age) {
+    return "Name: " + name + ", Age: " + age;
+}
+```
+
+---
+
+### 2. **Path Variables**
+Path variables are part of the URL itself, such as `/api/users/{id}`.
+
+#### **Using `@PathVariable` Annotation**
+You can use `@PathVariable` to retrieve values from the URL.
+
+#### **Example:**
+```java
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController {
+
+    @GetMapping("/api/users/{id}")
+    public String getUserById(@PathVariable int id) {
+        return "User ID: " + id;
+    }
+}
+```
+
+- **Request:** `GET /api/users/123`
+- **Response:** `User ID: 123`
+
+#### Multiple Path Variables
+```java
+@GetMapping("/api/users/{id}/posts/{postId}")
+public String getUserPost(@PathVariable int id, @PathVariable int postId) {
+    return "User ID: " + id + ", Post ID: " + postId;
+}
+```
+
+---
+
+### 3. **Request Body**
+If the parameters are sent as a JSON payload in the request body, you can use `@RequestBody`.
+
+#### **Using `@RequestBody` Annotation**
+Spring Boot automatically maps the request body to a Java object.
+
+#### **Example:**
+```java
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController {
+
+    @PostMapping("/api/users")
+    public String createUser(@RequestBody User user) {
+        return "User created: " + user.getName() + ", Age: " + user.getAge();
+    }
+}
+
+// User.java
+public class User {
+    private String name;
+    private int age;
+
+    // Getters and Setters
+}
+```
+
+- **Request:**
+  ```json
+  POST /api/users
+  {
+    "name": "John",
+    "age": 30
+  }
+  ```
+- **Response:** `User created: John, Age: 30`
+
+---
+
+### 4. **Headers**
+You can retrieve custom headers from the request using the `@RequestHeader` annotation.
+
+#### **Using `@RequestHeader` Annotation**
+```java
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController {
+
+    @GetMapping("/api/users")
+    public String getUserByHeader(@RequestHeader("Authorization") String token) {
+        return "Authorization Token: " + token;
+    }
+}
+```
+
+- **Request:**
+  ```
+  GET /api/users
+  Authorization: Bearer my-token
+  ```
+- **Response:** `Authorization Token: Bearer my-token`
+
+---
+
+### 5. **Matrix Variables (Optional)**
+Matrix variables are a less common way of passing parameters in the URL, like `/api/users;name=John;age=30`.
+
+#### **Using `@MatrixVariable` Annotation**
+Make sure to enable matrix variable support by setting `setRemoveSemicolonContent(false)` in the `UrlPathHelper`.
+
+#### **Example:**
+```java
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController {
+
+    @GetMapping("/api/users/{id}")
+    public String getUserByMatrixVar(@PathVariable int id, @MatrixVariable String name, @MatrixVariable int age) {
+        return "User ID: " + id + ", Name: " + name + ", Age: " + age;
+    }
+}
+```
+
+- **Request:** `/api/users/123;name=John;age=30`
+- **Response:** `User ID: 123, Name: John, Age: 30`
+
+---
+
+### Summary Table for Retrieving Parameters
+
+| **Type**               | **Annotation**      | **Example**                |
+|------------------------|---------------------|----------------------------|
+| **Query Parameters**    | `@RequestParam`     | `/api/users?name=John`     |
+| **Path Variables**      | `@PathVariable`     | `/api/users/123`           |
+| **Request Body**        | `@RequestBody`      | JSON Payload in POST       |
+| **Headers**             | `@RequestHeader`    | `Authorization: Bearer ...`|
+| **Matrix Variables**    | `@MatrixVariable`   | `/api/users/123;name=John` |
+
+This approach provides flexibility to handle different types of parameters in Spring Boot APIs!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+### SOLID Principles in Java (With Examples)
+
+The **SOLID principles** are a set of five design principles that help developers create more maintainable, understandable, and flexible code. These principles were introduced by **Robert C. Martin** and are the foundation of good object-oriented design.
+
+---
+
+### 1. **S: Single Responsibility Principle (SRP)**
+
+**Definition:**
+A class should have only one reason to change.
+In other words, a class should have a single responsibility or focus.
+
+#### **Example:**
+Bad example (violating SRP):
+A `User` class handles both user details and email sending.
+```java
+public class User {
+    private String name;
+    private String email;
+
+    public void saveToDatabase() {
+        System.out.println("Saving user to database...");
+    }
+
+    public void sendEmail() {
+        System.out.println("Sending email...");
+    }
+}
+```
+
+Good example (following SRP):
+Separate classes handle different responsibilities.
+```java
+public class User {
+    private String name;
+    private String email;
+
+    // Getters and Setters
+}
+
+public class UserRepository {
+    public void saveToDatabase(User user) {
+        System.out.println("Saving user to database...");
+    }
+}
+
+public class EmailService {
+    public void sendEmail(User user) {
+        System.out.println("Sending email to " + user.getEmail());
+    }
+}
+```
+
+---
+
+### 2. **O: Open-Closed Principle (OCP)**
+
+**Definition:**
+A class should be open for extension but closed for modification.
+You should be able to add new functionality without altering existing code.
+
+#### **Example:**
+Bad example (violating OCP):
+Modifying an existing `AreaCalculator` class to support new shapes.
+```java
+public class AreaCalculator {
+    public double calculateRectangleArea(double length, double width) {
+        return length * width;
+    }
+
+    public double calculateCircleArea(double radius) {
+        return Math.PI * radius * radius;
+    }
+}
+```
+
+Good example (following OCP):
+Use polymorphism to add new shapes without modifying the `AreaCalculator`.
+```java
+public interface Shape {
+    double calculateArea();
+}
+
+public class Rectangle implements Shape {
+    private double length;
+    private double width;
+
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public double calculateArea() {
+        return length * width;
+    }
+}
+
+public class Circle implements Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class AreaCalculator {
+    public double calculateTotalArea(List<Shape> shapes) {
+        return shapes.stream().mapToDouble(Shape::calculateArea).sum();
+    }
+}
+```
+
+---
+
+### 3. **L: Liskov Substitution Principle (LSP)**
+
+**Definition:**
+Objects of a superclass should be replaceable with objects of its subclasses without altering the correctness of the program.
+
+#### **Example:**
+Bad example (violating LSP):
+The subclass `Square` breaks the behavior of the `Rectangle` class.
+```java
+public class Rectangle {
+    protected double length;
+    protected double width;
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double calculateArea() {
+        return length * width;
+    }
+}
+
+public class Square extends Rectangle {
+    @Override
+    public void setLength(double length) {
+        this.length = length;
+        this.width = length; // Breaks the LSP
+    }
+
+    @Override
+    public void setWidth(double width) {
+        this.width = width;
+        this.length = width; // Breaks the LSP
+    }
+}
+```
+
+Good example (following LSP):
+Use composition instead of inheritance for the `Square` class.
+```java
+public interface Shape {
+    double calculateArea();
+}
+
+public class Rectangle implements Shape {
+    private double length;
+    private double width;
+
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public double calculateArea() {
+        return length * width;
+    }
+}
+
+public class Square implements Shape {
+    private double side;
+
+    public Square(double side) {
+        this.side = side;
+    }
+
+    @Override
+    public double calculateArea() {
+        return side * side;
+    }
+}
+```
+
+---
+
+### 4. **I: Interface Segregation Principle (ISP)**
+
+**Definition:**
+A class should not be forced to implement interfaces it does not use.
+Instead of having one large interface, break it into smaller, more specific interfaces.
+
+#### **Example:**
+Bad example (violating ISP):
+A `Printer` class is forced to implement methods it doesn't need.
+```java
+public interface Machine {
+    void print();
+    void scan();
+    void fax();
+}
+
+public class Printer implements Machine {
+    @Override
+    public void print() {
+        System.out.println("Printing...");
+    }
+
+    @Override
+    public void scan() {
+        // Not needed
+    }
+
+    @Override
+    public void fax() {
+        // Not needed
+    }
+}
+```
+
+Good example (following ISP):
+Split the `Machine` interface into smaller, focused interfaces.
+```java
+public interface Printer {
+    void print();
+}
+
+public interface Scanner {
+    void scan();
+}
+
+public class PrinterMachine implements Printer {
+    @Override
+    public void print() {
+        System.out.println("Printing...");
+    }
+}
+```
+
+---
+
+### 5. **D: Dependency Inversion Principle (DIP)**
+
+**Definition:**
+High-level modules should not depend on low-level modules. Both should depend on abstractions.
+Abstractions should not depend on details. Details should depend on abstractions.
+
+#### **Example:**
+Bad example (violating DIP):
+The `NotificationService` depends on the concrete `EmailService`.
+```java
+public class EmailService {
+    public void sendEmail(String message) {
+        System.out.println("Email sent: " + message);
+    }
+}
+
+public class NotificationService {
+    private EmailService emailService;
+
+    public NotificationService(EmailService emailService) {
+        this.emailService = emailService;
+    }
+
+    public void sendNotification(String message) {
+        emailService.sendEmail(message);
+    }
+}
+```
+
+Good example (following DIP):
+Introduce an abstraction (`MessageService`) that both `EmailService` and `SMSService` implement.
+```java
+public interface MessageService {
+    void sendMessage(String message);
+}
+
+public class EmailService implements MessageService {
+    @Override
+    public void sendMessage(String message) {
+        System.out.println("Email sent: " + message);
+    }
+}
+
+public class SMSService implements MessageService {
+    @Override
+    public void sendMessage(String message) {
+        System.out.println("SMS sent: " + message);
+    }
+}
+
+public class NotificationService {
+    private MessageService messageService;
+
+    public NotificationService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    public void sendNotification(String message) {
+        messageService.sendMessage(message);
+    }
+}
+```
+
+---
+
+### Summary of SOLID Principles
+
+| **Principle**               | **Definition**                                                                 |
+|-----------------------------|-------------------------------------------------------------------------------|
+| **S: Single Responsibility** | A class should have only one reason to change.                               |
+| **O: Open-Closed**           | A class should be open for extension but closed for modification.            |
+| **L: Liskov Substitution**   | Subtypes must be substitutable for their base types without breaking the code.|
+| **I: Interface Segregation** | A class should not be forced to implement interfaces it doesn’t use.         |
+| **D: Dependency Inversion**  | High-level modules should depend on abstractions, not on concrete implementations.|
+
+By following SOLID principles, your code becomes cleaner, easier to maintain, and more scalable!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+### Difference Between == and .equals() in Java
+
+Both `==` and `.equals()` are used for comparisons in Java, but they are used in different contexts and have different purposes.
+
+---
+
+### 1. **`==` Operator**
+The `==` operator checks for **reference equality** (whether two objects point to the same memory location) when used with objects. For primitive types (e.g., `int`, `char`), it checks for **value equality**.
+
+#### Key Points:
+- **Primitive Types**: `==` compares the values.
+  ```java
+  int a = 5;
+  int b = 5;
+  System.out.println(a == b); // true, because their values are equal
+  ```
+- **Objects**: `==` checks if both references point to the same object in memory.
+  ```java
+  String s1 = new String("Hello");
+  String s2 = new String("Hello");
+  System.out.println(s1 == s2); // false, because they are different objects in memory
+  ```
+
+---
+
+### 2. **`.equals()` Method**
+The `.equals()` method is used to check for **content equality** (whether two objects are logically equivalent). It is defined in the `Object` class and can be overridden by user-defined classes to compare object contents.
+
+#### Key Points:
+- **Default Behavior**: In the `Object` class, `.equals()` works like `==` (checks reference equality).
+- **Overridden Behavior**: In many classes (e.g., `String`, `Integer`), `.equals()` is overridden to check for logical equivalence.
+  ```java
+  String s1 = new String("Hello");
+  String s2 = new String("Hello");
+  System.out.println(s1.equals(s2)); // true, because their content is the same
+  ```
+
+---
+
+### Comparison Table:
+
+| Feature                   | `==`                        | `.equals()`                              |
+|---------------------------|-----------------------------|------------------------------------------|
+| **Use**                  | Checks reference equality   | Checks logical/content equality          |
+| **Primitive Types**       | Compares values             | Not applicable                           |
+| **Objects**               | Compares memory locations   | Compares content (if overridden)         |
+| **Overridable**           | No                          | Yes (e.g., in `String`, `Integer`, etc.) |
+| **Example (Objects)**     | `s1 == s2` (ref comparison) | `s1.equals(s2)` (content comparison)     |
+
+---
+
+### Examples:
+
+1. **For Primitive Types**:
+   ```java
+   int x = 10;
+   int y = 10;
+   System.out.println(x == y); // true
+   ```
+
+2. **For Objects (Reference Equality)**:
+   ```java
+   String s1 = new String("Java");
+   String s2 = new String("Java");
+   System.out.println(s1 == s2);      // false, different memory locations
+   System.out.println(s1.equals(s2)); // true, content is the same
+   ```
+
+3. **Custom Object with `.equals()` Overridden**:
+   ```java
+   class Person {
+       String name;
+
+       Person(String name) {
+           this.name = name;
+       }
+
+       @Override
+       public boolean equals(Object obj) {
+           if (this == obj) return true;
+           if (obj == null || getClass() != obj.getClass()) return false;
+           Person person = (Person) obj;
+           return name.equals(person.name);
+       }
+   }
+
+   public class Main {
+       public static void main(String[] args) {
+           Person p1 = new Person("John");
+           Person p2 = new Person("John");
+
+           System.out.println(p1 == p2);        // false, different objects in memory
+           System.out.println(p1.equals(p2));  // true, content is the same
+       }
+   }
+   ```
+
+---
+
+### When to Use:
+- Use `==` for **primitive types** or when checking if two objects point to the **same memory location**.
+- Use `.equals()` when you want to compare the **content** of two objects. Always ensure `.equals()` is properly overridden for custom objects if logical equality is required.
+
+---
+
+**Pro Tip**: Always override `hashCode()` when you override `.equals()` to maintain consistency when using objects in collections like `HashMap` or `HashSet`.
+
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+
 
 

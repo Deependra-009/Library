@@ -52,6 +52,8 @@
 | 44 | [Java 8 Features](#Java-8-Features)                                                                                                                     |
 | 45 | [Java 9 Features](#Java-9-Features)                                                                                                                     |
 | 46 | [Java 11 Features](#Java-11-Features)                                                                                                                   |
+| 47 | [Ways to Achieve Immutability in Java](#Ways-to-Achieve-Immutability-in-Java) |
+
 ---
 
 ### what is java
@@ -5479,6 +5481,205 @@ Java 11 made **Flight Recorder** available for performance monitoring.
 ### **Conclusion**
 Java 11 introduced several useful enhancements such as **new String methods, improved file handling, better HTTP client, and performance improvements with ZGC**. Since it is an **LTS (Long-Term Support) version**, many enterprises and developers prefer Java 11 for production environments.
 
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+### Ways to Achieve Immutability in Java
+
+Immutability means that once an object is created, its state cannot be changed. Immutable objects are particularly useful in multithreaded applications as they are inherently thread-safe. Below are several ways to achieve immutability in Java:
+
+---
+
+### 1. **Using the `final` Keyword**
+The `final` keyword ensures that the reference of an object cannot be changed. It can be applied to classes, methods, and variables to enforce immutability.
+
+#### Example:
+```java
+final String name = "John";
+name = "Doe"; // Compilation error: cannot reassign final variable
+```
+
+However, `final` only prevents reassignment, not modification of the internal state of mutable objects.
+
+---
+
+### 2. **Creating Immutable Classes**
+To make a class immutable, follow these steps:
+1. Declare the class as `final` so it cannot be extended.
+2. Make all fields private and final.
+3. Do not provide any setters.
+4. Initialize fields through a constructor.
+5. If fields are mutable objects, return a defensive copy in the getter.
+
+#### Example:
+```java
+final class Employee {
+    private final String name;
+    private final int id;
+
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+}
+
+// Usage
+Employee e = new Employee("Alice", 123);
+// e.name = "Bob"; // Compilation error: no setters
+```
+
+---
+
+### 3. **Using Collections**
+If your immutable class contains mutable collections like `List` or `Map`, return an unmodifiable or defensive copy.
+
+#### Example:
+```java
+import java.util.Collections;
+import java.util.List;
+
+final class ImmutableClass {
+    private final List<String> items;
+
+    public ImmutableClass(List<String> items) {
+        this.items = Collections.unmodifiableList(items); // Return unmodifiable list
+    }
+
+    public List<String> getItems() {
+        return items; // Already unmodifiable
+    }
+}
+```
+
+---
+
+### 4. **Using Wrapper Classes**
+Java provides built-in immutable wrapper classes for primitive types, like `Integer`, `Double`, and `Boolean`. Use these classes to work with immutable values.
+
+#### Example:
+```java
+Integer num = Integer.valueOf(10); // Immutable wrapper class
+```
+
+---
+
+### 5. **Using String**
+The `String` class in Java is inherently immutable. Use `String` instead of mutable alternatives like `StringBuilder` when immutability is required.
+
+#### Example:
+```java
+String str = "Hello";
+str = str.concat(" World"); // Creates a new String object; the original is unchanged
+```
+
+---
+
+### 6. **Using Records (Java 14+)**
+From Java 14 onwards, you can use `record` to create immutable data classes automatically.
+
+#### Example:
+```java
+public record Employee(String name, int id) {}
+```
+
+`record` automatically creates:
+- Final fields
+- A constructor
+- Getters
+- A `toString()`, `equals()`, and `hashCode()` implementation
+
+---
+
+### 7. **Using Static Factory Methods**
+Static factory methods can help maintain immutability by creating new objects rather than modifying the existing ones.
+
+#### Example:
+```java
+import java.util.List;
+
+public final class Person {
+    private final String name;
+
+    private Person(String name) {
+        this.name = name;
+    }
+
+    public static Person create(String name) {
+        return new Person(name);
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+// Usage
+Person p1 = Person.create("Alice");
+Person p2 = Person.create("Bob");
+```
+
+---
+
+### 8. **Defensive Copy**
+If your class contains mutable fields (e.g., `Date`, `ArrayList`), ensure immutability by returning defensive copies in getters and constructors.
+
+#### Example:
+```java
+import java.util.Date;
+
+final class ImmutableClass {
+    private final Date date;
+
+    public ImmutableClass(Date date) {
+        this.date = new Date(date.getTime()); // Defensive copy
+    }
+
+    public Date getDate() {
+        return new Date(date.getTime()); // Defensive copy
+    }
+}
+
+// Usage
+Date date = new Date();
+ImmutableClass immutable = new ImmutableClass(date);
+date.setTime(123456789); // Does not affect the immutable object
+System.out.println(immutable.getDate());
+```
+
+---
+
+### 9. **Immutable Collections (Java 9+)**
+From Java 9 onwards, you can create immutable collections using `List.of()`, `Set.of()`, and `Map.of()`.
+
+#### Example:
+```java
+List<String> list = List.of("A", "B", "C"); // Immutable list
+list.add("D"); // Throws UnsupportedOperationException
+```
+
+---
+
+### Summary of Techniques:
+| **Technique**                     | **Description**                                                                 |
+|-----------------------------------|---------------------------------------------------------------------------------|
+| `final` keyword                   | Prevent reassignment of variables.                                             |
+| Immutable Classes                 | Use `final` fields, no setters, and defensive copying.                         |
+| Built-in Immutable Classes        | Use `String`, `Integer`, `List.of()`, etc.                                     |
+| Records (Java 14+)                | Easily create immutable data classes.                                          |
+| Defensive Copy                    | Return copies of mutable objects in constructors and getters.                  |
+| Static Factory Methods            | Ensure object creation is controlled and new instances are always returned.    |
+
+By following these techniques, you can ensure that your objects are immutable, making your code thread-safe, reliable, and easier to maintain.
 
 **[⬆ Back to Top](#table-of-contents)**
 
