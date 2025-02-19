@@ -73,7 +73,7 @@
 | 65 | [What is the @SpringBootApplication Annotation?](#What-is-the-SpringBootApplication-Annotation) |
 | 66 | [How to Retrieve Parameters in Spring Boot](#How-to-Retrieve-Parameters-in-Spring-Boot) |
 | 67 | [SOLID Principles in Java (With Examples)](#SOLID-Principles-in-Java-With-Examples) |
-| 68 | [Difference Between == and .equals() in Java](#Difference-Between-==-and-equals-in-Java) |
+| 68 | [Difference Between == and .equals() in Java](#Difference-Between-and-equals-in-Java) |
 
 
 
