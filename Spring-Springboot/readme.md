@@ -4,76 +4,76 @@
 
 ---
 
-| No. | Questions                                                                                                                                               |
-|----|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | [What is Spring Framework?](#What-is-Spring-Framework)                                                                                                                           |
-| 2 | [Advantages of Spring Framework](#Advantages-of-Spring-Framework) |
-| 3 | [Spring Modules](#Spring-Modules) |
-| 4 | [What is IOC Container?](#What-is-IOC-Container) |
-| 5 | [What is Dependency Injection?](#What-is-Dependency-Injection) |
-| 6 | [Types of Dependency Injection](#Types-of-Dependency-Injection) |
-| 7 | [Constructor Injection vs Setter Injection](#Constructor-Injection-vs-Setter-Injection) |
-| 8 | [What is Autowiring in Spring?](#What-is-Autowiring-in-Spring) |
-| 9 | [Autowiring Modes in Spring](#Autowiring-Modes-in-Spring) |
-| 10 | [What is Spring AOP?](#What-is-Spring-AOP) |
-| 11 | [What is a Spring Configuration File?](#What-is-a-Spring-Configuration-File) |
-| 12 | [What is a Spring Bean?](#What-is-a-Spring-Bean) |
-| 13 | [What is Bean Scope in Spring?](#What-is-Bean-Scope-in-Spring) |
-| 14 | [What is the Difference Between @Inject and @Autowired?](#What-is-the-Difference-Between-Inject-and-Autowired) |
-| 15 | [What Are the Types of IoC Containers in Spring?](#What-Are-the-Types-of-IoC-Containers-in-Spring) |
-| 16 | [What is the @Required Annotation in Spring?](#What-is-the-Required-Annotation-in-Spring) |
-| 17 | [What is the @Qualifier Annotation in Spring?](#What-is-the-Qualifier-Annotation-in-Spring) |
-| 18 | [What is the @Primary Annotation in Spring?](#What-is-the-Primary-Annotation-in-Spring) |
-| 19 | [What is the Lifecycle in Spring?](#What-is-the-Lifecycle-in-Spring) |
+| No. | Questions                                                                                                                                      |
+|----|------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | [What is Spring Framework?](#What-is-Spring-Framework)                                                                                         |
+| 2 | [Advantages of Spring Framework](#Advantages-of-Spring-Framework)                                                                              |
+| 3 | [Spring Modules](#Spring-Modules)                                                                                                              |
+| 4 | [What is IOC Container?](#What-is-IOC-Container)                                                                                               |
+| 5 | [What is Dependency Injection?](#What-is-Dependency-Injection)                                                                                 |
+| 6 | [Types of Dependency Injection](#Types-of-Dependency-Injection)                                                                                |
+| 7 | [Constructor Injection vs Setter Injection](#Constructor-Injection-vs-Setter-Injection)                                                        |
+| 8 | [What is Autowiring in Spring?](#What-is-Autowiring-in-Spring)                                                                                 |
+| 9 | [Autowiring Modes in Spring](#Autowiring-Modes-in-Spring)                                                                                      |
+| 10 | [What is Spring AOP?](#What-is-Spring-AOP)                                                                                                     |
+| 11 | [What is a Spring Configuration File?](#What-is-a-Spring-Configuration-File)                                                                   |
+| 12 | [What is a Spring Bean?](#What-is-a-Spring-Bean)                                                                                               |
+| 13 | [What is Bean Scope in Spring?](#What-is-Bean-Scope-in-Spring)                                                                                 |
+| 14 | [What is the Difference Between @Inject and @Autowired?](#What-is-the-Difference-Between-Inject-and-Autowired)                                 |
+| 15 | [What Are the Types of IoC Containers in Spring?](#What-Are-the-Types-of-IoC-Containers-in-Spring)                                             |
+| 16 | [What is the @Required Annotation in Spring?](#What-is-the-Required-Annotation-in-Spring)                                                      |
+| 17 | [What is the @Qualifier Annotation in Spring?](#What-is-the-Qualifier-Annotation-in-Spring)                                                    |
+| 18 | [What is the @Primary Annotation in Spring?](#What-is-the-Primary-Annotation-in-Spring)                                                        |
+| 19 | [What is the Lifecycle in Spring?](#What-is-the-Lifecycle-in-Spring)                                                                           |
 | 20 | [What Are the Different Ways of Writing the Lifecycle of a Spring Bean?](#What-Are-the-Different-Ways-of-Writing-the-Lifecycle-of-a-Spring-Bean) |
-| 21 | [What is the Stereotype Annotation in Spring?](#What-is-the-Stereotype-Annotation-in-Spring) |
-| 22 | [What Are Profiles in Spring?](#What-Are-Profiles-in-Spring) |
-| 23 | [What is Spring MVC?](#What-is-Spring-MVC) |
-| 24 | [What is MVC Architecture?](#What-is-MVC-Architecture) |
-| 25 | [What are the Advantages of MVC?](#What-are-the-Advantages-of-MVC) |
-| 26 | [What is the Flow of Spring MVC?](#What-is-the-Flow-of-Spring-MVC) |
-| 27 | [What is the Difference Between @Controller and @RestController?](#What-is-the-Difference-Between-Controller-and-RestController) |
-| 28 | [What is the Difference Between @RequestBody and @ResponseBody?](#What-is-the-Difference-Between-RequestBody-and-ResponseBody) |
-| 29 | [What is @PathVariable?](#What-is-PathVariable) |
-| 30 | [What are Spring MVC Validations?](#What-are-Spring-MVC-Validations) |
-| 31 | [What are HTTP Response Status Codes?](#What-are-HTTP-Response-Status-Codes) |
-| 32 | [What is Cross-Origin Resource Sharing (CORS)?](#What-is-Cross-Origin-Resource-Sharing-CORS) |
-| 33 | [What is View Resolver in Spring MVC?](#What-is-View-Resolver-in-Spring-MVC) |
-| 34 | [What is the Difference Between JPA and Hibernate?](#What-is-the-Difference-Between-JPA-and-Hibernate) |
-| 35 | [What are the Advantages of JPA?](#What-are-the-Advantages-of-JPA) |
-| 36 | [What is the Difference Between CrudRepository and JpaRepository?](#What-is-the-Difference-Between-CrudRepository-and-JpaRepository) |
-| 37 | [What is an Entity Class in Spring JPA?](#What-is-an-Entity-Class-in-Spring-JPA) |
-| 38 | [What is PagingAndSortingRepository in Spring Data JPA?](#What-is-PagingAndSortingRepository-in-Spring-Data-JPA) |
-| 39 | [What is @Query Annotation in Spring Data JPA?](#What-is-Query-Annotation-in-Spring-Data-JPA) |
-| 40 | [What is Spring Security?](#What-is-Spring-Security) |
-| 41 | [What is Spring Security OAuth2?](#What-is-Spring-Security-OAuth2) |
-| 42 | [What is Hashing and Encryption?](#What-is-Hashing-and-Encryption) |
-| 43 | [What is Password Encoder?](#What-is-Password-Encoder) |
-| 44 | [What is Authentication & Authorization?](#What-is-Authentication-&-Authorization) |
-| 45 | [What is Security Context & SecurityContextHolder?](#What-is-Security-Context-&-SecurityContextHolder) |
-| 46 | [What is Security Annotation?](#What-is-Security-Annotation) |
-| 47 | [What is a Custom Filter in Spring Security?](#What-is-a-Custom-Filter-in-Spring-Security) |
-| 48 | [What is Spring Boot?](#What-is-Spring-Boot) |
-| 49 | [Why Should We Use Spring Boot Framework?](#Why-Should-We-Use-Spring-Boot-Framework) |
-| 50 | [Advantages of Spring Boot](#Advantages-of-Spring-Boot) |
-| 51 | [Spring Boot Architecture](#Spring-Boot-Architecture) |
-| 52 | [Java Persistence Query Language (JPQL)](#Java-Persistence-Query-Language-JPQL) |
-| 53 | [Hibernate vs JPA](#Hibernate-vs-JPA) |
-| 54 | [Spring Boot Actuator](#Spring-Boot-Actuator) |
-| 55 | [Spring Boot AOP](#Spring-Boot-AOP) |
-| 56 | [Spring Boot JDBC](#Spring-Boot-JDBC) |
-| 57 | [Spring Boot JDBC vs Spring JDBC](#Spring-Boot-JDBC-vs-Spring-JDBC) |
-| 58 | [Spring Boot H2 Database](#Spring-Boot-H2-Database) |
-| 59 | [Spring Boot Thymeleaf](#Spring-Boot-Thymeleaf) |
-| 60 | [Spring Boot Caching](#Spring-Boot-Caching) |
-| 61 | [Spring Boot Cache Annotation](#Spring-Boot-Cache-Annotation) |
-| 62 | [RESTful Web Services](#RESTful-Web-Services) |
-| 63 | [SOAP vs REST](#SOAP-vs-REST) |
-| 64 | [What is DispatcherServlet in Spring?](#What-is-DispatcherServlet-in-Spring) |
-| 65 | [What is the @SpringBootApplication Annotation?](#What-is-the-@SpringBootApplication-Annotation) |
-| 66 | [How to Retrieve Parameters in Spring Boot](#How-to-Retrieve-Parameters-in-Spring-Boot) |
-| 67 | [SOLID Principles in Java (With Examples)](#SOLID-Principles-in-Java-With-Examples) |
-| 68 | [Difference Between == and .equals() in Java](#Difference-Between-==-and-equals-in-Java) |
+| 21 | [What is the Stereotype Annotation in Spring?](#What-is-the-Stereotype-Annotation-in-Spring)                                                   |
+| 22 | [What Are Profiles in Spring?](#What-Are-Profiles-in-Spring)                                                                                   |
+| 23 | [What is Spring MVC?](#What-is-Spring-MVC)                                                                                                     |
+| 24 | [What is MVC Architecture?](#What-is-MVC-Architecture)                                                                                         |
+| 25 | [What are the Advantages of MVC?](#What-are-the-Advantages-of-MVC)                                                                             |
+| 26 | [What is the Flow of Spring MVC?](#What-is-the-Flow-of-Spring-MVC)                                                                             |
+| 27 | [What is the Difference Between @Controller and @RestController?](#What-is-the-Difference-Between-Controller-and-RestController)               |
+| 28 | [What is the Difference Between @RequestBody and @ResponseBody?](#What-is-the-Difference-Between-RequestBody-and-ResponseBody)                 |
+| 29 | [What is @PathVariable?](#What-is-PathVariable)                                                                                                |
+| 30 | [What are Spring MVC Validations?](#What-are-Spring-MVC-Validations)                                                                           |
+| 31 | [What are HTTP Response Status Codes?](#What-are-HTTP-Response-Status-Codes)                                                                   |
+| 32 | [What is Cross-Origin Resource Sharing (CORS)?](#What-is-Cross-Origin-Resource-Sharing-CORS)                                                   |
+| 33 | [What is View Resolver in Spring MVC?](#What-is-View-Resolver-in-Spring-MVC)                                                                   |
+| 34 | [What is the Difference Between JPA and Hibernate?](#What-is-the-Difference-Between-JPA-and-Hibernate)                                         |
+| 35 | [What are the Advantages of JPA?](#What-are-the-Advantages-of-JPA)                                                                             |
+| 36 | [What is the Difference Between CrudRepository and JpaRepository?](#What-is-the-Difference-Between-CrudRepository-and-JpaRepository)           |
+| 37 | [What is an Entity Class in Spring JPA?](#What-is-an-Entity-Class-in-Spring-JPA)                                                               |
+| 38 | [What is PagingAndSortingRepository in Spring Data JPA?](#What-is-PagingAndSortingRepository-in-Spring-Data-JPA)                               |
+| 39 | [What is @Query Annotation in Spring Data JPA?](#What-is-Query-Annotation-in-Spring-Data-JPA)                                                  |
+| 40 | [What is Spring Security?](#What-is-Spring-Security)                                                                                           |
+| 41 | [What is Spring Security OAuth2?](#What-is-Spring-Security-OAuth2)                                                                             |
+| 42 | [What is Hashing and Encryption?](#What-is-Hashing-and-Encryption)                                                                             |
+| 43 | [What is Password Encoder?](#What-is-Password-Encoder)                                                                                         |
+| 44 | [What is Authentication & Authorization?](#What-is-Authentication-&-Authorization)                                                             |
+| 45 | [What is Security Context & SecurityContextHolder?](#What-is-Security-Context-&-SecurityContextHolder)                                         |
+| 46 | [What is Security Annotation?](#What-is-Security-Annotation)                                                                                   |
+| 47 | [What is a Custom Filter in Spring Security?](#What-is-a-Custom-Filter-in-Spring-Security)                                                     |
+| 48 | [What is Spring Boot?](#What-is-Spring-Boot)                                                                                                   |
+| 49 | [Why Should We Use Spring Boot Framework?](#Why-Should-We-Use-Spring-Boot-Framework)                                                           |
+| 50 | [Advantages of Spring Boot](#Advantages-of-Spring-Boot)                                                                                        |
+| 51 | [Spring Boot Architecture](#Spring-Boot-Architecture)                                                                                          |
+| 52 | [Java Persistence Query Language (JPQL)](#Java-Persistence-Query-Language-JPQL)                                                                |
+| 53 | [Hibernate vs JPA](#Hibernate-vs-JPA)                                                                                                          |
+| 54 | [Spring Boot Actuator](#Spring-Boot-Actuator)                                                                                                  |
+| 55 | [Spring Boot AOP](#Spring-Boot-AOP)                                                                                                            |
+| 56 | [Spring Boot JDBC](#Spring-Boot-JDBC)                                                                                                          |
+| 57 | [Spring Boot JDBC vs Spring JDBC](#Spring-Boot-JDBC-vs-Spring-JDBC)                                                                            |
+| 58 | [Spring Boot H2 Database](#Spring-Boot-H2-Database)                                                                                            |
+| 59 | [Spring Boot Thymeleaf](#Spring-Boot-Thymeleaf)                                                                                                |
+| 60 | [Spring Boot Caching](#Spring-Boot-Caching)                                                                                                    |
+| 61 | [Spring Boot Cache Annotation](#Spring-Boot-Cache-Annotation)                                                                                  |
+| 62 | [RESTful Web Services](#RESTful-Web-Services)                                                                                                  |
+| 63 | [SOAP vs REST](#SOAP-vs-REST)                                                                                                                  |
+| 64 | [What is DispatcherServlet in Spring?](#What-is-DispatcherServlet-in-Spring)                                                                   |
+| 65 | [What is the @SpringBootApplication Annotation?](#What-is-the-@SpringBootApplication-Annotation)                                               |
+| 66 | [How to Retrieve Parameters in Spring Boot](#How-to-Retrieve-Parameters-in-Spring-Boot)                                                        |
+| 67 | [SOLID Principles in Java (With Examples)](#SOLID-Principles-in-Java-With-Examples)                                                            |
+| 68 | [Difference Between == and .equals() in Java](#Difference-Between--and-equals-in-Java)                                                         |
 
 
 
@@ -10269,7 +10269,7 @@ By following SOLID principles, your code becomes cleaner, easier to maintain, an
 
 <hr style="border:1px solid orange">
 
-### Difference Between == and .equals() in Java
+### Difference Between == and equals in Java
 
 Both `==` and `.equals()` are used for comparisons in Java, but they are used in different contexts and have different purposes.
 
