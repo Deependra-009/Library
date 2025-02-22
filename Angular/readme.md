@@ -40,6 +40,16 @@
 | 32 | [MVVM Architecture in Angular](#mvvm-architecture-in-angular) |
 | 33 | [What Are RxJS in Angular?](#what-are-rxjs-in-angular) |
 | 34 | [NgRx in Angular](#ngrx-in-angular) |
+| 35 | [How can you optimize performance in an Angular application?](#how-can-you-optimize-performance-in-an-angular-application) |
+| 36 | [What is the purpose of the HttpClient module in Angular?](#what-is-the-purpose-of-the-httpclient-module-in-angular) |
+| 37 | [What is the role of the RouterOutlet in Angular routing?](#what-is-the-role-of-the-routeroutlet-in-angular-routing) |
+| 38 | [How can you handle error handling in Angular applications?](#how-can-you-handle-error-handling-in-angular-applications) |
+| 39 | [What is the role of the RouterOutlet in Angular routing?](#what-is-the-role-of-the-routeroutlet-in-angular-routing) |
+| 40 | [What is the purpose of the providers array in Angular modules?](#what-is-the-purpose-of-the-providers-array-in-angular-modules) |
+| 41 | [What are Guards in Angular and how do they work?](#what-are-guards-in-angular-and-how-do-they-work) |
+| 42 | [How do you handle large forms in Angular for better performance?](#how-do-you-handle-large-forms-in-angular-for-better-performance) |
+| 43 | [What is the difference between ng-content and ng-template?](#what-is-the-difference-between-ng-content-and-ng-template) |
+| 44 | [What is a BehaviorSubject in RxJS, and how is it used in Angular?](#what-is-a-behaviorsubject-in-rxjs-and-how-is-it-used-in-angular) |
 
 
 
@@ -3461,7 +3471,7 @@ RxJS is an essential part of Angular for building **reactive and scalable applic
 <hr style="border:1px solid orange">
 
 
-# NgRx in Angular
+### NgRx in Angular
 
 ## **1. What is NgRx?**
 
@@ -3714,7 +3724,7 @@ NgRx is an **efficient and scalable** solution for managing **state, API calls, 
 
 <hr style="border:1px solid orange">
 
-# How can you optimize performance in an Angular application?
+### How can you optimize performance in an Angular application?
 
 There are several strategies you can apply to optimize the performance of an Angular application:
 
@@ -3774,7 +3784,7 @@ By using these techniques, you can significantly improve the performance of your
 
 <hr style="border:1px solid orange">
 
-# **What is the purpose of the HttpClient module in Angular?**
+### What is the purpose of the HttpClient module in Angular?
 
 The **HttpClient module** in Angular is used to make HTTP requests to external APIs or servers. It provides a simplified and powerful API for handling HTTP communication, such as sending requests, receiving responses, and managing errors.
 
@@ -3846,7 +3856,7 @@ In summary, the **HttpClient module** simplifies making HTTP requests, handles r
 <hr style="border:1px solid orange">
 
 
-# **What is the role of the RouterOutlet in Angular routing?**
+### What is the role of the RouterOutlet in Angular routing?
 
 The **RouterOutlet** is a directive in Angular used to display views or components based on the current route in the application. It acts as a placeholder for the routed component, where the Angular router dynamically loads and inserts the component corresponding to the activated route.
 
@@ -3907,7 +3917,7 @@ In summary, **RouterOutlet** is crucial for Angular routing as it enables dynami
 <hr style="border:1px solid orange">
 
 
-# **How can you handle error handling in Angular applications?**
+### How can you handle error handling in Angular applications?
 
 Error handling in Angular applications is essential to ensure a smooth user experience and prevent the application from crashing due to unexpected issues. Angular provides several mechanisms for handling errors, especially for asynchronous operations like HTTP requests, form validation, and component interactions.
 
@@ -4095,7 +4105,7 @@ In summary, error handling in Angular can be accomplished through HTTP error han
 <hr style="border:1px solid orange">
 
 
-# **What is the role of the RouterOutlet in Angular routing?**
+### What is the role of the RouterOutlet in Angular routing?
 
 The **RouterOutlet** is a directive in Angular used to render the view or component corresponding to the active route. It acts as a placeholder within the template where the routed component is dynamically loaded based on the current route in the application.
 
@@ -4162,7 +4172,7 @@ In summary, **RouterOutlet** is crucial in Angular for managing dynamic content 
 <hr style="border:1px solid orange">
 
 
-# **What is the purpose of the providers array in Angular modules?**
+### What is the purpose of the providers array in Angular modules?
 
 The **providers** array in an Angular module is used to define the **services** or **dependencies** that are available for **dependency injection** within the module. When a service or value is added to the **providers** array, it becomes available to all components, directives, pipes, and other services that are part of that module or any child modules.
 
@@ -4244,7 +4254,7 @@ The **providers** array in Angular modules is used to register services and depe
 <hr style="border:1px solid orange">
 
 
-# **What are Guards in Angular and how do they work?**
+### What are Guards in Angular and how do they work?
 
 Guards in Angular are special types of services that are used to control access to routes in your application. They allow you to determine whether a route can be activated, deactivated, or navigated to based on certain conditions. Guards are implemented as services and are executed before navigating to a route, allowing you to make decisions about navigation.
 
@@ -4386,7 +4396,7 @@ Guards in Angular are services that protect and manage access to routes based on
 <hr style="border:1px solid orange">
 
 
-# **How do you handle large forms in Angular for better performance?**
+### How do you handle large forms in Angular for better performance?
 
 Handling large forms in Angular can be challenging, but there are several strategies you can employ to ensure better performance and responsiveness. These techniques help in optimizing the user experience, reducing unnecessary re-renders, and improving form validation and data handling.
 
@@ -4525,7 +4535,7 @@ Optimizing large forms in Angular involves a combination of strategies such as e
 <hr style="border:1px solid orange">
 
 
-# **What is the difference between ng-content and ng-template?**
+### What is the difference between ng-content and ng-template?
 
 Both `ng-content` and `ng-template` are used in Angular to control the rendering of content in components, but they serve different purposes and are used in different scenarios.
 
@@ -4589,7 +4599,7 @@ In this example, if `showContent` is false, the content inside `ng-template` (i.
 <hr style="border:1px solid orange">
 
 
-# **What is a BehaviorSubject in RxJS, and how is it used in Angular?**
+### What is a BehaviorSubject in RxJS, and how is it used in Angular?
 
 ### **BehaviorSubject in RxJS**
 
