@@ -90,7 +90,7 @@
 | 82 | [What is Spring Boot Transaction Management?](#What-is-Spring-Boot-Transaction-Management) |
 | 83 | [What is ContextLoaderListener and What Does It Do?](#What-is-ContextLoaderListener-and-What-Does-It-Do) |
 | 84 | [What is the Hibernate Validator Framework?](#what-is-the-hibernate-validator-framework) |
-| 85 | [What Are the Limitations of Autowiring?](#what-are-the-limitations-of-autowiring) |
+| 85 | [Limitations of Autowiring](#Limitations-of-Autowiring) |
 
 
 
@@ -12510,7 +12510,8 @@ public class UserService {
 <hr style="border:1px solid orange">
 
 
-### What Are the Limitations of Autowiring?
+### Limitations of Autowiring
+
 
 Autowiring in **Spring** allows automatic dependency injection without explicitly defining bean dependencies. However, it has **several limitations** that can cause issues in a project.
 
