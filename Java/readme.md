@@ -53,6 +53,22 @@
 | 45 | [Java 9 Features](#Java-9-Features)                                                                                                                     |
 | 46 | [Java 11 Features](#Java-11-Features)                                                                                                                   |
 | 47 | [Ways to Achieve Immutability in Java](#Ways-to-Achieve-Immutability-in-Java) |
+| 48 | [Private Methods in Interfaces](#Private-Methods-in-Interfaces) |
+| 49 | [Replacing String[] args with Variable Arguments in Java](#replacing-string-args-with-variable-arguments-in-java) |
+| 50 | [volatile Keyword in Java](#volatile-keyword-in-java) |
+| 51 | [Can You Write a Functional Interface Without an Abstract Method in Java?](#can-you-write-a-functional-interface-without-an-abstract-method-in-java) |
+| 52 | [When Should We Use Default and Static Methods in Java?](#when-should-we-use-default-and-static-methods-in-java) |
+| 53 | [equals() and hashCode() Contract in Java](#equals-and-hashcode-contract-in-java) |
+| 54 | [Difference Between Runnable and Callable in Java](#difference-between-runnable-and-callable-in-java) |
+| 55 | [In Java, static as well as private method overriding is possible. Comment on the statement.](#in-java-static-as-well-as-private-method-overriding-is-possible-comment-on-the-statement) |
+| 56 | [Java Works as "Pass by Value" or "Pass by Reference"?](#java-works-as-pass-by-value-or-pass-by-reference) |
+
+
+
+
+
+
+
 
 ---
 
@@ -5684,6 +5700,806 @@ By following these techniques, you can ensure that your objects are immutable, m
 **[⬆ Back to Top](#table-of-contents)**
 
 <hr style="border:1px solid orange">
+
+### Private Methods in Interfaces
+
+In Java 9, private methods were introduced in interfaces to allow code reusability within the interface. These methods help avoid code duplication in default and static methods.
+
+#### **Key Points:**
+1. **Cannot be accessed outside the interface** – Private methods are only accessible within the interface.
+2. **Useful for code reusability** – They help reduce redundancy in default and static methods.
+3. **Cannot be abstract** – Private methods must have a body.
+4. **Can be static or instance methods** – A private method can be either a static or an instance method.
+
+#### **Syntax:**
+
+##### **1. Private Instance Method:**
+```java
+interface MyInterface {
+    default void show() {
+        System.out.println("Default Method");
+        commonLogic();
+    }
+
+    private void commonLogic() {
+        System.out.println("Common Logic inside Private Method");
+    }
+}
+```
+
+##### **2. Private Static Method:**
+```java
+interface MyInterface {
+    static void display() {
+        System.out.println("Static Method");
+        staticHelper();
+    }
+
+    private static void staticHelper() {
+        System.out.println("Common Logic inside Private Static Method");
+    }
+}
+```
+
+#### **Example Usage:**
+```java
+class Demo implements MyInterface {
+    public static void main(String[] args) {
+        Demo obj = new Demo();
+        obj.show(); // Calls the default method
+        MyInterface.display(); // Calls the static method
+    }
+}
+```
+#### **Output:**
+```
+Default Method
+Common Logic inside Private Method
+Static Method
+Common Logic inside Private Static Method
+```
+
+#### **Benefits of Private Methods in Interfaces:**
+- **Encapsulation**: Hides unnecessary implementation details from interface users.
+- **Code Reusability**: Prevents duplication by using common logic inside private methods.
+- **Improved Readability**: Keeps the interface clean and modular.
+
+Before Java 9, achieving the same functionality required creating utility classes or default method hacks. Private methods simplify this by allowing helper methods directly inside interfaces.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Replacing String[] args with Variable Arguments in Java
+
+In Java, we can replace `String[] args` with **varargs (`String... args`)** to make method parameters more flexible.
+
+---
+
+### **What is Varargs (`...`)?**
+- Varargs (`...`) allows a method to take **zero or more arguments** of the same type.
+- It **replaces arrays (`[]`)** when we are not sure how many arguments will be passed.
+- Internally, Java converts varargs into an array.
+
+---
+
+### **Replacing `String[] args` with `String... args` in `main()` Method**
+
+By default, the `main()` method in Java looks like this:
+```java
+public static void main(String[] args) {
+    System.out.println("Hello, " + args[0]);
+}
+```
+This method requires an **explicit array** (`String[]`).
+
+We can replace it with **varargs (`String... args`)** like this:
+```java
+public static void main(String... args) {
+    System.out.println("Hello, " + args[0]);
+}
+```
+Both versions work the same way because **Java treats `String... args` as `String[] args` internally**.
+
+---
+
+### **Example: Using Varargs in a Method**
+```java
+class Demo {
+    // Using varargs instead of array
+    static void printNames(String... names) {
+        for (String name : names) {
+            System.out.println(name);
+        }
+    }
+
+    public static void main(String... args) {
+        printNames("Alice", "Bob", "Charlie");
+        printNames("John");
+        printNames(); // Works fine, prints nothing
+    }
+}
+```
+### **Output:**
+```
+Alice
+Bob
+Charlie
+John
+```
+**Note:** It works even if we pass **zero, one, or multiple arguments**.
+
+---
+
+### **Key Differences: `String[] args` vs. `String... args`**
+
+| Feature | `String[] args` | `String... args` |
+|---------|---------------|----------------|
+| Syntax | Requires an explicit array | More flexible, allows direct arguments |
+| Functionality | Must pass an array explicitly | Can pass values directly |
+| Readability | Less readable | More concise & cleaner |
+| Use Case | Used in standard `main()` method | Useful for flexible method parameters |
+
+---
+
+### **When to Use Varargs?**
+✅ When the number of parameters **is unknown**.
+✅ When you want to make the method **more flexible**.
+✅ When calling the method should be **simpler and cleaner**.
+
+However, **Java’s `main()` method is always called with `String[] args`**, so replacing it with `String... args` **only improves readability but does not change behavior**.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### volatile Keyword in Java
+
+The `volatile` keyword in Java is used to **ensure visibility and ordering of variable updates across multiple threads**. It is mainly used in **multi-threading** to prevent threads from caching a variable, ensuring that they always read the latest value from the main memory.
+
+---
+
+### **Why Do We Need `volatile`?**
+
+In Java, threads may cache variables for better performance, meaning changes made by one thread may not be visible to others. The `volatile` keyword ensures:
+
+1. **Visibility** – All threads **read the latest value** directly from main memory.
+2. **Prevents Reordering** – The compiler **does not reorder** volatile variable operations, maintaining execution order.
+
+---
+
+### **Example Without `volatile` (Leads to Issue)**
+
+```java
+class SharedData {
+    static boolean flag = false;
+
+    static void printMessage() {
+        while (!flag) {
+            // Loop runs infinitely as thread may cache 'flag'
+        }
+        System.out.println("Flag updated, exiting loop...");
+    }
+}
+```
+🔴 If `flag` is updated by another thread, it **might not be visible** due to caching.
+
+---
+
+### **Example With `volatile` (Fixes the Issue)**
+
+```java
+class SharedData {
+    static volatile boolean flag = false; // Ensures visibility
+
+    static void printMessage() {
+        while (!flag) {
+            // Always checks latest 'flag' value from memory
+        }
+        System.out.println("Flag updated, exiting loop...");
+    }
+}
+```
+✅ The `volatile` keyword ensures that when **one thread updates `flag`**, all other threads **immediately see the change**.
+
+---
+
+### **Key Properties of `volatile`**
+✔ **Ensures Visibility** – The latest value is always read from memory.
+✔ **Prevents Instruction Reordering** – Guarantees correct execution order.
+❌ **Does Not Guarantee Atomicity** – `volatile` **does not** prevent race conditions when multiple threads modify a variable.
+
+---
+
+### **When to Use `volatile`?**
+✅ When multiple threads **read and write a shared variable**.
+✅ When operations on a variable **do not depend on its previous value** (e.g., `flag = true`).
+✅ When you do **not need locking (`synchronized`)** but need visibility guarantees.
+
+---
+
+### **Limitations of `volatile`**
+🚫 **Does not provide atomicity** – For operations like `count++`, use **`synchronized` or `AtomicInteger`** instead.
+🚫 **Not suitable for complex operations** – Use **locks (`synchronized`, `Lock` API)** for more control.
+
+**Example of Incorrect Use:**
+```java
+class Counter {
+    volatile int count = 0;
+
+    void increment() {
+        count++; // Not atomic! Two threads can cause race condition.
+    }
+}
+```
+✅ **Fix:** Use `AtomicInteger`:
+```java
+import java.util.concurrent.atomic.AtomicInteger;
+
+class Counter {
+    AtomicInteger count = new AtomicInteger(0);
+
+    void increment() {
+        count.incrementAndGet(); // Ensures atomicity
+    }
+}
+```
+
+---
+
+### **Conclusion**
+The `volatile` keyword is used in multi-threading to ensure **visibility and ordering of variable updates**. However, it **does not provide atomicity**, so for complex operations, **synchronized or atomic variables should be used** instead.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Can You Write a Functional Interface Without an Abstract Method in Java?
+
+No, a **functional interface** in Java **must have exactly one abstract method**. If an interface does not have any abstract methods, it **cannot** be considered a functional interface.
+
+---
+
+### **What is a Functional Interface?**
+A **functional interface** is an interface that has **only one abstract method** and can be used with **lambda expressions**. It may have multiple **default or static methods**, but only one abstract method.
+
+✅ **Example of a Functional Interface (Correct Way)**
+```java
+@FunctionalInterface
+interface MyFunctionalInterface {
+    void show(); // One abstract method (Required)
+
+    default void display() {
+        System.out.println("Default method");
+    }
+}
+```
+Here, `show()` is the **only abstract method**, so it's a valid functional interface.
+
+---
+
+### **What Happens If There Is No Abstract Method?**
+
+🔴 **If an interface has only default and static methods (no abstract method), it is NOT a functional interface.**
+Example:
+```java
+@FunctionalInterface
+interface InvalidFunctionalInterface {
+    default void method1() {
+        System.out.println("Default method");
+    }
+
+    static void method2() {
+        System.out.println("Static method");
+    }
+}
+```
+🚨 **This will cause a compilation error because there is no abstract method.**
+
+---
+
+### **Key Rules for Functional Interfaces:**
+✔ **Must have exactly one abstract method.**
+✔ Can have multiple **default or static methods**.
+✔ Can extend other interfaces, but must still have only **one** abstract method.
+
+---
+
+### **Conclusion**
+❌ **You cannot write a functional interface without an abstract method** because a functional interface **must contain one and only one abstract method** to be used with lambda expressions.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### When Should We Use Default and Static Methods in Java?
+
+Java introduced **default methods** and **static methods** in interfaces from **Java 8** to enhance code reusability while maintaining backward compatibility.
+
+---
+
+### **1. Default Methods in Interfaces**
+
+✅ **Use Default Methods When:**
+1. **Adding New Methods to an Interface Without Breaking Existing Implementations**
+   - Before Java 8, adding a method to an interface **broke** all existing implementations.
+   - With **default methods**, we can provide a default implementation without breaking existing classes.
+
+2. **Providing a Common Implementation for Multiple Classes**
+   - When multiple implementing classes need a **shared behavior**, default methods reduce code duplication.
+
+3. **Allowing Implementing Classes to Override If Needed**
+   - Implementing classes can either **use** the default method or **override** it with their own implementation.
+
+✅ **Example: Default Method in an Interface**
+```java
+interface Vehicle {
+    void start();
+
+    default void stop() { // Default method with implementation
+        System.out.println("Vehicle is stopping...");
+    }
+}
+
+class Car implements Vehicle {
+    public void start() {
+        System.out.println("Car is starting...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle car = new Car();
+        car.start();
+        car.stop(); // Uses default implementation
+    }
+}
+```
+👉 The `Car` class **inherits** the `stop()` method without implementing it.
+
+---
+
+### **2. Static Methods in Interfaces**
+
+✅ **Use Static Methods When:**
+1. **Utility or Helper Methods That Do Not Depend on Instance Data**
+   - If a method is only performing calculations or providing utility functions, it should be `static`.
+
+2. **Preventing Implementing Classes from Overriding a Method**
+   - Unlike default methods, **static methods cannot be overridden**.
+
+3. **Ensuring a Method Belongs to the Interface, Not the Implementing Class**
+   - Static methods are called using **Interface Name**, not an object.
+
+✅ **Example: Static Method in an Interface**
+```java
+interface MathUtils {
+    static int square(int x) { // Static method
+        return x * x;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int result = MathUtils.square(5); // Calling static method
+        System.out.println(result); // Output: 25
+    }
+}
+```
+👉 **`square()` belongs to the `MathUtils` interface** and cannot be overridden.
+
+---
+
+### **Key Differences Between Default and Static Methods**
+
+| Feature              | Default Method           | Static Method |
+|----------------------|-------------------------|--------------|
+| Can be overridden?  | ✅ Yes, implementing classes can override it | ❌ No, static methods cannot be overridden |
+| Requires an instance? | ✅ Yes, called on an instance | ❌ No, called using the interface name |
+| Used for? | Providing default behavior for implementing classes | Utility/helper methods that don’t need instance data |
+| Called by? | Implementing class instance | Interface name |
+
+---
+
+### **Conclusion**
+✔ **Use Default Methods** when you need to add new behavior to an interface **without breaking existing implementations**.
+✔ **Use Static Methods** for **utility functions** that do not depend on instance variables and **cannot be overridden**.
+
+🚀 **Both features make Java interfaces more powerful and flexible!**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### equals() and hashCode() Contract in Java
+
+In Java, the `equals()` and `hashCode()` methods are used for **object comparison** and **hash-based collections** (like `HashMap`, `HashSet`). These methods must follow a specific contract to ensure correct behavior.
+
+---
+
+### **1. The equals() Method**
+- The `equals()` method is used to **compare two objects for equality**.
+- The default implementation (`Object.equals()`) checks **reference equality** (`==`), but we can override it for **custom comparison**.
+
+✅ **Example: Overriding `equals()`**
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Check same reference
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Person person = (Person) obj;
+        return age == person.age && name.equals(person.name); // Compare values
+    }
+}
+```
+👉 **Now, two `Person` objects are equal if their `name` and `age` are the same.**
+
+---
+
+### **2. The hashCode() Method**
+- The `hashCode()` method **returns an integer (hash code) for an object**.
+- It is used in **hash-based collections** (`HashMap`, `HashSet`) for **efficient lookup**.
+
+✅ **Example: Overriding `hashCode()`**
+```java
+@Override
+public int hashCode() {
+    return Objects.hash(name, age); // Generates a hash code based on fields
+}
+```
+👉 The `hashCode()` ensures that objects with **equal values produce the same hash code**.
+
+---
+
+### **3. The equals() and hashCode() Contract**
+
+✅ **Rules that must be followed**:
+
+1. **If `equals()` returns `true`, `hashCode()` must be the same for both objects.**
+   ```java
+   Person p1 = new Person("Alice", 25);
+   Person p2 = new Person("Alice", 25);
+   System.out.println(p1.equals(p2));  // true
+   System.out.println(p1.hashCode() == p2.hashCode());  // true ✅
+   ```
+
+2. **If `equals()` returns `false`, `hashCode()` can be different, but it's not mandatory.**
+   ```java
+   Person p1 = new Person("Alice", 25);
+   Person p2 = new Person("Bob", 30);
+   System.out.println(p1.equals(p2));  // false
+   System.out.println(p1.hashCode() != p2.hashCode());  // Usually true
+   ```
+
+3. **If `hashCode()` is different, `equals()` must return `false`.**
+
+4. **If `hashCode()` is the same, `equals()` may return `true` or `false`** (different objects can have the same hash code, but equals should differentiate them).
+
+---
+
+### **4. Why is the Contract Important?**
+
+🔹 Ensures **correct behavior** in collections like `HashMap`, `HashSet`, `HashTable`.
+🔹 Avoids **duplicate keys** in `HashMap` and **incorrect lookups** in `HashSet`.
+
+✅ **Example: Using in `HashSet`**
+```java
+Set<Person> people = new HashSet<>();
+people.add(new Person("Alice", 25));
+System.out.println(people.contains(new Person("Alice", 25))); // true ✅
+```
+👉 Without a proper `equals()` and `hashCode()`, `contains()` might return `false` **even if an equal object exists in the set**.
+
+---
+
+### **Conclusion**
+✔ **`equals()` checks object equality, while `hashCode()` provides an efficient way to store and retrieve objects.**
+✔ **If two objects are equal, their hash codes must also be equal.**
+✔ **Always override both methods together to ensure correct behavior in collections.**
+
+🚀 **Following the contract makes Java collections work efficiently!**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Difference Between Runnable and Callable in Java
+
+Both `Runnable` and `Callable` are used to execute tasks in **multithreading** but have key differences in how they return results and handle exceptions.
+
+---
+
+### **1. Runnable Interface**
+- Introduced in **Java 1.0**.
+- Does **not** return a result (`void`).
+- Cannot throw checked exceptions.
+- Used with `Thread` or `ExecutorService`.
+
+✅ **Example: Runnable Implementation**
+```java
+class MyTask implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Executing task in Runnable");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread thread = new Thread(new MyTask());
+        thread.start();
+    }
+}
+```
+👉 **No return value** from `run()`, and we cannot throw checked exceptions.
+
+---
+
+### **2. Callable Interface**
+- Introduced in **Java 5** (`java.util.concurrent`).
+- Returns a **result** (`Generic<T>`).
+- Can **throw checked exceptions**.
+- Used with `ExecutorService` and `Future`.
+
+✅ **Example: Callable Implementation**
+```java
+import java.util.concurrent.*;
+
+class MyTask implements Callable<String> {
+    @Override
+    public String call() throws Exception {
+        return "Task completed";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        Future<String> future = executor.submit(new MyTask());
+        System.out.println(future.get()); // Waits and gets result
+        executor.shutdown();
+    }
+}
+```
+👉 `Callable` allows **returning a result** and **throwing exceptions**.
+
+---
+
+### **3. Key Differences**
+
+| Feature        | Runnable                  | Callable |
+|---------------|---------------------------|----------|
+| **Introduced In** | Java 1.0 | Java 5 |
+| **Return Type** | `void` (No result) | `T` (Generic result) |
+| **Exception Handling** | Cannot throw checked exceptions | Can throw checked exceptions |
+| **Used With** | `Thread`, `ExecutorService` | `ExecutorService`, `Future` |
+| **Execution** | `run()` method | `call()` method |
+
+---
+
+### **4. When to Use Runnable vs Callable?**
+
+✅ **Use `Runnable`** when:
+- The task does **not need a return value**.
+- No checked exceptions need to be handled.
+- Simple background tasks (e.g., logging, periodic jobs).
+
+✅ **Use `Callable`** when:
+- The task **needs a return value**.
+- You **expect checked exceptions**.
+- Used in thread pools where results are needed (`Future.get()`).
+
+---
+
+### **Conclusion**
+✔ **Runnable** is simpler but cannot return a value.
+✔ **Callable** is more powerful, allowing results and exceptions.
+✔ Use **Runnable for simple tasks** and **Callable when you need results or exception handling**.
+
+🚀 **Callable is better for complex, result-driven tasks!**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### In Java, static as well as private method overriding is possible. Comment on the statement.
+
+The statement is **incorrect** because **static and private methods cannot be overridden in Java**. Here's why:
+
+---
+
+### **1. Can Static Methods Be Overridden?**
+❌ **No, static methods cannot be overridden.**
+
+🔹 In Java, **method overriding** is based on **dynamic method dispatch (runtime polymorphism)**, which only works with **instance methods**.
+🔹 **Static methods belong to the class** (not the object), so they are **resolved at compile-time**, not runtime.
+🔹 Instead of **overriding**, static methods are **hidden** if redefined in a subclass.
+
+✅ **Example: Method Hiding (Not Overriding)**
+```java
+class Parent {
+    static void show() {
+        System.out.println("Static method in Parent");
+    }
+}
+
+class Child extends Parent {
+    static void show() { // This is method hiding, not overriding
+        System.out.println("Static method in Child");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Parent obj = new Child();
+        obj.show(); // Output: Static method in Parent (method hiding, not overriding)
+    }
+}
+```
+👉 Even though `obj` is of type `Child`, the **Parent's static method is called** because static methods are resolved at **compile-time**.
+
+---
+
+### **2. Can Private Methods Be Overridden?**
+❌ **No, private methods cannot be overridden.**
+
+🔹 A **private method is not inherited** by subclasses, so **there is no concept of overriding it**.
+🔹 If a subclass defines a method with the same name as a private method in the parent class, it is simply **a new method (not an overridden method).**
+
+✅ **Example: Private Method in Parent Class**
+```java
+class Parent {
+    private void display() {
+        System.out.println("Private method in Parent");
+    }
+}
+
+class Child extends Parent {
+    private void display() { // This is a new method, not an override
+        System.out.println("Private method in Child");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Parent obj = new Child();
+        // obj.display(); // ❌ Error: display() is private and not accessible
+    }
+}
+```
+👉 The `display()` method in `Child` is **not overriding** the method in `Parent`. It is a **new, independent method** that only exists within `Child`.
+
+---
+
+### **Key Takeaways**
+✔ **Static methods cannot be overridden**; they are only **hidden**.
+✔ **Private methods cannot be overridden** because they **are not inherited**.
+✔ **Only non-static, non-private instance methods can be overridden** in Java.
+
+🚀 **Best Practice:**
+- Use **static methods** for utility functions that do not depend on object state.
+- Avoid naming a private method the same as a superclass method to prevent confusion.
+- Use **method overriding only with public or protected instance methods** for polymorphic behavior.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Java Works as "Pass by Value" or "Pass by Reference"?
+
+Java **always** follows **pass by value**, not pass by reference. However, the way **objects and primitive data types** behave makes it seem confusing.
+
+---
+
+### **1. Primitive Data Types (Pass by Value)**
+🔹 When you pass a **primitive type** (`int`, `double`, `char`, etc.), Java **creates a copy** of the value.
+🔹 Changes inside the method **do not affect** the original variable.
+
+✅ **Example (Pass by Value for Primitives):**
+```java
+class Test {
+    void modify(int x) {
+        x = 100; // This change is local to this method
+    }
+
+    public static void main(String[] args) {
+        int num = 50;
+        Test obj = new Test();
+        obj.modify(num);
+        System.out.println(num); // Output: 50 (original value is unchanged)
+    }
+}
+```
+👉 Even though `x` is modified inside `modify()`, the original `num` remains **unchanged** because Java passes a **copy of the value**.
+
+---
+
+### **2. Objects (Pass by Value of Reference)**
+🔹 When passing an **object**, Java still passes **by value**, but it passes **the value of the reference (memory address)**, not the actual object.
+🔹 This means modifications **inside the object’s state** will reflect outside the method, but changing the reference itself will not.
+
+✅ **Example (Pass by Value of Reference):**
+```java
+class Data {
+    int value = 50;
+}
+
+class Test {
+    void modify(Data obj) {
+        obj.value = 100; // Modifies the original object's value
+    }
+
+    public static void main(String[] args) {
+        Data data = new Data();
+        Test obj = new Test();
+        obj.modify(data);
+        System.out.println(data.value); // Output: 100 (value is changed)
+    }
+}
+```
+👉 The `modify()` method **changes the object’s state**, so the modification is visible outside the method.
+
+---
+
+### **3. Changing Object Reference (Does Not Affect Original Object)**
+🔹 If you **reassign** the reference inside a method, it **does not affect** the original reference.
+
+✅ **Example:**
+```java
+class Data {
+    int value = 50;
+}
+
+class Test {
+    void modify(Data obj) {
+        obj = new Data(); // New object created, original reference remains unchanged
+        obj.value = 100;
+    }
+
+    public static void main(String[] args) {
+        Data data = new Data();
+        Test obj = new Test();
+        obj.modify(data);
+        System.out.println(data.value); // Output: 50 (original object remains unchanged)
+    }
+}
+```
+👉 Here, `modify()` creates a **new object**, but since Java passes **only the reference value**, the **original reference remains unchanged**.
+
+---
+
+### **Conclusion**
+✔ **Java is always pass by value**, even for objects.
+✔ **For primitives**, a copy of the value is passed (changes inside the method do not affect the original).
+✔ **For objects**, the reference value is passed (modifying the object’s state affects the original, but reassigning the reference does not).
+
+🚀 **Rule of Thumb:**
+- **Primitives** → Value is copied → **Original remains unchanged**.
+- **Objects** → Reference value is copied → **State changes, but reference change does not reflect**.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+
 
 
 

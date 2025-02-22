@@ -76,6 +76,22 @@
 | 68 | [Difference Between == and .equals() in Java](#Difference-Between--and-equals-in-Java)                                                         |
 | 69 | [What is a Design Pattern in Java?](#What-is-a-Design-Pattern-in-Java) |
 | 70 | [Creational Design Patterns in Java](#Creational-Design-Patterns-in-Java) |
+| 71 | [How Many Components Are There in Microservices Architecture?](#How-Many-Components-Are-There-in-Microservices-Architecture) |
+| 72 | [Circuit Breaker Pattern in Microservices](#Circuit-Breaker-Pattern-in-Microservices) |
+| 73 | [Fault Isolation in Microservices](#Fault-Isolation-in-Microservices) |
+| 74 | [Different Ways to Create a Spring Boot Application](#Different-Ways-to-Create-a-Spring-Boot-Application) |
+| 75 | [Spring Boot Exceptions](#Spring-Boot-Exceptions) |
+| 76 | [Maven Build Lifecycle](#Maven-Build-Lifecycle) |
+| 77 | [What Should You Do When You Recognize Performance Degradation in Systems?](#What-Should-You-Do-When-You-Recognize-Performance-Degradation-in-Systems) |
+| 78 | [Saga Design Pattern in Microservices](#Saga-Design-Pattern-in-Microservices) |
+| 79 | [Why Do We Use the Sequence Design Pattern?](#Why-Do-We-Use-the-Sequence-Design-Pattern) |
+| 80 | [How Do We Handle Ambiguity of Beans While Loading the Spring Context?](#How-Do-We-Handle-Ambiguity-of-Beans-While-Loading-the-Spring-Context) |
+| 81 | [What is Agile?](#What-is-Agile) |
+| 82 | [What is Spring Boot Transaction Management?](#What-is-Spring-Boot-Transaction-Management) |
+| 83 | [What is ContextLoaderListener and What Does It Do?](#What-is-ContextLoaderListener-and-What-Does-It-Do) |
+| 84 | [How is ContextLoaderListener Used in Spring Boot?](#How-is-ContextLoaderListener-Used-in-Spring-Boot) |
+| 85 | [What is the Hibernate Validator Framework?](#What-is-the-Hibernate-Validator-Framework?) |
+| 86 | [What Are the Limitations of Autowiring?](#What-Are-the-Limitations-of-Autowiring) |
 
 
 
@@ -10842,6 +10858,1873 @@ public class PrototypePatternExample {
 ✅ **Use Prototype** → When copying **existing objects efficiently**.
 
 These patterns **improve code maintainability, reduce coupling, and enhance scalability**. 🚀
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### How Many Components Are There in Microservices Architecture?
+
+Microservices architecture consists of several essential **components** that help in building, deploying, and managing independent services. Below are the key components:
+
+---
+
+### **1. API Gateway**
+- Acts as an **entry point** for clients.
+- Handles **request routing, authentication, rate limiting, and load balancing**.
+- Example: **Spring Cloud Gateway, Zuul, Kong API Gateway**.
+
+---
+
+### **2. Service Registry & Discovery**
+- Keeps track of available services and their locations.
+- Helps services dynamically find and communicate with each other.
+- Example: **Eureka, Consul, Zookeeper**.
+
+---
+
+### **3. Configuration Management**
+- Stores centralized configuration settings for all microservices.
+- Helps in dynamic configuration updates without restarting services.
+- Example: **Spring Cloud Config, Apache ZooKeeper, Consul**.
+
+---
+
+### **4. Load Balancer**
+- Distributes requests across multiple instances of a microservice.
+- Ensures high availability and scalability.
+- Example: **Ribbon (client-side), Nginx, HAProxy (server-side)**.
+
+---
+
+### **5. Service Communication**
+- Microservices communicate using **REST, gRPC, or Message Queues**.
+- Ensures reliable interaction between services.
+- Example: **Feign Client (HTTP), Kafka, RabbitMQ (Message Queues)**.
+
+---
+
+### **6. Circuit Breaker & Resilience**
+- Prevents failures from cascading in the system.
+- Automatically **stops calls to a failing service** and retries after a timeout.
+- Example: **Resilience4j, Hystrix**.
+
+---
+
+### **7. Distributed Logging & Monitoring**
+- Tracks logs and metrics from multiple services in a centralized location.
+- Helps in debugging and performance optimization.
+- Example: **ELK Stack (Elasticsearch, Logstash, Kibana), Prometheus, Grafana**.
+
+---
+
+### **8. Security (Authentication & Authorization)**
+- Ensures secure access to microservices.
+- Uses OAuth, JWT, or API keys for authentication.
+- Example: **Spring Security, Keycloak, Okta**.
+
+---
+
+### **9. Database per Microservice**
+- Each microservice has its own database to ensure **data isolation**.
+- Uses **polyglot persistence**, meaning different services can use different databases.
+- Example: **MySQL, PostgreSQL, MongoDB, Redis**.
+
+---
+
+### **10. Event-Driven Architecture**
+- Uses message brokers to enable asynchronous communication between services.
+- Reduces direct dependencies between services.
+- Example: **Apache Kafka, RabbitMQ, ActiveMQ**.
+
+---
+
+### **11. CI/CD Pipeline**
+- Automates the build, testing, and deployment of microservices.
+- Ensures faster and reliable releases.
+- Example: **Jenkins, GitHub Actions, Docker, Kubernetes**.
+
+---
+
+### **12. Containerization & Orchestration**
+- Uses containers for easy deployment and scaling.
+- Orchestrates multiple microservices efficiently.
+- Example: **Docker, Kubernetes**.
+
+---
+
+### **Conclusion**
+Microservices architecture typically includes **12 key components** that work together to ensure **scalability, resilience, and maintainability**. These components help manage **service communication, security, logging, deployment, and monitoring** efficiently. 🚀
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Circuit Breaker Pattern in Microservices
+
+The **Circuit Breaker pattern** is used in microservices to **prevent system failures** from spreading when a service is slow or unavailable. It helps in improving system **resilience and fault tolerance** by stopping repeated failed requests and allowing recovery time.
+
+---
+
+### **Why Do We Need the Circuit Breaker Pattern?**
+In microservices, one service often depends on another. If a service fails or responds slowly, repeated requests can:
+❌ **Overload the failing service**.
+❌ **Cause cascading failures** in the system.
+❌ **Block resources** and slow down the entire application.
+
+✅ The **Circuit Breaker pattern** **detects failures and stops requests** to prevent further damage.
+
+---
+
+### **How Does the Circuit Breaker Work?**
+
+1. **Closed State (Normal Operation)**
+   - Requests go through normally.
+   - If failures occur, a counter tracks them.
+
+2. **Open State (Failure Detected)**
+   - If failures exceed a threshold, the circuit "breaks" (opens).
+   - Requests are immediately **rejected** without calling the failing service.
+
+3. **Half-Open State (Recovery Check)**
+   - After a wait time, a few requests are **allowed**.
+   - If they succeed, the circuit **closes** (back to normal).
+   - If they fail, the circuit **stays open** for another timeout period.
+
+---
+
+### **Example Using Resilience4j in Spring Boot**
+
+#### **Step 1: Add Dependency**
+```xml
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-spring-boot2</artifactId>
+    <version>1.7.1</version>
+</dependency>
+```
+
+#### **Step 2: Configure Circuit Breaker** (`application.yml`)
+```yaml
+resilience4j.circuitbreaker:
+  instances:
+    myService:
+      failureRateThreshold: 50 # Open if 50% of requests fail
+      slowCallRateThreshold: 60 # Open if 60% of calls are slow
+      waitDurationInOpenState: 5000ms # Wait 5 seconds before retrying
+      permittedNumberOfCallsInHalfOpenState: 3 # Allow 3 test calls
+```
+
+#### **Step 3: Apply Circuit Breaker to a Service**
+```java
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class MyService {
+
+    @CircuitBreaker(name = "myService", fallbackMethod = "fallbackResponse")
+    public String callExternalService() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("http://slow-service.com/data", String.class);
+    }
+
+    // Fallback method when circuit is OPEN
+    public String fallbackResponse(Exception ex) {
+        return "Service is currently unavailable. Please try later.";
+    }
+}
+```
+
+✅ If `http://slow-service.com/data` fails too often, the **Circuit Breaker opens**, and the `fallbackResponse()` method handles requests instead.
+
+---
+
+### **Benefits of Circuit Breaker Pattern**
+✔ **Prevents cascading failures** in microservices.
+✔ **Reduces load** on failing services.
+✔ **Improves system responsiveness** by handling failures gracefully.
+✔ **Allows automatic recovery** without manual intervention.
+
+---
+
+### **Conclusion**
+The **Circuit Breaker pattern** improves **fault tolerance** in microservices by **stopping calls to failing services** and allowing them to recover. It is commonly implemented using **Resilience4j, Hystrix, or Spring Cloud Circuit Breaker**. 🚀
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Fault Isolation in Microservices
+
+**Fault Isolation** in microservices is a design principle that ensures **failures in one microservice do not impact the entire system**. It helps in **containing failures**, improving system **resilience, availability, and fault tolerance**.
+
+---
+
+### **Why is Fault Isolation Important?**
+In a monolithic application, a single failure can crash the **entire system**. However, in microservices, each service runs independently. **Without fault isolation**, a single failing service might cause a **chain reaction** leading to system-wide failure.
+
+✅ Fault isolation **prevents** such failures from spreading and keeps the system operational.
+
+---
+
+### **How to Achieve Fault Isolation?**
+
+#### **1. Independent Service Deployment**
+- Each microservice runs **separately** so failures are contained.
+- If one service fails, the others continue running.
+
+✅ **Solution:** Deploy microservices using **Docker, Kubernetes**, or separate instances.
+
+---
+
+#### **2. Circuit Breaker Pattern**
+- **Stops calls to a failing service** after repeated failures.
+- Allows the system to continue working using **fallback mechanisms**.
+
+✅ **Solution:** Use **Resilience4j, Hystrix, or Spring Cloud Circuit Breaker**.
+
+Example using **Resilience4j**:
+```java
+@CircuitBreaker(name = "paymentService", fallbackMethod = "fallbackResponse")
+public String processPayment() {
+    return restTemplate.getForObject("http://payment-service/charge", String.class);
+}
+
+public String fallbackResponse(Exception ex) {
+    return "Payment service is down. Please try again later.";
+}
+```
+👉 If `payment-service` fails, the fallback response prevents system-wide failure.
+
+---
+
+#### **3. Bulkhead Pattern**
+- Limits **resource usage per service** (e.g., CPU, threads, memory).
+- Ensures that one failing service does not consume all system resources.
+
+✅ **Solution:** Use **thread pools or separate containers** for services.
+
+Example: Limit **thread pool size** for a service:
+```yaml
+resilience4j.bulkhead:
+  instances:
+    orderService:
+      maxConcurrentCalls: 5
+      maxWaitDuration: 1000ms
+```
+👉 If `orderService` gets too many requests, it **rejects** new ones instead of crashing.
+
+---
+
+#### **4. Asynchronous Communication**
+- Services communicate via **message queues** instead of direct calls.
+- Prevents **dependency on slow or failing services**.
+
+✅ **Solution:** Use **Kafka, RabbitMQ, or ActiveMQ**.
+
+Example using Kafka for event-driven communication:
+```java
+kafkaTemplate.send("order-topic", orderData);
+```
+👉 If a service is down, messages **wait in the queue** instead of failing immediately.
+
+---
+
+#### **5. Service Timeouts & Retries**
+- **Timeouts** prevent waiting indefinitely for a response.
+- **Retries** ensure temporary failures are handled gracefully.
+
+✅ **Solution:** Configure timeouts using **RestTemplate or Feign Client**.
+
+Example: Setting **timeout** in Feign Client
+```java
+@FeignClient(name = "inventory-service", url = "http://inventory-service", configuration = FeignConfig.class)
+public interface InventoryClient {
+    @GetMapping("/check-stock")
+    String checkStock();
+}
+```
+```java
+@Configuration
+public class FeignConfig {
+    @Bean
+    public Request.Options timeoutConfiguration() {
+        return new Request.Options(2000, 5000); // Connect timeout: 2s, Read timeout: 5s
+    }
+}
+```
+👉 If `inventory-service` takes longer than **5 seconds**, the request fails instead of blocking the system.
+
+---
+
+### **Conclusion**
+**Fault Isolation** ensures that **failures in one microservice do not impact the entire system**. It is achieved using **circuit breakers, bulkheads, timeouts, retries, and asynchronous communication**. These strategies improve **system resilience and availability** in microservices. 🚀
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Different Ways to Create a Spring Boot Application
+
+There are several ways to create a **Spring Boot application**, depending on your preference and project requirements. Below are the most common methods:
+
+---
+
+### **1. Using Spring Initializr (Web Interface) - Recommended**
+Spring Initializr is an official tool to generate a Spring Boot project with necessary dependencies.
+
+✅ **Steps:**
+1. Go to [Spring Initializr](https://start.spring.io/)
+2. Select **Project Type**: Maven or Gradle
+3. Select **Language**: Java
+4. Select **Spring Boot Version**
+5. Add **Dependencies** (e.g., Spring Web, Spring Data JPA, MySQL, Lombok, etc.)
+6. Click **"Generate"** and download the ZIP file
+7. Extract the project and open it in **IntelliJ IDEA, Eclipse, or VS Code**
+8. Run the application using:
+   ```sh
+   mvn spring-boot:run  # For Maven
+   gradle bootRun       # For Gradle
+   ```
+
+---
+
+### **2. Using Spring Boot CLI (Command Line Interface)**
+Spring Boot CLI allows you to create and run applications using simple commands.
+
+✅ **Steps:**
+1. Install Spring Boot CLI
+   - **For Windows (Using SDKMAN)**
+     ```sh
+     sdk install springboot
+     ```
+   - **For Mac/Linux**
+     ```sh
+     brew install springboot
+     ```
+2. Create a new project:
+   ```sh
+   spring init --dependencies=web,data-jpa,h2 myapp
+   ```
+   - This creates a new Spring Boot project named **myapp** with **Spring Web, JPA, and H2**.
+3. Navigate into the project folder:
+   ```sh
+   cd myapp
+   ```
+4. Run the application:
+   ```sh
+   mvn spring-boot:run
+   ```
+
+---
+
+### **3. Using Spring Boot in an Existing Maven Project (Manually)**
+If you already have a **Maven project**, you can convert it into a Spring Boot application.
+
+✅ **Steps:**
+1. Add **Spring Boot Starter Parent** in `pom.xml`:
+   ```xml
+   <parent>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-parent</artifactId>
+       <version>3.1.0</version>
+   </parent>
+   ```
+2. Add Spring Boot dependencies:
+   ```xml
+   <dependencies>
+       <dependency>
+           <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-web</artifactId>
+       </dependency>
+   </dependencies>
+   ```
+3. Create a main class:
+   ```java
+   @SpringBootApplication
+   public class MyApplication {
+       public static void main(String[] args) {
+           SpringApplication.run(MyApplication.class, args);
+       }
+   }
+   ```
+4. Run the project:
+   ```sh
+   mvn spring-boot:run
+   ```
+
+---
+
+### **4. Using Spring Boot in an Existing Gradle Project**
+If you are using **Gradle**, you can convert it into a Spring Boot application.
+
+✅ **Steps:**
+1. Add Spring Boot dependency in `build.gradle`:
+   ```gradle
+   plugins {
+       id 'org.springframework.boot' version '3.1.0'
+       id 'io.spring.dependency-management' version '1.1.3'
+       id 'java'
+   }
+
+   dependencies {
+       implementation 'org.springframework.boot:spring-boot-starter-web'
+   }
+   ```
+2. Create the main class:
+   ```java
+   @SpringBootApplication
+   public class MyApplication {
+       public static void main(String[] args) {
+           SpringApplication.run(MyApplication.class, args);
+       }
+   }
+   ```
+3. Run the application:
+   ```sh
+   gradle bootRun
+   ```
+
+---
+
+### **5. Using an IDE (IntelliJ IDEA, Eclipse, VS Code)**
+Most IDEs provide built-in support for Spring Boot.
+
+✅ **Steps in IntelliJ IDEA:**
+1. **File** → **New Project**
+2. Select **Spring Boot** and click **Next**
+3. Select **Dependencies** (Spring Web, JPA, etc.)
+4. Click **Finish** and the project is created
+5. Run the main class from the IDE
+
+✅ **Steps in Eclipse (Using Spring Tool Suite - STS):**
+1. Install **Spring Tools 4 Plugin**
+2. Click **File → New → Spring Boot Starter Project**
+3. Enter project details and dependencies
+4. Click **Finish** and run the project
+
+---
+
+### **6. Using Docker to Create a Spring Boot Application**
+You can also create a Spring Boot application inside a **Docker container**.
+
+✅ **Steps:**
+1. Create a **Spring Boot application** (Using any method above).
+2. Create a `Dockerfile`:
+   ```dockerfile
+   FROM openjdk:17
+   COPY target/myapp.jar app.jar
+   ENTRYPOINT ["java", "-jar", "app.jar"]
+   ```
+3. Build and run the Docker container:
+   ```sh
+   docker build -t myapp .
+   docker run -p 8080:8080 myapp
+   ```
+
+---
+
+### **Conclusion**
+There are **multiple ways** to create a Spring Boot application, depending on your preference:
+✔ **Spring Initializr (Recommended)** – Quick and easy
+✔ **Spring Boot CLI** – Command-line based
+✔ **Manually with Maven/Gradle** – Useful for existing projects
+✔ **Using IDEs (IntelliJ, Eclipse, VS Code)** – Beginner-friendly
+✔ **Using Docker** – For containerized deployment
+
+🚀 The best way depends on your **experience and project requirements**!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Spring Boot Exceptions
+
+In Spring Boot, exceptions occur when something goes wrong during application execution. These exceptions can be categorized based on **where they occur** and **how they are handled**.
+
+---
+
+### **Types of Exceptions in Spring Boot**
+
+#### **1. Checked Exceptions (Compile-time Exceptions)**
+- These exceptions **must be handled** using `try-catch` or `throws` in the method signature.
+- Example: **IOException, SQLException**
+
+✅ **Example: Handling IOException**
+```java
+import java.io.*;
+
+public class FileReadExample {
+    public void readFile() throws IOException {
+        FileReader file = new FileReader("file.txt");
+        file.read();
+    }
+}
+```
+👉 The method **must declare `throws IOException`**, or it must be handled with `try-catch`.
+
+---
+
+#### **2. Unchecked Exceptions (Runtime Exceptions)**
+- These exceptions occur **during runtime** and **don’t require explicit handling**.
+- Example: **NullPointerException, ArrayIndexOutOfBoundsException**
+
+✅ **Example: Handling NullPointerException**
+```java
+public class NullPointerExample {
+    public static void main(String[] args) {
+        String name = null;
+        try {
+            System.out.println(name.length()); // NullPointerException
+        } catch (NullPointerException e) {
+            System.out.println("Null value encountered!");
+        }
+    }
+}
+```
+
+---
+
+#### **3. Spring Boot-Specific Exceptions**
+Spring Boot has built-in exceptions for handling errors in web applications.
+
+✅ **Common Spring Boot Exceptions:**
+
+| Exception                     | When It Occurs |
+|--------------------------------|---------------|
+| `HttpMessageNotReadableException` | Invalid JSON request body |
+| `MethodArgumentNotValidException` | Validation failure (e.g., `@Valid`) |
+| `NoSuchElementException` | When `findById()` returns empty |
+| `HttpRequestMethodNotSupportedException` | Wrong HTTP method used |
+| `DataIntegrityViolationException` | Database constraint violation |
+| `ConstraintViolationException` | Validation failed for request parameters |
+
+---
+
+### **Exception Handling in Spring Boot**
+
+Spring Boot provides different ways to handle exceptions **gracefully**.
+
+---
+
+#### **1. Using `@ExceptionHandler` (Method Level Exception Handling)**
+You can handle exceptions for a specific controller using `@ExceptionHandler`.
+
+✅ **Example: Handling `NoSuchElementException` in a Controller**
+```java
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id) {
+        return userService.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User not found"));
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+}
+```
+👉 If a user is **not found**, it returns `404 Not Found` instead of crashing.
+
+---
+
+#### **2. Using `@ControllerAdvice` (Global Exception Handling)**
+To handle exceptions **for the entire application**, use `@ControllerAdvice`.
+
+✅ **Example: Global Exception Handling**
+```java
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input data!");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGenericException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong!");
+    }
+}
+```
+👉 **`@RestControllerAdvice`** ensures that all controllers share the same exception-handling logic.
+
+---
+
+#### **3. Using `ResponseStatusException`**
+You can throw exceptions directly with a specific **HTTP status code**.
+
+✅ **Example: Throwing a `404 Not Found` Exception**
+```java
+@GetMapping("/{id}")
+public User getUser(@PathVariable Long id) {
+    return userService.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+}
+```
+👉 This automatically returns a `404` response if the user is not found.
+
+---
+
+### **Conclusion**
+Spring Boot provides multiple ways to handle exceptions effectively:
+✔ **Checked & Unchecked Exceptions** – Based on compile-time or runtime errors.
+✔ **Spring Boot-Specific Exceptions** – Such as validation errors, request errors, and database errors.
+✔ **Exception Handling Approaches** – Using `@ExceptionHandler`, `@ControllerAdvice`, and `ResponseStatusException`.
+
+🚀 A well-implemented exception handling system makes **Spring Boot applications more robust and user-friendly**!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Maven Build Lifecycle
+
+Maven has a **build lifecycle** that defines the sequence of steps (**phases**) required to build, test, and deploy a Java project. These phases ensure that the project is compiled, tested, packaged, and deployed correctly.
+
+---
+
+### **1. Types of Maven Build Lifecycles**
+
+Maven provides **three main lifecycles**:
+
+| Lifecycle       | Purpose |
+|----------------|---------|
+| **Clean**      | Deletes previous build files (clean up) |
+| **Default**    | Builds, tests, and packages the application |
+| **Site**       | Generates project documentation |
+
+---
+
+### **2. Default Lifecycle (Main Lifecycle)**
+
+The **Default lifecycle** has multiple phases. The most commonly used ones are:
+
+| Phase         | Description |
+|--------------|-------------|
+| **validate**  | Checks if the project is correct and necessary information is available |
+| **compile**   | Compiles the Java source code (`.java` → `.class`) |
+| **test**      | Runs unit tests using JUnit/TestNG |
+| **package**   | Bundles the compiled code into a `.jar` or `.war` file |
+| **verify**    | Runs integration tests (optional) |
+| **install**   | Installs the package into the local `.m2` repository |
+| **deploy**    | Deploys the application to a remote repository |
+
+✅ **Example: Running Maven Build Phases**
+```sh
+mvn compile         # Compile the source code
+mvn package         # Create a JAR/WAR file
+mvn install         # Install the package in local repository
+mvn deploy          # Deploy the package to a remote repository
+```
+👉 Each phase **automatically runs all previous phases**.
+For example, running `mvn package` will **first validate, compile, and test** before creating the package.
+
+---
+
+### **3. Clean Lifecycle**
+This lifecycle is used to remove old build files before building a new one.
+
+| Phase  | Description |
+|--------|-------------|
+| **pre-clean**  | Runs before cleaning |
+| **clean**      | Deletes `target/` folder (previous build artifacts) |
+| **post-clean** | Runs after cleaning |
+
+✅ **Example: Running Clean**
+```sh
+mvn clean    # Deletes the target/ directory
+```
+
+---
+
+### **4. Site Lifecycle**
+This lifecycle is used to generate project documentation.
+
+| Phase  | Description |
+|--------|-------------|
+| **pre-site**   | Runs before generating site documentation |
+| **site**       | Generates project site documentation |
+| **post-site**  | Runs after generating the site |
+| **site-deploy**| Deploys site documentation to a web server |
+
+✅ **Example: Generating Site Documentation**
+```sh
+mvn site
+```
+
+---
+
+### **5. Maven Build Lifecycle in Real Projects**
+
+🚀 **Example: Complete Build Process for a Spring Boot Project**
+```sh
+mvn clean        # Remove old build files
+mvn compile      # Compile source code
+mvn test         # Run unit tests
+mvn package      # Create a JAR/WAR file
+mvn install      # Install package into local repository
+mvn deploy       # Deploy the package to a remote repository
+```
+
+---
+
+### **Conclusion**
+✔ **Maven Build Lifecycle** consists of multiple **phases** to compile, test, package, and deploy Java projects.
+✔ **Three main lifecycles**: `clean`, `default`, and `site`.
+✔ **Default lifecycle** is the most important and includes `compile`, `test`, `package`, `install`, and `deploy`.
+✔ **Each phase executes the previous phases automatically**, making the build process smooth and efficient.
+
+🚀 **Maven makes Java project builds simple, automated, and structured!**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### What Should You Do When You Recognize Performance Degradation in Systems?
+
+When you notice a system slowdown or performance degradation, follow these steps systematically to **identify, analyze, and resolve** the issue.
+
+---
+
+### **1. Identify the Performance Issue**
+✅ **Monitor System Metrics**
+- Check **CPU, Memory, Disk I/O, Network Usage** using tools like **Grafana, Prometheus, JConsole, VisualVM**.
+- Identify **high response times**, **slow API calls**, or **high error rates**.
+
+✅ **Analyze Logs & Alerts**
+- Use **ELK Stack (Elasticsearch, Logstash, Kibana)**, **Splunk**, or **Spring Boot Actuators** to check logs and errors.
+- Identify **error patterns, slow database queries, or timeouts**.
+
+✅ **Check Application Metrics**
+- Use **Spring Boot Actuator** to monitor **thread count, heap usage, GC activity, and response times**.
+- Profile the application with **JProfiler, YourKit, or Java Mission Control**.
+
+---
+
+### **2. Diagnose the Root Cause**
+🔹 **Check Database Performance**
+- Identify **slow queries** using `EXPLAIN ANALYZE` (PostgreSQL, MySQL).
+- Check for **missing indexes** and **optimize queries**.
+- Use **connection pooling** (HikariCP) to reduce DB load.
+
+🔹 **Analyze Code Performance**
+- Use **profiling tools** (JProfiler, VisualVM) to find slow methods.
+- Check for **memory leaks** (Heap dump analysis).
+- Identify **CPU-intensive operations** and optimize loops.
+
+🔹 **Network & API Latency Issues**
+- Check **API response times** using **Postman, JMeter, or Gatling**.
+- Use **caching (Redis, Ehcache)** to reduce redundant API calls.
+- Implement **Circuit Breaker (Resilience4j, Hystrix)** for fault tolerance.
+
+---
+
+### **3. Optimize and Fix the Issue**
+🔹 **Optimize Code & Database**
+- **Refactor inefficient loops, reduce unnecessary computations**.
+- **Optimize database queries**, add indexes, use **pagination** for large data.
+- Use **lazy loading (Hibernate)** to reduce unnecessary data fetching.
+
+🔹 **Scale the System**
+- **Vertical Scaling**: Increase server CPU, RAM.
+- **Horizontal Scaling**: Add more instances (Load Balancer, Kubernetes).
+- Use **Microservices** instead of a monolithic structure.
+
+🔹 **Implement Caching**
+- Use **Redis/Memcached** to reduce frequent DB calls.
+- Cache **frequently used API responses, computed data**.
+
+🔹 **Tune JVM Performance**
+- Optimize **Garbage Collection (GC)** settings.
+- Increase **Heap size, thread pool configuration**.
+- Use **Spring Boot Actuator & Micrometer** for monitoring.
+
+---
+
+### **4. Continuous Monitoring & Prevention**
+✅ **Set Up Alerts & Auto-Scaling**
+- Use **Prometheus + Grafana** for real-time monitoring.
+- Enable **Auto-Scaling** in Kubernetes or AWS Auto Scaling Groups.
+
+✅ **Optimize Load Testing**
+- Use **JMeter, Locust, Gatling** to simulate high load scenarios.
+- Ensure the system can handle peak traffic.
+
+✅ **Regular Code & Database Audits**
+- Conduct **performance reviews**.
+- Identify **slow queries, high-memory usage**.
+
+---
+
+### **Conclusion**
+✔ **Monitor and analyze system metrics** to detect bottlenecks.
+✔ **Identify root causes** like slow queries, high CPU usage, or network latency.
+✔ **Optimize code, database, caching, and scaling strategies**.
+✔ **Continuously monitor and set up proactive alerting**.
+
+🚀 **A systematic approach ensures high system performance and reliability!**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### Saga Design Pattern in Microservices
+
+The **Saga Design Pattern** is used in microservices to **manage distributed transactions** across multiple services, ensuring **data consistency** in case of failures. Since microservices don’t support **traditional ACID transactions**, Saga ensures that either **all steps complete successfully** or **compensating actions undo any partial execution**.
+
+---
+
+### **How Saga Works?**
+A Saga is a **sequence of local transactions**. If any step fails, the system **executes compensating transactions** to rollback changes from previous steps.
+
+✅ **Example: E-commerce Order Processing**
+1. **Order Service** → Create Order ✅
+2. **Payment Service** → Deduct Payment ✅
+3. **Inventory Service** → Reduce Stock ❌ (Fails)
+4. **Compensating Action** → Refund Payment, Cancel Order
+
+---
+
+### **Types of Saga Patterns**
+
+#### **1. Choreography-Based Saga** (Decentralized)
+Each microservice listens to events from other services and **reacts accordingly**. No central controller is involved.
+
+✅ **How It Works?**
+- Order Service **creates an order** → Publishes `OrderCreated` event
+- Payment Service **processes payment** → Publishes `PaymentSuccess` event
+- Inventory Service **reserves stock** → If stock is insufficient, it **publishes `StockFailure` event**
+- Order Service **listens for failures and rolls back**
+
+✅ **Pros:**
+- No central controller, making it **loosely coupled**
+- Good for **simple workflows** with **few microservices**
+
+❌ **Cons:**
+- Harder to **track and debug** due to multiple event interactions
+- **Complex dependency management** between services
+
+---
+
+#### **2. Orchestration-Based Saga** (Centralized)
+A **central orchestrator** (Saga Manager) **coordinates** all steps and handles compensating actions if needed.
+
+✅ **How It Works?**
+- **Saga Orchestrator** starts the process
+- Calls `OrderService → PaymentService → InventoryService` sequentially
+- If any step fails, it **triggers rollback actions**
+
+✅ **Pros:**
+- **Easier to manage** with clear execution flow
+- Easier to handle **complex workflows**
+
+❌ **Cons:**
+- **Single point of failure** (orchestrator)
+- Can introduce **tighter coupling**
+
+---
+
+### **Difference Between Orchestration and Choreography in Saga**
+
+| Feature            | Choreography-Based Saga | Orchestration-Based Saga |
+|--------------------|------------------------|--------------------------|
+| **Architecture**   | Decentralized (Event-driven) | Centralized (Controlled by Saga Orchestrator) |
+| **Control**       | Each service listens to events | Saga Orchestrator manages the flow |
+| **Complexity**    | Harder to debug (many services interact) | Easier to debug (clear execution flow) |
+| **Coupling**      | Loosely coupled | More tightly coupled |
+| **Scalability**   | Better for simple workflows | Better for complex workflows |
+| **Failure Handling** | Each service handles its own rollback | Orchestrator handles rollback |
+
+---
+
+### **Conclusion**
+✔ **Saga Pattern ensures consistency in distributed transactions.**
+✔ **Choreography** is good for **simple, loosely coupled microservices**.
+✔ **Orchestration** is better for **complex workflows with a clear flow**.
+
+🚀 **Choose the right approach based on your microservices architecture!**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+
+### Why Do We Use the Sequence Design Pattern?
+
+The **Sequence Design Pattern** is used to **define and enforce the order** in which multiple operations or processes must be executed. This pattern is especially useful in **workflow management, business processes, and distributed systems** where **tasks must follow a specific sequence** to ensure correctness.
+
+---
+
+### **Where is the Sequence Design Pattern Used?**
+
+1. **Microservices Workflow Execution**
+   - Ensures that **services execute in a defined order**.
+   - Example: **Order Processing**
+     - Validate Order → Deduct Payment → Update Inventory → Notify Customer.
+
+2. **Saga Pattern (Orchestration)**
+   - Used in **distributed transactions** to maintain **data consistency**.
+   - Example: In a **booking system**, an orchestrator ensures that **seat reservation, payment, and confirmation** happen in sequence.
+
+3. **ETL (Extract, Transform, Load) Pipelines**
+   - Data processing must follow **extraction → transformation → loading** steps.
+
+4. **State Machine Implementations**
+   - Ensures **valid state transitions** in applications like **workflow automation**.
+
+---
+
+### **How Does the Sequence Pattern Work?**
+- It **defines a clear execution order** for tasks.
+- Can be implemented using **method chaining, workflow engines, or orchestration frameworks**.
+
+✅ **Example: Implementing a Simple Sequence in Java**
+```java
+class OrderProcessing {
+    void validateOrder() {
+        System.out.println("Validating Order...");
+    }
+    void processPayment() {
+        System.out.println("Processing Payment...");
+    }
+    void updateInventory() {
+        System.out.println("Updating Inventory...");
+    }
+    void sendNotification() {
+        System.out.println("Sending Notification...");
+    }
+    void execute() {
+        validateOrder();
+        processPayment();
+        updateInventory();
+        sendNotification();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        OrderProcessing order = new OrderProcessing();
+        order.execute(); // Executes steps in sequence
+    }
+}
+```
+👉 Here, `execute()` **ensures the correct order of execution**.
+
+---
+
+### **Advantages of Using the Sequence Pattern**
+
+✅ **Ensures Order Consistency**
+- Tasks execute in the **correct sequence** to maintain data integrity.
+
+✅ **Avoids Race Conditions**
+- Prevents **concurrent execution issues** where later steps depend on earlier ones.
+
+✅ **Improves Maintainability**
+- **Encapsulates workflow logic** for easy modifications.
+
+✅ **Reduces Errors**
+- Avoids missing or incorrect execution of critical steps.
+
+---
+
+### **Conclusion**
+✔ The **Sequence Design Pattern** is used to **maintain a strict order of operations** in workflows, microservices, and automation.
+✔ Helps in **avoiding concurrency issues, ensuring data integrity, and improving maintainability**.
+✔ Used in **order processing, transaction workflows, ETL pipelines, and state machines**.
+
+🚀 **A must-use pattern when execution order matters!**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### How Do We Handle Ambiguity of Beans While Loading the Spring Context?
+
+In **Spring**, when multiple beans of the **same type** exist in the application context, Spring may not know which one to inject, leading to **"NoUniqueBeanDefinitionException"**. To resolve this **bean ambiguity**, we can use various techniques.
+
+---
+
+### **1. Using `@Primary` (Default Bean Selection)**
+- Marks one bean as the **default** when multiple beans of the same type exist.
+
+✅ **Example:**
+```java
+@Component
+public class MySQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("Connected to MySQL");
+    }
+}
+
+@Component
+@Primary // This bean will be injected by default
+public class PostgreSQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("Connected to PostgreSQL");
+    }
+}
+```
+```java
+@Service
+public class DatabaseService {
+    private final Database database;
+
+    @Autowired
+    public DatabaseService(Database database) { // PostgreSQLDatabase will be injected
+        this.database = database;
+    }
+}
+```
+👉 **`PostgreSQLDatabase` will be injected because it is marked as `@Primary`**.
+
+---
+
+### **2. Using `@Qualifier` (Explicit Bean Selection)**
+- If multiple beans exist, we can specify **which one to use**.
+
+✅ **Example:**
+```java
+@Component("mysqlDB")
+public class MySQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("Connected to MySQL");
+    }
+}
+
+@Component("postgresDB")
+public class PostgreSQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("Connected to PostgreSQL");
+    }
+}
+
+@Service
+public class DatabaseService {
+    private final Database database;
+
+    @Autowired
+    public DatabaseService(@Qualifier("mysqlDB") Database database) { // Explicitly selecting MySQL
+        this.database = database;
+    }
+}
+```
+👉 **Now `mysqlDB` (MySQLDatabase) will be injected explicitly.**
+
+---
+
+### **3. Using `@Bean` with Explicit Naming in `@Configuration`**
+- Define beans with specific names in a **configuration class**.
+
+✅ **Example:**
+```java
+@Configuration
+public class AppConfig {
+    @Bean(name = "mysqlDB")
+    public Database mysqlDatabase() {
+        return new MySQLDatabase();
+    }
+
+    @Bean(name = "postgresDB")
+    public Database postgresDatabase() {
+        return new PostgreSQLDatabase();
+    }
+}
+```
+```java
+@Service
+public class DatabaseService {
+    private final Database database;
+
+    @Autowired
+    public DatabaseService(@Qualifier("postgresDB") Database database) {
+        this.database = database;
+    }
+}
+```
+👉 **Explicitly selecting `postgresDB` (PostgreSQLDatabase) using `@Qualifier`**.
+
+---
+
+### **4. Using `@Profile` for Environment-Specific Beans**
+- Define different beans for **different environments (dev, prod, test)**.
+
+✅ **Example:**
+```java
+@Component
+@Profile("dev")
+public class MySQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("Connected to MySQL - Dev");
+    }
+}
+
+@Component
+@Profile("prod")
+public class PostgreSQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("Connected to PostgreSQL - Prod");
+    }
+}
+```
+👉 **Spring will load the correct bean based on the active profile (`spring.profiles.active=dev` in `application.properties`).**
+
+---
+
+### **5. Using `@Autowired(required = false)` to Avoid Ambiguity**
+- If a bean is not required, we can set `required = false`.
+
+✅ **Example:**
+```java
+@Autowired(required = false)
+private Database database; // No error if no matching bean is found
+```
+👉 **Spring won’t throw an error if no suitable bean exists.**
+
+---
+
+### **Conclusion**
+✔ **Use `@Primary`** when one bean should be the default choice.
+✔ **Use `@Qualifier`** to explicitly specify which bean to inject.
+✔ **Use `@Bean` in a `@Configuration` class** to define beans with names.
+✔ **Use `@Profile`** to load different beans based on the environment.
+✔ **Use `@Autowired(required = false)`** when the bean may not always be present.
+
+🚀 **Best practice:** Use **`@Qualifier` for precision** and **`@Primary` for defaults**!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### What is Agile?
+
+**Agile** is a **software development methodology** that focuses on **iterative development, collaboration, flexibility, and customer feedback**. Instead of following a rigid plan, Agile teams work in **small increments (iterations or sprints)**, continuously improving the product based on feedback.
+
+🚀 **Key Principles of Agile (from the Agile Manifesto):**
+1. **Individuals and interactions** over processes and tools.
+2. **Working software** over comprehensive documentation.
+3. **Customer collaboration** over contract negotiation.
+4. **Responding to change** over following a plan.
+
+---
+
+### **How Many Types of Agile Methodologies Are There?**
+
+There are several Agile methodologies, but the most commonly used ones include:
+
+#### **1. Scrum** (Most Popular)
+- **Framework:** Uses **Sprints** (2-4 week cycles) to deliver small, working product increments.
+- **Roles:** **Scrum Master**, **Product Owner**, **Development Team**.
+- **Events:** Sprint Planning, Daily Standups, Sprint Review, Sprint Retrospective.
+- **Best For:** Software development teams needing structured, iterative work.
+
+✅ **Example:** A team builds an e-commerce website by delivering small features (e.g., login, product listing) in each sprint.
+
+---
+
+#### **2. Kanban** (Visual Workflow Management)
+- **Framework:** Uses a **Kanban Board** with columns like **To-Do, In Progress, Done**.
+- **Focus:** **Continuous delivery** without fixed sprints.
+- **Best For:** Support teams, DevOps, and teams handling ongoing work.
+
+✅ **Example:** A customer support team uses Kanban to track and resolve customer tickets.
+
+---
+
+#### **3. Lean Software Development**
+- **Framework:** Focuses on **eliminating waste**, improving efficiency, and delivering **only necessary features**.
+- **Best For:** Startups or companies aiming to release **MVPs (Minimum Viable Products)** quickly.
+
+✅ **Example:** A startup builds a **basic version of a food delivery app**, releasing only core features first.
+
+---
+
+#### **4. Extreme Programming (XP)** (For High-Quality Code)
+- **Framework:** Focuses on **frequent releases, test-driven development (TDD), and pair programming**.
+- **Best For:** Teams requiring **high code quality and continuous testing**.
+
+✅ **Example:** A banking application team follows XP to ensure **secure and bug-free transactions**.
+
+---
+
+#### **5. Feature-Driven Development (FDD)**
+- **Framework:** **Breaks work into features**, each developed in short iterations.
+- **Best For:** Large teams building **complex projects**.
+
+✅ **Example:** A company developing **an enterprise CRM system** uses FDD to add new features one by one.
+
+---
+
+#### **6. Dynamic Systems Development Method (DSDM)**
+- **Framework:** Prioritizes **business needs and rapid delivery**.
+- **Best For:** Business-critical applications requiring **fast development and frequent feedback**.
+
+✅ **Example:** A financial firm uses DSDM to build a **real-time stock trading application**.
+
+---
+
+### **Conclusion**
+✔ **Agile is a flexible, iterative approach** to software development.
+✔ **Popular Agile methodologies:**
+   - **Scrum** (structured, sprint-based)
+   - **Kanban** (continuous workflow)
+   - **Lean** (eliminate waste)
+   - **Extreme Programming (XP)** (focus on quality)
+   - **Feature-Driven Development (FDD)** (feature-based)
+   - **DSDM** (business-focused rapid development)
+
+🚀 **Best Practice:** Choose the methodology based on **team structure, project needs, and customer requirements!**
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### What is Spring Boot Transaction Management?
+
+**Spring Boot Transaction Management** ensures **data consistency and integrity** by grouping multiple operations into a **single unit of work**. If any part of the transaction fails, the **entire transaction is rolled back** to prevent partial updates.
+
+---
+
+### **Why is Transaction Management Needed?**
+- Ensures **data integrity** by preventing incomplete operations.
+- Prevents **inconsistent database states** due to failures.
+- Provides **rollback** in case of errors.
+- Supports **ACID properties** (Atomicity, Consistency, Isolation, Durability).
+
+---
+
+### **How to Implement Transaction Management in Spring Boot?**
+
+Spring Boot provides **declarative and programmatic** transaction management.
+
+#### **1. Using `@Transactional` (Declarative Transaction Management) ✅ (Recommended)**
+The easiest way to manage transactions in Spring Boot is by using `@Transactional` annotation.
+
+✅ **Example:**
+```java
+@Service
+public class BankService {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Transactional // Ensures rollback if an exception occurs
+    public void transferMoney(Long senderId, Long receiverId, double amount) {
+        Account sender = accountRepository.findById(senderId).orElseThrow();
+        Account receiver = accountRepository.findById(receiverId).orElseThrow();
+
+        sender.setBalance(sender.getBalance() - amount);
+        receiver.setBalance(receiver.getBalance() + amount);
+
+        accountRepository.save(sender);
+        accountRepository.save(receiver);
+    }
+}
+```
+👉 If anything goes wrong (e.g., `receiverId` is invalid), the transaction **rolls back automatically**.
+
+---
+
+#### **2. Rollback on Specific Exceptions**
+By default, `@Transactional` **rolls back only on unchecked exceptions (RuntimeException, Error)**.
+To roll back on checked exceptions, specify them in the annotation.
+
+✅ **Example:**
+```java
+@Transactional(rollbackFor = Exception.class) // Rolls back on any exception
+public void transferMoney(Long senderId, Long receiverId, double amount) {
+    // Transactional logic here
+}
+```
+
+---
+
+#### **3. Propagation Types in Transactions**
+Spring provides different **transaction propagation behaviors** to control how transactions interact.
+
+| Propagation Type | Behavior |
+|-----------------|----------|
+| `REQUIRED` *(Default)* | Uses existing transaction; if none, creates a new one. |
+| `REQUIRES_NEW` | Always starts a new transaction, suspending any existing one. |
+| `NESTED` | Runs within an existing transaction but allows nested rollback. |
+| `SUPPORTS` | Uses a transaction if one exists; otherwise, runs non-transactionally. |
+| `NOT_SUPPORTED` | Runs outside any transaction. |
+| `MANDATORY` | Must be executed within an existing transaction; throws an error if none exists. |
+| `NEVER` | Must not run within a transaction; throws an error if one exists. |
+
+✅ **Example:**
+```java
+@Transactional(propagation = Propagation.REQUIRES_NEW) // Always creates a new transaction
+public void saveTransaction(Transaction transaction) {
+    transactionRepository.save(transaction);
+}
+```
+👉 This ensures that even if the **parent transaction fails, this one remains committed**.
+
+---
+
+#### **4. Isolation Levels (Handling Concurrent Transactions)**
+Spring supports **isolation levels** to control how transactions interact with each other.
+
+| Isolation Level | Prevents |
+|---------------|----------|
+| `READ_UNCOMMITTED` | Nothing (allows dirty reads) |
+| `READ_COMMITTED` | Dirty reads |
+| `REPEATABLE_READ` | Dirty & non-repeatable reads |
+| `SERIALIZABLE` *(Strictest)* | Dirty, non-repeatable, & phantom reads |
+
+✅ **Example:**
+```java
+@Transactional(isolation = Isolation.SERIALIZABLE) // Prevents concurrency issues
+public void updateBalance(Long accountId, double amount) {
+    Account account = accountRepository.findById(accountId).orElseThrow();
+    account.setBalance(account.getBalance() + amount);
+    accountRepository.save(account);
+}
+```
+
+---
+
+### **5. Programmatic Transaction Management (Manual Control)**
+Instead of using `@Transactional`, you can use `TransactionTemplate`.
+
+✅ **Example:**
+```java
+@Service
+public class BankService {
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
+    public void transferMoney(Long senderId, Long receiverId, double amount) {
+        transactionTemplate.execute(status -> {
+            Account sender = accountRepository.findById(senderId).orElseThrow();
+            Account receiver = accountRepository.findById(receiverId).orElseThrow();
+
+            sender.setBalance(sender.getBalance() - amount);
+            receiver.setBalance(receiver.getBalance() + amount);
+
+            accountRepository.save(sender);
+            accountRepository.save(receiver);
+
+            return null; // Commit transaction
+        });
+    }
+}
+```
+👉 **Use when fine-grained transaction control is needed.**
+
+---
+
+### **Conclusion**
+✔ Spring Boot **Transaction Management** ensures **data consistency and integrity**.
+✔ Use **`@Transactional` (Declarative Approach) for most cases**.
+✔ Customize rollback behavior using `rollbackFor = Exception.class`.
+✔ Use **propagation types** to manage nested transactions.
+✔ Set **isolation levels** to prevent concurrency issues.
+✔ Use **TransactionTemplate** for manual control if needed.
+
+🚀 **Best Practice:** Prefer **`@Transactional` with default settings** and fine-tune it as required!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### What is ContextLoaderListener and What Does It Do?
+
+`ContextLoaderListener` is a **Servlet listener** in Spring that **initializes and manages the Spring application context** when a web application starts.
+
+---
+
+### **Key Responsibilities of `ContextLoaderListener`**
+1. **Loads the Spring Application Context**
+   - It loads the root application context (`ApplicationContext`) when the web application starts.
+   - This context is shared across the entire application.
+
+2. **Links Spring with the ServletContext**
+   - It integrates the Spring **application context** with the **ServletContext** of the web application.
+   - This allows **beans** to be available globally within the application.
+
+3. **Manages the Lifecycle of the Application Context**
+   - When the web application starts, it **creates and initializes the context**.
+   - When the application stops, it **cleans up and destroys the context**.
+
+---
+
+### **How `ContextLoaderListener` Works?**
+- It **listens** to `ServletContext` lifecycle events (like application startup and shutdown).
+- It loads the `applicationContext.xml` or `WebApplicationContext` defined in Spring Boot.
+- This ensures **dependency injection and bean management** are ready before handling any requests.
+
+---
+
+### **How to Use `ContextLoaderListener` in a Traditional Spring Application?**
+In a **Spring MVC web application**, we register `ContextLoaderListener` in `web.xml`:
+
+```xml
+<listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+</context-param>
+```
+🔹 **Explanation:**
+- The `contextConfigLocation` parameter specifies the location of **Spring's application context file**.
+- `ContextLoaderListener` loads this file and initializes the **root application context**.
+
+---
+
+### How is ContextLoaderListener Used in Spring Boot?
+In **Spring Boot**, `ContextLoaderListener` is automatically configured, so we **don’t need to register it manually**.
+Spring Boot uses `SpringApplication.run()` to initialize the application context.
+
+✅ Example:
+```java
+@SpringBootApplication
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+```
+Here, Spring Boot **automatically** loads the application context, so we don’t need `ContextLoaderListener` explicitly.
+
+---
+
+### **Key Differences: Traditional Spring vs. Spring Boot**
+| Feature | Traditional Spring (XML-based) | Spring Boot (Annotation-based) |
+|---------|--------------------------------|--------------------------------|
+| **Application Context Initialization** | Uses `ContextLoaderListener` with `web.xml` | Automatically configured in `SpringApplication.run()` |
+| **Configuration Type** | XML (`applicationContext.xml`) | Java-based (`@SpringBootApplication`) |
+| **Manual Registration** | Yes, needed in `web.xml` | No, Boot handles it automatically |
+
+---
+
+### **Conclusion**
+✔ `ContextLoaderListener` **initializes the Spring application context** and links it to `ServletContext`.
+✔ In **traditional Spring applications**, we **manually configure it in `web.xml`**.
+✔ In **Spring Boot**, it is **automatically handled**, so no manual setup is needed.
+✔ It ensures **beans are available globally** before processing any requests.
+
+🚀 **Best Practice:** If you're using Spring Boot, you **don’t need `ContextLoaderListener` manually**, as Boot manages it automatically!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### What is the Hibernate Validator Framework?
+
+The **Hibernate Validator Framework** is the **reference implementation** of **Java Bean Validation (JSR 380)**, which is used to **validate Java objects** using annotations.
+
+---
+
+### **Key Features of Hibernate Validator**
+✅ Provides **built-in validation annotations** (e.g., `@NotNull`, `@Size`, `@Pattern`)
+✅ Supports **custom validation constraints**
+✅ Works with **Spring Boot and JPA** for automatic validation
+✅ Can be used for **method parameter validation**
+
+---
+
+### **How to Use Hibernate Validator in Spring Boot?**
+
+#### **1. Add Hibernate Validator Dependency**
+If you're using **Spring Boot with Spring Validation**, Hibernate Validator is **already included** in `spring-boot-starter-validation`.
+
+📌 **For a Maven project, add this dependency:**
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
+
+---
+
+#### **2. Use Built-in Validation Annotations**
+You can annotate fields in your **DTO (Data Transfer Object)** or **Entity class** to enforce validation rules.
+
+✅ **Example: Using Hibernate Validator in a DTO**
+```java
+import jakarta.validation.constraints.*;
+
+public class UserDTO {
+
+    @NotNull(message = "Name cannot be null")
+    @Size(min = 2, message = "Name must be at least 2 characters")
+    private String name;
+
+    @Email(message = "Invalid email format")
+    private String email;
+
+    @Min(value = 18, message = "Age must be at least 18")
+    private int age;
+
+    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+    private String phone;
+
+    // Getters and Setters
+}
+```
+
+---
+
+#### **3. Validate Input in Spring Boot Controller**
+Spring Boot automatically validates the request body **if you use `@Valid` or `@Validated`**.
+
+✅ **Example: Using `@Valid` in a Controller**
+```java
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok("User registered successfully");
+    }
+}
+```
+🔹 **What happens here?**
+- If **valid data** is sent, the request proceeds.
+- If **invalid data** is sent, Spring Boot **returns a 400 Bad Request error** with validation messages.
+
+---
+
+### **4. Custom Validator (If Built-in Annotations Are Not Enough)**
+If built-in constraints don't meet your needs, you can create a **custom validator**.
+
+✅ **Step 1: Create a Custom Annotation**
+```java
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+import java.lang.annotation.*;
+
+@Documented
+@Constraint(validatedBy = AgeValidator.class)
+@Target({ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ValidAge {
+    String message() default "Age must be between 18 and 60";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+}
+```
+
+✅ **Step 2: Implement the Validator Class**
+```java
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
+public class AgeValidator implements ConstraintValidator<ValidAge, Integer> {
+    @Override
+    public boolean isValid(Integer age, ConstraintValidatorContext context) {
+        return age != null && age >= 18 && age <= 60;
+    }
+}
+```
+
+✅ **Step 3: Use the Custom Validator in a DTO**
+```java
+public class EmployeeDTO {
+    @ValidAge
+    private int age;
+}
+```
+Now, `age` must be between **18 and 60**, or else validation will fail.
+
+---
+
+### **5. Method Parameter Validation**
+You can also validate method parameters in **service classes** using `@Validated`.
+
+✅ **Example:**
+```java
+import org.springframework.stereotype.Service;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.validation.annotation.Validated;
+
+@Validated
+@Service
+public class UserService {
+    public String getUser(@NotNull @Min(1) Long userId) {
+        return "User found";
+    }
+}
+```
+👉 If `userId` is **null** or **less than 1**, Spring will throw a validation error.
+
+---
+
+### **Conclusion**
+✔ **Hibernate Validator** is the **standard** for **Java Bean Validation (JSR 380)**.
+✔ Works **seamlessly with Spring Boot**, requiring **minimal configuration**.
+✔ Supports **built-in constraints** and **custom validators**.
+✔ Automatically **validates request bodies and method parameters**.
+
+🚀 **Best Practice:** Always use `@Valid` or `@Validated` in controllers and services to ensure **data integrity and correctness**!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+### What Are the Limitations of Autowiring?
+
+Autowiring in **Spring** allows automatic dependency injection without explicitly defining bean dependencies. However, it has **several limitations** that can cause issues in a project.
+
+---
+
+### **1. Ambiguity Issue (Multiple Beans of the Same Type)**
+If there are **multiple beans of the same type**, Spring **does not know which one to inject**, leading to an `NoUniqueBeanDefinitionException`.
+
+✅ **Example:**
+```java
+@Component
+class ServiceA {}
+
+@Component
+class ServiceB {}
+
+@Component
+class MyComponent {
+    @Autowired
+    private ServiceA service; // Works fine
+}
+```
+Now, if we have **two beans of the same type**:
+```java
+@Component
+class DataService {}
+
+@Component
+class AnotherDataService {}
+
+@Component
+class MyComponent {
+    @Autowired
+    private DataService dataService; // ❌ Error: No unique bean definition!
+}
+```
+### **Solution:**
+Use `@Qualifier` to specify the exact bean:
+```java
+@Autowired
+@Qualifier("anotherDataService")
+private DataService dataService;
+```
+
+---
+
+### **2. Cannot Autowire Primitive Data Types and Strings**
+Spring **cannot autowire primitive types** (`int`, `double`, etc.) or `String` values directly.
+
+✅ **Example of Issue:**
+```java
+@Component
+class MyComponent {
+    @Autowired
+    private String myString; // ❌ Spring doesn't know what to inject!
+}
+```
+### **Solution:**
+Use `@Value` for literals:
+```java
+@Value("${app.message}")
+private String myString;
+```
+
+---
+
+### **3. Cannot Autowire Static Fields**
+Spring **does not support autowiring static fields** because static fields belong to the **class, not the object instance**.
+
+✅ **Example of Issue:**
+```java
+@Component
+class MyComponent {
+    @Autowired
+    private static MyService myService; // ❌ Doesn't work!
+}
+```
+### **Solution:**
+Use a setter method:
+```java
+@Component
+class MyComponent {
+    private static MyService myService;
+
+    @Autowired
+    public void setMyService(MyService service) {
+        myService = service;
+    }
+}
+```
+
+---
+
+### **4. Hidden Dependencies (Reduces Readability & Maintainability)**
+- Autowiring hides **explicit dependencies**, making it harder to **understand and debug** code.
+- It is difficult to track **where a bean is coming from** if autowiring is used everywhere.
+
+### **Solution:**
+Use **constructor-based injection** (recommended for better visibility).
+```java
+@Component
+class MyComponent {
+    private final MyService myService;
+
+    @Autowired
+    public MyComponent(MyService myService) {
+        this.myService = myService;
+    }
+}
+```
+
+---
+
+### **5. Autowiring Does Not Work for Classes That Are Not Beans**
+If a class is **not a Spring bean**, it cannot be autowired automatically.
+
+✅ **Example of Issue:**
+```java
+class MyUtility {
+    @Autowired
+    private MyService myService; // ❌ Doesn't work, MyUtility is not a Spring bean!
+}
+```
+### **Solution:**
+1. Mark the class as a **Spring component**:
+   ```java
+   @Component
+   class MyUtility {
+       @Autowired
+       private MyService myService;
+   }
+   ```
+2. Or manually create a bean:
+   ```java
+   @Bean
+   public MyUtility myUtility() {
+       return new MyUtility();
+   }
+   ```
+
+---
+
+### **6. Circular Dependency Issue**
+If two beans depend on each other, Spring throws a `BeanCurrentlyInCreationException`.
+
+✅ **Example of Circular Dependency:**
+```java
+@Component
+class ServiceA {
+    @Autowired
+    private ServiceB serviceB;
+}
+
+@Component
+class ServiceB {
+    @Autowired
+    private ServiceA serviceA;
+}
+```
+### **Solution:**
+- Use `@Lazy` to delay bean initialization:
+  ```java
+  @Component
+  class ServiceA {
+      @Autowired
+      @Lazy
+      private ServiceB serviceB;
+  }
+  ```
+- Use **constructor injection** (but avoid circular dependencies).
+
+---
+
+### **7. Autowiring Only Works in Spring-Managed Beans**
+Spring **only injects dependencies into beans managed by the Spring container**.
+If a bean is created manually (`new MyBean()`), autowiring **will not work**.
+
+✅ **Example of Issue:**
+```java
+@Component
+class MyComponent {
+    private MyService myService = new MyService(); // ❌ Not managed by Spring!
+}
+```
+### **Solution:**
+Always use **Spring’s dependency injection** instead of `new`:
+```java
+@Component
+class MyComponent {
+    private final MyService myService;
+
+    @Autowired
+    public MyComponent(MyService myService) {
+        this.myService = myService;
+    }
+}
+```
+
+---
+
+### **Conclusion**
+✔ Autowiring **simplifies dependency injection**, but it has **limitations** like ambiguity, hidden dependencies, and circular dependencies.
+✔ **Constructor-based injection** is recommended for better **readability and testability**.
+✔ Always use `@Qualifier` for **multiple beans** and `@Value` for **primitive types or Strings**.
+✔ Avoid **circular dependencies** and manually creating beans using `new`.
+
+🚀 **Best Practice:** Use **explicit constructor injection** for important dependencies instead of relying entirely on autowiring!
+
+**[⬆ Back to Top](#table-of-contents)**
+
+<hr style="border:1px solid orange">
+
+
+
 
 
 
