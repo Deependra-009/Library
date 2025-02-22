@@ -90,7 +90,7 @@
 | 82 | [What is Spring Boot Transaction Management?](#What-is-Spring-Boot-Transaction-Management) |
 | 83 | [What is ContextLoaderListener and What Does It Do?](#What-is-ContextLoaderListener-and-What-Does-It-Do) |
 | 84 | [What is the Hibernate Validator Framework?](#what-is-the-hibernate-validator-framework) |
-| 85 | [Limitations of Autowiring](#Limitations-of-Autowiring) |
+| 85 | [Limitations of Autowiring](#limitations-of-autowiring) |
 
 
 
