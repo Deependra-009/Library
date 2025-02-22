@@ -90,7 +90,6 @@
 | 82 | [What is Spring Boot Transaction Management?](#What-is-Spring-Boot-Transaction-Management) |
 | 83 | [What is ContextLoaderListener and What Does It Do?](#What-is-ContextLoaderListener-and-What-Does-It-Do) |
 | 84 | [What is the Hibernate Validator Framework?](#what-is-the-hibernate-validator-framework) |
-| 85 | [Limitations of Autowiring](#limitations-of-autowiring) |
 
 
 
@@ -940,6 +939,217 @@ Spring provides several ways to autowire dependencies. These modes define how Sp
 
 3. **No Bean of the Required Type:**
    If no matching bean is found for autowiring, Spring will throw an exception unless you use `@Autowired(required = false)` to make the dependency optional.
+
+
+### Limitations of Autowiring
+
+
+Autowiring in **Spring** allows automatic dependency injection without explicitly defining bean dependencies. However, it has **several limitations** that can cause issues in a project.
+
+---
+
+### **1. Ambiguity Issue (Multiple Beans of the Same Type)**
+If there are **multiple beans of the same type**, Spring **does not know which one to inject**, leading to an `NoUniqueBeanDefinitionException`.
+
+✅ **Example:**
+```java
+@Component
+class ServiceA {}
+
+@Component
+class ServiceB {}
+
+@Component
+class MyComponent {
+    @Autowired
+    private ServiceA service; // Works fine
+}
+```
+Now, if we have **two beans of the same type**:
+```java
+@Component
+class DataService {}
+
+@Component
+class AnotherDataService {}
+
+@Component
+class MyComponent {
+    @Autowired
+    private DataService dataService; // ❌ Error: No unique bean definition!
+}
+```
+### **Solution:**
+Use `@Qualifier` to specify the exact bean:
+```java
+@Autowired
+@Qualifier("anotherDataService")
+private DataService dataService;
+```
+
+---
+
+### **2. Cannot Autowire Primitive Data Types and Strings**
+Spring **cannot autowire primitive types** (`int`, `double`, etc.) or `String` values directly.
+
+✅ **Example of Issue:**
+```java
+@Component
+class MyComponent {
+    @Autowired
+    private String myString; // ❌ Spring doesn't know what to inject!
+}
+```
+### **Solution:**
+Use `@Value` for literals:
+```java
+@Value("${app.message}")
+private String myString;
+```
+
+---
+
+### **3. Cannot Autowire Static Fields**
+Spring **does not support autowiring static fields** because static fields belong to the **class, not the object instance**.
+
+✅ **Example of Issue:**
+```java
+@Component
+class MyComponent {
+    @Autowired
+    private static MyService myService; // ❌ Doesn't work!
+}
+```
+### **Solution:**
+Use a setter method:
+```java
+@Component
+class MyComponent {
+    private static MyService myService;
+
+    @Autowired
+    public void setMyService(MyService service) {
+        myService = service;
+    }
+}
+```
+
+---
+
+### **4. Hidden Dependencies (Reduces Readability & Maintainability)**
+- Autowiring hides **explicit dependencies**, making it harder to **understand and debug** code.
+- It is difficult to track **where a bean is coming from** if autowiring is used everywhere.
+
+### **Solution:**
+Use **constructor-based injection** (recommended for better visibility).
+```java
+@Component
+class MyComponent {
+    private final MyService myService;
+
+    @Autowired
+    public MyComponent(MyService myService) {
+        this.myService = myService;
+    }
+}
+```
+
+---
+
+### **5. Autowiring Does Not Work for Classes That Are Not Beans**
+If a class is **not a Spring bean**, it cannot be autowired automatically.
+
+✅ **Example of Issue:**
+```java
+class MyUtility {
+    @Autowired
+    private MyService myService; // ❌ Doesn't work, MyUtility is not a Spring bean!
+}
+```
+### **Solution:**
+1. Mark the class as a **Spring component**:
+   ```java
+   @Component
+   class MyUtility {
+       @Autowired
+       private MyService myService;
+   }
+   ```
+2. Or manually create a bean:
+   ```java
+   @Bean
+   public MyUtility myUtility() {
+       return new MyUtility();
+   }
+   ```
+
+---
+
+### **6. Circular Dependency Issue**
+If two beans depend on each other, Spring throws a `BeanCurrentlyInCreationException`.
+
+✅ **Example of Circular Dependency:**
+```java
+@Component
+class ServiceA {
+    @Autowired
+    private ServiceB serviceB;
+}
+
+@Component
+class ServiceB {
+    @Autowired
+    private ServiceA serviceA;
+}
+```
+### **Solution:**
+- Use `@Lazy` to delay bean initialization:
+  ```java
+  @Component
+  class ServiceA {
+      @Autowired
+      @Lazy
+      private ServiceB serviceB;
+  }
+  ```
+- Use **constructor injection** (but avoid circular dependencies).
+
+---
+
+### **7. Autowiring Only Works in Spring-Managed Beans**
+Spring **only injects dependencies into beans managed by the Spring container**.
+If a bean is created manually (`new MyBean()`), autowiring **will not work**.
+
+✅ **Example of Issue:**
+```java
+@Component
+class MyComponent {
+    private MyService myService = new MyService(); // ❌ Not managed by Spring!
+}
+```
+### **Solution:**
+Always use **Spring’s dependency injection** instead of `new`:
+```java
+@Component
+class MyComponent {
+    private final MyService myService;
+
+    @Autowired
+    public MyComponent(MyService myService) {
+        this.myService = myService;
+    }
+}
+```
+
+---
+
+### **Conclusion**
+✔ Autowiring **simplifies dependency injection**, but it has **limitations** like ambiguity, hidden dependencies, and circular dependencies.
+✔ **Constructor-based injection** is recommended for better **readability and testability**.
+✔ Always use `@Qualifier` for **multiple beans** and `@Value` for **primitive types or Strings**.
+✔ Avoid **circular dependencies** and manually creating beans using `new`.
+
+🚀 **Best Practice:** Use **explicit constructor injection** for important dependencies instead of relying entirely on autowiring!
 
 ### Benefits of Autowiring:
 - **Reduces Boilerplate Code:** You don’t need to manually configure or wire the dependencies in the Spring configuration files.
@@ -12508,224 +12718,4 @@ public class UserService {
 **[⬆ Back to Top](#table-of-contents)**
 
 <hr style="border:1px solid orange">
-
-
-### Limitations of Autowiring
-
-
-Autowiring in **Spring** allows automatic dependency injection without explicitly defining bean dependencies. However, it has **several limitations** that can cause issues in a project.
-
----
-
-### **1. Ambiguity Issue (Multiple Beans of the Same Type)**
-If there are **multiple beans of the same type**, Spring **does not know which one to inject**, leading to an `NoUniqueBeanDefinitionException`.
-
-✅ **Example:**
-```java
-@Component
-class ServiceA {}
-
-@Component
-class ServiceB {}
-
-@Component
-class MyComponent {
-    @Autowired
-    private ServiceA service; // Works fine
-}
-```
-Now, if we have **two beans of the same type**:
-```java
-@Component
-class DataService {}
-
-@Component
-class AnotherDataService {}
-
-@Component
-class MyComponent {
-    @Autowired
-    private DataService dataService; // ❌ Error: No unique bean definition!
-}
-```
-### **Solution:**
-Use `@Qualifier` to specify the exact bean:
-```java
-@Autowired
-@Qualifier("anotherDataService")
-private DataService dataService;
-```
-
----
-
-### **2. Cannot Autowire Primitive Data Types and Strings**
-Spring **cannot autowire primitive types** (`int`, `double`, etc.) or `String` values directly.
-
-✅ **Example of Issue:**
-```java
-@Component
-class MyComponent {
-    @Autowired
-    private String myString; // ❌ Spring doesn't know what to inject!
-}
-```
-### **Solution:**
-Use `@Value` for literals:
-```java
-@Value("${app.message}")
-private String myString;
-```
-
----
-
-### **3. Cannot Autowire Static Fields**
-Spring **does not support autowiring static fields** because static fields belong to the **class, not the object instance**.
-
-✅ **Example of Issue:**
-```java
-@Component
-class MyComponent {
-    @Autowired
-    private static MyService myService; // ❌ Doesn't work!
-}
-```
-### **Solution:**
-Use a setter method:
-```java
-@Component
-class MyComponent {
-    private static MyService myService;
-
-    @Autowired
-    public void setMyService(MyService service) {
-        myService = service;
-    }
-}
-```
-
----
-
-### **4. Hidden Dependencies (Reduces Readability & Maintainability)**
-- Autowiring hides **explicit dependencies**, making it harder to **understand and debug** code.
-- It is difficult to track **where a bean is coming from** if autowiring is used everywhere.
-
-### **Solution:**
-Use **constructor-based injection** (recommended for better visibility).
-```java
-@Component
-class MyComponent {
-    private final MyService myService;
-
-    @Autowired
-    public MyComponent(MyService myService) {
-        this.myService = myService;
-    }
-}
-```
-
----
-
-### **5. Autowiring Does Not Work for Classes That Are Not Beans**
-If a class is **not a Spring bean**, it cannot be autowired automatically.
-
-✅ **Example of Issue:**
-```java
-class MyUtility {
-    @Autowired
-    private MyService myService; // ❌ Doesn't work, MyUtility is not a Spring bean!
-}
-```
-### **Solution:**
-1. Mark the class as a **Spring component**:
-   ```java
-   @Component
-   class MyUtility {
-       @Autowired
-       private MyService myService;
-   }
-   ```
-2. Or manually create a bean:
-   ```java
-   @Bean
-   public MyUtility myUtility() {
-       return new MyUtility();
-   }
-   ```
-
----
-
-### **6. Circular Dependency Issue**
-If two beans depend on each other, Spring throws a `BeanCurrentlyInCreationException`.
-
-✅ **Example of Circular Dependency:**
-```java
-@Component
-class ServiceA {
-    @Autowired
-    private ServiceB serviceB;
-}
-
-@Component
-class ServiceB {
-    @Autowired
-    private ServiceA serviceA;
-}
-```
-### **Solution:**
-- Use `@Lazy` to delay bean initialization:
-  ```java
-  @Component
-  class ServiceA {
-      @Autowired
-      @Lazy
-      private ServiceB serviceB;
-  }
-  ```
-- Use **constructor injection** (but avoid circular dependencies).
-
----
-
-### **7. Autowiring Only Works in Spring-Managed Beans**
-Spring **only injects dependencies into beans managed by the Spring container**.
-If a bean is created manually (`new MyBean()`), autowiring **will not work**.
-
-✅ **Example of Issue:**
-```java
-@Component
-class MyComponent {
-    private MyService myService = new MyService(); // ❌ Not managed by Spring!
-}
-```
-### **Solution:**
-Always use **Spring’s dependency injection** instead of `new`:
-```java
-@Component
-class MyComponent {
-    private final MyService myService;
-
-    @Autowired
-    public MyComponent(MyService myService) {
-        this.myService = myService;
-    }
-}
-```
-
----
-
-### **Conclusion**
-✔ Autowiring **simplifies dependency injection**, but it has **limitations** like ambiguity, hidden dependencies, and circular dependencies.
-✔ **Constructor-based injection** is recommended for better **readability and testability**.
-✔ Always use `@Qualifier` for **multiple beans** and `@Value` for **primitive types or Strings**.
-✔ Avoid **circular dependencies** and manually creating beans using `new`.
-
-🚀 **Best Practice:** Use **explicit constructor injection** for important dependencies instead of relying entirely on autowiring!
-
-**[⬆ Back to Top](#table-of-contents)**
-
-<hr style="border:1px solid orange">
-
-
-
-
-
 
