@@ -89,9 +89,9 @@
 | 81 | [What is Agile?](#What-is-Agile) |
 | 82 | [What is Spring Boot Transaction Management?](#What-is-Spring-Boot-Transaction-Management) |
 | 83 | [What is ContextLoaderListener and What Does It Do?](#What-is-ContextLoaderListener-and-What-Does-It-Do) |
-| 84 | [How is ContextLoaderListener Used in Spring Boot?](#How-is-ContextLoaderListener-Used-in-Spring-Boot) |
-| 85 | [What is the Hibernate Validator Framework?](#What-is-the-Hibernate-Validator-Framework?) |
-| 86 | [What Are the Limitations of Autowiring?](#What-Are-the-Limitations-of-Autowiring) |
+| 84 | [What is the Hibernate Validator Framework?](#what-is-the-hibernate-validator-framework) |
+| 85 | [What Are the Limitations of Autowiring?](#what-are-the-limitations-of-autowiring) |
+
 
 
 
