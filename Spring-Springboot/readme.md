@@ -1,4 +1,4 @@
-<h1>Spring-Springboot Interview Questions</h1>
+<h1>Spring-Springboot Questions</h1>
 
 ### Table of contents
 
