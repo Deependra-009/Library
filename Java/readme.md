@@ -1,4 +1,4 @@
-<h1>Java Interview Questions</h1>
+<h1>Java Questions</h1>
 
 ### Table of contents
 
