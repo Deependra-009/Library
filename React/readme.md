@@ -1,4 +1,4 @@
-<h1>React Interview Questions</h1>
+<h1>React Questions</h1>
 
 ### Table of contents
 
