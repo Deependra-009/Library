@@ -1,4 +1,4 @@
-<h1>Angular Interview Questions</h1>
+<h1>Angular Questions</h1>
 
 ### Table of contents
 
