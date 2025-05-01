@@ -6,7 +6,6 @@
 
 | No. | Questions                                                                                                                                               |
 |----|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-
 | 1 | [What is the OSI model? Explain each layer.](#what-is-the-osi-model-explain-each-layer) |
 | 2 | [What is the difference between TCP and UDP?](#what-is-the-difference-between-tcp-and-udp) |
 | 3 | [Explain the concept of IP addressing. What is the difference between IPv4 and IPv6?](#explain-the-concept-of-ip-addressing-what-is-the-difference-between-ipv4-and-ipv6) |
