@@ -399,85 +399,14 @@ In simple terms, DI means that objects (dependencies) are **injected** into a cl
 1. **Constructor Injection:**
    In this type of DI, dependencies are provided through the constructor of a class. When a class is instantiated, the required dependencies are passed as arguments.
 
-   Example:
-   ```java
-   @Component
-   public class Service {
-       public void execute() {
-           System.out.println("Service is executing.");
-       }
-   }
-
-   @Component
-   public class Controller {
-       private final Service service;
-
-       @Autowired  // Spring will inject the dependency via the constructor
-       public Controller(Service service) {
-           this.service = service;
-       }
-
-       public void performAction() {
-           service.execute();
-       }
-   }
-   ```
-
-   In this case, the `Controller` class depends on the `Service` class. Spring will automatically inject the `Service` instance into the `Controller` via the constructor.
 
 2. **Setter Injection:**
    In setter injection, dependencies are provided through setter methods after the object is constructed.
 
-   Example:
-   ```java
-   @Component
-   public class Service {
-       public void execute() {
-           System.out.println("Service is executing.");
-       }
-   }
-
-   @Component
-   public class Controller {
-       private Service service;
-
-       @Autowired  // Spring will inject the dependency via the setter
-       public void setService(Service service) {
-           this.service = service;
-       }
-
-       public void performAction() {
-           service.execute();
-       }
-   }
-   ```
-
-   In this case, the `Controller` class has a setter method for `Service`. Spring calls this setter to inject the dependency.
 
 3. **Field Injection:**
    In field injection, dependencies are directly injected into the fields of a class, using the `@Autowired` annotation on the field.
 
-   Example:
-   ```java
-   @Component
-   public class Service {
-       public void execute() {
-           System.out.println("Service is executing.");
-       }
-   }
-
-   @Component
-   public class Controller {
-       @Autowired  // Spring injects the dependency directly into the field
-       private Service service;
-
-       public void performAction() {
-           service.execute();
-       }
-   }
-   ```
-
-   Here, Spring automatically injects the `Service` instance directly into the `Controller` class's `service` field.
 
 ### How Dependency Injection Works in Spring:
 
@@ -4592,70 +4521,6 @@ HTTP response status codes are issued by a server in response to a client's requ
 3. **3xx (Redirection)**: The client needs to take additional action to complete the request.
 4. **4xx (Client Error)**: The request contains bad syntax or cannot be fulfilled by the server.
 5. **5xx (Server Error)**: The server failed to fulfill a valid request.
-
----
-
-### Common HTTP Status Codes
-
-#### 1. **2xx – Successful Responses**
-These codes indicate that the request was successfully received, understood, and processed.
-
-- **200 OK**: The request has succeeded. The meaning of "success" depends on the HTTP method.
-  - **Example**: A `GET` request has successfully fetched data.
-
-- **201 Created**: The request has been fulfilled and a new resource has been created.
-  - **Example**: A `POST` request to create a new resource (like adding a new user or product).
-
-- **204 No Content**: The server has successfully processed the request, but there is no content to return (commonly used with `DELETE` requests).
-  - **Example**: A `DELETE` request was successful, but no response body is needed.
-
-#### 2. **3xx – Redirection Responses**
-These codes indicate that the client needs to take additional action to complete the request.
-
-- **301 Moved Permanently**: The resource has been permanently moved to a new location, and future requests should be directed to the new URL.
-  - **Example**: A URL redirection to a new endpoint.
-
-- **302 Found**: The resource has temporarily moved to a different location.
-  - **Example**: A temporary redirection, such as after submitting a form, directing the user to a confirmation page.
-
-- **304 Not Modified**: The resource has not been modified since the last request. This is typically used with caching.
-  - **Example**: When the client asks for a resource but already has the latest version in cache.
-
-#### 3. **4xx – Client Error Responses**
-These codes indicate that the client has made an error in the request.
-
-- **400 Bad Request**: The server could not understand the request due to invalid syntax.
-  - **Example**: Missing required parameters in a `POST` request.
-
-- **401 Unauthorized**: The request requires user authentication, and the client has not provided valid credentials.
-  - **Example**: A `GET` request to access a protected resource without providing a valid login.
-
-- **403 Forbidden**: The server understood the request but refuses to authorize it. The client does not have permission to access the resource.
-  - **Example**: A `GET` request for a resource that the client is not authorized to access.
-
-- **404 Not Found**: The server cannot find the requested resource.
-  - **Example**: A `GET` request for a non-existing URL or resource.
-
-- **405 Method Not Allowed**: The method used in the request is not allowed for the specified resource.
-  - **Example**: Using `POST` on a URL that only supports `GET`.
-
-- **422 Unprocessable Entity**: The request was well-formed but was unable to be followed due to semantic errors.
-  - **Example**: Submitting a form with data that is valid in structure but contains errors (like invalid email format).
-
-#### 4. **5xx – Server Error Responses**
-These codes indicate that the server failed to fulfill a valid request.
-
-- **500 Internal Server Error**: A generic error message when the server encounters an unexpected condition that prevents it from fulfilling the request.
-  - **Example**: A server crash or bug during request processing.
-
-- **502 Bad Gateway**: The server received an invalid response from an upstream server it accessed while attempting to fulfill the request.
-  - **Example**: When a reverse proxy server cannot communicate with the backend server.
-
-- **503 Service Unavailable**: The server is currently unable to handle the request due to temporary overloading or maintenance of the server.
-  - **Example**: A website undergoing maintenance.
-
-- **504 Gateway Timeout**: The server did not receive a timely response from an upstream server or some other auxiliary server.
-  - **Example**: A timeout when the backend server does not respond within the expected timeframe.
 
 ---
 
