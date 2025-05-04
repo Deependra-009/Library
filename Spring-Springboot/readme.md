@@ -12514,9 +12514,10 @@ In a **Spring MVC web application**, we register `ContextLoaderListener` in `web
     <param-value>/WEB-INF/applicationContext.xml</param-value>
 </context-param>
 ```
-🔹 **Explanation:**
+ **Explanation:**
 - The `contextConfigLocation` parameter specifies the location of **Spring's application context file**.
 - `ContextLoaderListener` loads this file and initializes the **root application context**.
+
 
 ---
 
